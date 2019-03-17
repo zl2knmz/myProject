@@ -19,7 +19,7 @@ public class HelloWorld {
 
         DateTimeFormatter datetime_wd_ticket1 = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
         String syncTime1 = "2019-03-08T17:13:46Z";
-        DateTime tempDate1 = DateTime.parse(syncTime1, datetime_wd_ticket1).plusSeconds(-3);
+        DateTime tempDate1 = DateTime.parse(syncTime1, datetime_wd_ticket1).minusSeconds(3);
         syncTime1 = tempDate1.toString(datetime_wd_ticket1);
         System.out.println(syncTime1);
     }
