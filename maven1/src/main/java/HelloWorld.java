@@ -1,8 +1,17 @@
+import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.lionsoul.ip2region.DataBlock;
+import org.lionsoul.ip2region.DbConfig;
+import org.lionsoul.ip2region.DbMakerConfigException;
+import org.lionsoul.ip2region.DbSearcher;
 import util.LatLonUtil;
 import util.Snowflake;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class HelloWorld {
     public static void main(String[] args) {
@@ -39,26 +48,54 @@ public class HelloWorld {
         location = HelloWorld.reverveLocation(location);
         System.out.println(location);*/
 
-        double lat = 22.5227035253;
+        /*double lat = 22.5227035253;
         double lon = 113.9452031238;
         double[] a = LatLonUtil.getAround(lat, lon, 2000);
-        for(int i = 0; i < a.length; i++){
+        for (int i = 0; i < a.length; i++) {
             System.out.println(a[i]);
+        }*/
+
+        DbSearcher dbSearcher = null;
+        try {
+            dbSearcher = HelloWorld.getDbIpClient();
+        } catch (DbMakerConfigException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        DataBlock dataBlock = null;
+        try {
+            dataBlock = dbSearcher.memorySearch("113.90.94.16");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String cityId = String.valueOf(dataBlock.getCityId());
+        String city = dataBlock.getRegion().split("\\|")[3].replace("市", "");
+
+        System.out.println("cityId: " + cityId + " city: " + city);
     }
 
-    private static String reverveLocation(String location){
+    public static DbSearcher getDbIpClient() throws DbMakerConfigException, IOException {
+        DbConfig config = new DbConfig();
+        String path = "./config/ip2region.db";
+        final File dbFile = new File(path);
+        byte[] mybyte = IOUtils.toByteArray(new FileInputStream(dbFile));
+        DbSearcher searcher = new DbSearcher(config, mybyte);
+        return searcher;
+    }
+
+    private static String reverveLocation(String location) {
         String[] arr = location.split(",");
-        if(arr.length > 1){
+        if (arr.length > 1) {
             //经度
             String longitude = arr[0].replaceAll(" ", "");
             //纬度
             String latitude = arr[1].replaceAll(" ", "");
 
-            if((Double.valueOf(longitude) <= 180) && (Double.valueOf(latitude) <= 90)){
+            if ((Double.valueOf(longitude) <= 180) && (Double.valueOf(latitude) <= 90)) {
                 return latitude + "," + longitude;
-            }else {
+            } else {
                 return "0.0,0.0";
             }
         }
