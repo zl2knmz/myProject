@@ -22,3 +22,7 @@ maven1/\.idea/libraries/
 maven1/target/maven-status/maven-compiler-plugin/compile/default-compile/
 
 *.class
+
+maven1/target/maven-archiver/pom\.properties
+
+maven1/target/knmz-tools-1\.0\.0\.jar

@@ -117,12 +117,12 @@ public class DButil {
      * @param params
      * 功能介绍：查询操作
      */
-    public static List<Map<String, String>> executeQuery(String sql, Object[] params) {
+    public static List<Map<String, Object>> executeQuery(String sql, Object[] params) {
         if(null == conn){
             initConnection();
         }
         ResultSet rs = null;
-        List<Map<String, String>> list = null;
+        List<Map<String, Object>> list = null;
         try {
             ps = conn.prepareStatement(sql);
             if (params != null) {
@@ -135,9 +135,9 @@ public class DButil {
             //移动光标，如果新的当前行有效，则返回 true；如果不存在下一行，则返回 false
             while (rs.next()) {
                 ResultSetMetaData rsmd = rs.getMetaData();
-                Map<String, String> map = new HashMap<>();
+                Map<String, Object> map = new HashMap<>();
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                    map.put(rsmd.getColumnName(i), rs.getObject(i).toString());
+                    map.put(rsmd.getColumnName(i), rs.getObject(i));
                 }
                 list.add(map);
             }
