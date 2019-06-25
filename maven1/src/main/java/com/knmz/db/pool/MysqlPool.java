@@ -10,21 +10,30 @@ import java.util.LinkedList;
  */
 public class MysqlPool implements IDatabaseConnection {
 
-    //最小连接数
-    private static final int minCount = 1;
-    //最大连接数
-    private static final int maxCount = 10;
-    //连接池
-    private static final LinkedList<Connection> pools = new LinkedList<Connection>();
+    /**
+     * 最小连接数
+     */
+    private static final int MIN_COUNT = 1;
+
+    /**
+     * 最大连接数
+     */
+    private static final int MAX_COUNT = 10;
+
+    /**
+     * 连接池
+     */
+    private static final LinkedList<Connection> POOLS = new LinkedList<>();
+
     MysqlHandler handler = new MysqlHandler();
 
     @Override
     public void init() {
         Connection conn = null;
         try{
-            for(int i=0; i<minCount; i++) {
+            for(int i=0; i<MIN_COUNT; i++) {
                 conn = handler.buildConnection();
-                pools.add(conn);
+                POOLS.add(conn);
             }
         }catch(Exception e) {
             e.printStackTrace();
@@ -34,19 +43,19 @@ public class MysqlPool implements IDatabaseConnection {
     @Override
     public synchronized Connection getConnection() {
         Connection conn = null;
-        if(pools.size() == 0) {
+        if(POOLS.size() == 0) {
             conn = handler.buildConnection();
         } else {
-            conn = pools.remove(0);
+            conn = POOLS.remove(0);
         }
         return conn;
     }
 
     @Override
     public synchronized void close(Connection conn) {
-        if(pools.size() < maxCount) {
-            pools.add(conn);
+        if(POOLS.size() < MAX_COUNT) {
+            POOLS.add(conn);
         }
-        System.out.println(pools);
+        System.out.println(POOLS);
     }
 }

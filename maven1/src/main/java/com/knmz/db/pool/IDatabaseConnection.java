@@ -8,10 +8,19 @@ import java.sql.Connection;
  * Description: 定义一个接口，更换数据库的时候方便
  */
 public interface IDatabaseConnection {
-    //初始化
-    public void init();
-    //取得连接
-    public  Connection getConnection();
-    //关闭
-    public void close(Connection conn);
+    /**
+     * 初始化
+     */
+    void init();
+
+    /**
+     * 取得连接
+     */
+    Connection getConnection();
+
+    /**
+     * 关闭连接
+     * @param conn
+     */
+    void close(Connection conn);
 }
