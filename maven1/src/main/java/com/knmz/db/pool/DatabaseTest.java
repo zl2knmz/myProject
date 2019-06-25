@@ -8,8 +8,9 @@ import java.sql.ResultSet;
  * @Author: zl
  * @Date: 2019/6/10 23:52
  */
-public class DatabseTest {
-    static IDatabaseConnection mysqlServer = new MysqlPool();
+public class DatabaseTest {
+    private static IDatabaseConnection mysqlServer = new MysqlPool();
+
     public static void main(String args[]) {
         mysqlServer.init();
         long start = System.currentTimeMillis();
@@ -19,6 +20,7 @@ public class DatabseTest {
         long end = System.currentTimeMillis();
         System.out.println(end-start);
     }
+
     private static void test() {
         try{
             Connection conn = mysqlServer.getConnection();
@@ -32,4 +34,5 @@ public class DatabseTest {
             e.printStackTrace();
         }
     }
+
 }
