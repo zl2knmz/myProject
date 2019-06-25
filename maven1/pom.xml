@@ -96,6 +96,19 @@
             <version>5.1.38</version>
         </dependency>
 
+        <!-- phoenix local-->
+        <!--<dependency>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-core</artifactId>
+            <version>4.14.1-HBase-1.2</version>
+        </dependency>-->
+
+        <!-- phoenix online-->
+        <dependency>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-core</artifactId>
+            <version>4.8.0-HBase-1.2</version>
+        </dependency>
     </dependencies>
 
     <build>
