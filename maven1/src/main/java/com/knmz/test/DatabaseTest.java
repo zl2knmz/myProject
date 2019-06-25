@@ -1,4 +1,7 @@
-package com.knmz.db.pool;
+package com.knmz.test;
+
+import com.knmz.db.pool.IDatabaseConnection;
+import com.knmz.db.pool.MysqlPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
