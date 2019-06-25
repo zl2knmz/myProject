@@ -8,10 +8,28 @@ import java.sql.DriverManager;
  * @Date: 2019/6/10 23:48
  */
 public class MysqlHandler {
+    /**
+     * mysql驱动
+     */
     private static final String DBDRIVER = "com.mysql.jdbc.Driver";
-    private static final String DBURL = "jdbc:mysql://localhost:3306/maven?useUnicode=true&autoReconnect=true";
+
+    /**
+     * 数据库连接
+     * jdbc:mysql://localhost:3306/maven?useUnicode=true&autoReconnect=true
+     */
+    private static final String DBURL = "jdbc:mysql://192.168.1.4:3306/springbootdb?useUnicode=true&autoReconnect=true";
+
+    /**
+     * mysql用户名
+     * root
+     */
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+
+    /**
+     * mysql密码
+     * root
+     */
+    private static final String PASSWORD = "hdx2057BCa%";
     private Connection conn = null;
 
     public Connection buildConnection() {
