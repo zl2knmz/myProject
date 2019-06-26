@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 public class DatabaseTest {
     private static IDatabaseConnection mysqlServer = new MysqlPool();
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         mysqlServer.init();
         long start = System.currentTimeMillis();
         for(int i=0; i<300; i++) {

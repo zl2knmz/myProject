@@ -19,10 +19,16 @@ public class JsonTest {
      */
     private static final String FILEPATH = "E:" + File.separator + "Program Files" + File.separator + "image" + File.separator;
 
-    public static void main(String args[]) {
-        jobTest();
+    public static void main(String[] args) {
+//        jobTest();
+        jobIdToNameTest();
+//        cityIdToNameTest();
     }
 
+    /**
+     * 组装两层职位格式json,如下格式：
+     * [{"技术":{"jobs":{"电子/半导体":1010,"其他技术职位":1014,"软件销售支持":1013,"测试":1003},"id":10}},{"产品":{"jobs":{"高端产品职位":1102,"其他产品职位":1103,"产品经理":1101},"id":11}}]
+     */
     public static void jobTest() {
         JSONArray jsonArray = new JSONArray();
 
@@ -56,8 +62,50 @@ public class JsonTest {
             jsonArray.add(jsonObject);
         }
 
-        String fileName = "job.json";
+        String fileName = "jobLevel.json";
         FileOutStreamUtil.charOutStream(FILEPATH, fileName, jsonArray.toJSONString());
+
+        System.out.println("json文件路径：" + FILEPATH + " 文件名：" + fileName);
+    }
+
+    /**
+     * jobId -> name 格式json,如下格式：
+     * {"240401":"高端供应链职位","240403":"物流总监"}
+     */
+    public static void jobIdToNameTest() {
+        JSONObject jsonObject = new JSONObject();
+        String sql = "select `ID`,`NAME` from job_data";
+
+        List<Map<String, Object>> list = DataProcess.executeQuery(sql, null);
+        for(Map<String, Object> map : list){
+            String key = map.get("ID").toString();
+            String value = map.get("NAME").toString();
+            jsonObject.put(key, value);
+        }
+
+        String fileName = "jobIdToName.json";
+        FileOutStreamUtil.charOutStream(FILEPATH, fileName, jsonObject.toJSONString());
+
+        System.out.println("json文件路径：" + FILEPATH + " 文件名：" + fileName);
+    }
+
+    /**
+     * cityId -> name 格式json,如下格式：
+     * {"330683":"嵊州市","2306":"大庆市","2305":"双鸭山市"}
+     */
+    public static void cityIdToNameTest() {
+        JSONObject jsonObject = new JSONObject();
+        String sql = "select `CODE`,`NAME` from `area`";
+
+        List<Map<String, Object>> list = DataProcess.executeQuery(sql, null);
+        for(Map<String, Object> map : list){
+            String key = map.get("CODE").toString();
+            String value = map.get("NAME").toString();
+            jsonObject.put(key, value);
+        }
+
+        String fileName = "cityIdToName.json";
+        FileOutStreamUtil.charOutStream(FILEPATH, fileName, jsonObject.toJSONString());
 
         System.out.println("json文件路径：" + FILEPATH + " 文件名：" + fileName);
     }
