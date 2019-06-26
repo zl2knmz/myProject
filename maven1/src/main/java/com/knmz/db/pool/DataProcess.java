@@ -224,7 +224,7 @@ public class DataProcess {
 
             if (conn != null) {
                 mysqlServer.close(conn);
-                conn.close();
+//                conn.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();

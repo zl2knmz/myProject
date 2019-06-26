@@ -56,6 +56,6 @@ public class MysqlPool implements IDatabaseConnection {
         if(POOLS.size() < MAX_COUNT) {
             POOLS.add(conn);
         }
-        System.out.println(POOLS);
+//        System.out.println(POOLS);
     }
 }
