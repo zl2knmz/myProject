@@ -6,16 +6,21 @@ import org.apache.hadoop.io.IOUtils;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * @Author: zl
  * @Date: 2019/7/11 17:03
+ * 读写hdfs文件
  */
 public class OperateHdfs {
 
-    //读取hdfs上的文件内容
-    public static void readFromHDFS(String file) throws IOException {
+    private static final String USER_NAME = "hue";
+
+    /**
+     * 读取hdfs上的文件内容
+     */
+    public static void readFromHdfs(String file) throws IOException {
+        System.setProperty("HADOOP_USER_NAME", USER_NAME);
         Configuration conf = new Configuration();
         FileSystem fs = FileSystem.get(URI.create(file), conf);
         Path path = new Path(file);
@@ -23,25 +28,26 @@ public class OperateHdfs {
 
         IOUtils.copyBytes(in, System.out, 4096, true);
         //使用FSDataInoutStream的read方法会将文件内容读取到字节流中并返回
-        /**
-         * FileStatus stat = fs.getFileStatus(path);
+         /*FileStatus stat = fs.getFileStatus(path);
          // create the buffer
          byte[] buffer = new byte[Integer.parseInt(String.valueOf(stat.getLen()))];
          is.readFully(0, buffer);
          is.close();
          fs.close();
-         return buffer;
-         */
+         return buffer;*/
     }
 
-    //在指定位置新建一个文件，并写入字符
-    public static void writeToHDFS(String file, String words) throws IOException {
-        System.setProperty("HADOOP_USER_NAME", "hue");
+    /**
+     * 在指定位置新建一个文件，并写入字符
+     */
+    public static void writeToHdfs(String file, String words) throws IOException {
+        System.setProperty("HADOOP_USER_NAME", USER_NAME);
 
         Configuration conf = new Configuration();
         FileSystem fs = FileSystem.get(URI.create(file), conf);
         Path path = new Path(file);
-        FSDataOutputStream out = fs.create(path);   //创建文件
+        //创建文件
+        FSDataOutputStream out = fs.create(path);
 
         //两个方法都用于文件写入，好像一般多使用后者
         //out.writeBytes(words);
@@ -51,11 +57,15 @@ public class OperateHdfs {
         //如果是要从输入流中写入，或是从一个文件写到另一个文件（此时用输入流打开已有内容的文件）
         //可以使用如下IOUtils.copyBytes方法。
         //FSDataInputStream in = fs.open(new Path(args[0]));
-        //IOUtils.copyBytes(in, out, 4096, true)        //4096为一次复制块大小，true表示复制完成后关闭流
+        //4096为一次复制块大小，true表示复制完成后关闭流
+        //IOUtils.copyBytes(in, out, 4096, true)
     }
 
-    //删除hdfs上的文件
-    public static void deleteHDFSFile(String file) throws IOException {
+    /**
+     * 删除hdfs上的文件
+     */
+    public static void deleteHdfsFile(String file) throws IOException {
+        System.setProperty("HADOOP_USER_NAME", USER_NAME);
         Configuration conf = new Configuration();
         FileSystem fs = FileSystem.get(URI.create(file), conf);
         Path path = new Path(file);
@@ -64,8 +74,11 @@ public class OperateHdfs {
         fs.close();
     }
 
-    //上传本地文件到hdfs
-    public static void uploadLocalFileHDFS(String src, String dst) throws IOException {
+    /**
+     * 上传本地文件到hdfs
+     */
+    public static void uploadLocalFileHdfs(String src, String dst) throws IOException {
+        System.setProperty("HADOOP_USER_NAME", USER_NAME);
         Configuration conf = new Configuration();
         FileSystem fs = FileSystem.get(URI.create(dst), conf);
         Path pathDst = new Path(dst);
@@ -75,8 +88,12 @@ public class OperateHdfs {
         fs.close();
     }
 
-    //显示目录下所有文件
+    /**
+     * 显示目录下所有文件
+     */
     public static void listDirAll(String DirFile) throws IOException {
+        System.setProperty("HADOOP_USER_NAME", USER_NAME);
+
         Configuration conf = new Configuration();
         FileSystem fs = FileSystem.get(URI.create(DirFile), conf);
         Path path = new Path(DirFile);
@@ -87,31 +104,31 @@ public class OperateHdfs {
             System.out.println(f.getPath().toString());
         }
         //方法2
-        Path[] listedPaths = FileUtil.stat2Paths(status);
+        /*Path[] listedPaths = FileUtil.stat2Paths(status);
         for (Path p : listedPaths) {
             System.out.println(p.toString());
-        }
+        }*/
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
-        System.setProperty("HADOOP_USER_NAME", "hue");
+    public static void main(String[] args) throws IOException {
 
         String localFile = "C:\\Users\\Administrator\\Desktop\\push-temp\\test.txt";
 
         String path = "hdfs://master:8022/user/hue/push/";
 
         String file = "hdfs://192.168.1.220:8020/user/hue/push/test.txt";
-        
+//        String file = "hdfs://10.10.165.154:8020/user/hue/push/test.txt";
+
         String words = "测试向HDFS里面写文件！";
 
-        writeToHDFS(file, words);
+//        writeToHdfs(file, words);
 
-//        readFromHDFS(file);
+//        uploadLocalFileHdfs(localFile, file);
 
-//        deleteHDFSFile(file);
-
-//        uploadLocalFileHDFS(localFile, path);
+        readFromHdfs(file);
 
 //        listDirAll(path);
+
+//        deleteHdfsFile(file);
     }
 }
