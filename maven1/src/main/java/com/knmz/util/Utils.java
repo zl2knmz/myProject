@@ -8,6 +8,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.http.util.TextUtils;
+import org.apache.poi.ss.usermodel.*;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonMethod;
@@ -15,6 +17,7 @@ import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -209,5 +212,41 @@ public class Utils {
             }
         }
         return location;
+    }
+
+    /**
+     * 读取 excel名单
+     *
+     * @param path 文件路径
+     * @return 收件人名单列表
+     */
+    public List<String> parseRecipientsFromExcel(String path) {
+        List<String> ret = null;
+        if (!TextUtils.isBlank(path)) {
+            try {
+                Workbook workbook = WorkbookFactory.create(new File(path));
+                if (workbook != null && workbook.getNumberOfSheets() > 0) {
+                    Sheet sheet = workbook.getSheetAt(0);
+                    if (sheet != null && sheet.getPhysicalNumberOfRows() > 0) {
+                        ret = new ArrayList<>();
+                        List<String> finalRet = new ArrayList<>();
+                        sheet.forEach(row -> {
+                            Cell cell = row.getCell(0);
+                            if (cell.getCellTypeEnum() == CellType.STRING) {
+                                String cellValue = cell.getRichStringCellValue().getString();
+                                if (!TextUtils.isBlank(cellValue)) {
+                                    finalRet.add(cellValue.trim());
+                                }
+                            }
+                        });
+                        ret = finalRet;
+                    }
+                    workbook.close();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return ret;
     }
 }
