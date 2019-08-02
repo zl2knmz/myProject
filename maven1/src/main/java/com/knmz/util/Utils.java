@@ -226,11 +226,13 @@ public class Utils {
             try {
                 Workbook workbook = WorkbookFactory.create(new File(path));
                 if (workbook != null && workbook.getNumberOfSheets() > 0) {
+                    //读取第一个工作表
                     Sheet sheet = workbook.getSheetAt(0);
                     if (sheet != null && sheet.getPhysicalNumberOfRows() > 0) {
                         ret = new ArrayList<>();
                         List<String> finalRet = new ArrayList<>();
                         sheet.forEach(row -> {
+                            //读取第一列数据
                             Cell cell = row.getCell(0);
                             if (cell.getCellTypeEnum() == CellType.STRING) {
                                 String cellValue = cell.getRichStringCellValue().getString();
