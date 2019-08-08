@@ -7,9 +7,12 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println("helloWorld !");
+        /*System.out.println("helloWorld !");
         int a = DateTime.now().getHourOfDay();
         int b = DateTime.now().getMinuteOfHour();
         System.out.println(111);
@@ -47,8 +50,27 @@ public class HelloWorld {
         double[] latLon = LatLonUtil.getAround(lat, lon, 2000);
         for (int i = 0; i < latLon.length; i++) {
             System.out.println(latLon[i]);
-        }
+        }*/
 
+        /*int total = forReturnTest();
+        System.out.println(total);*/
+
+        String pushData = "12431241";
+        List<String> listTo = Arrays.asList(pushData.split(","));
+        System.out.println(11);
+    }
+
+    public static int forReturnTest() {
+        int total = 0;
+        int length = 10;
+        for (int i = 0; i < length; i++) {
+            total = total + i;
+            if (i == 5) {
+                return total;
+            }
+        }
+        System.out.println(111);
+        return total;
     }
 
 }

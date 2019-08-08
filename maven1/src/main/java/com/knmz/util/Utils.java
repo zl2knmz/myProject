@@ -18,10 +18,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.io.InputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -215,12 +217,92 @@ public class Utils {
     }
 
     /**
+     * @param str 手机号或邮箱
+     *            手机号或邮箱的简单校验
+     */
+    public static String checkData(String str) {
+        if (null != str && str.length() > 0) {
+            if (str.contains("@")) {
+                //邮箱
+                return str;
+            } else if (str.length() == 11 && "1".equals(str.substring(0, 1))) {
+                //手机号
+                return str;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param phone 手机号
+     *            隐藏手机号中间4位
+     */
+    public static String hiddenPhone(String phone) {
+        if (null != phone && phone.length() > 7) {
+            phone = phone.substring(0, 3) + "****" + phone.substring(7);
+            return phone;
+        }
+        return null;
+    }
+
+    /**
+     * @param email 邮箱
+     *            隐藏邮箱
+     */
+    public static String hiddenEmail(String email) {
+        if (null != email && email.length() > 0) {
+            int index = email.indexOf("@");
+            if (index > 0) {
+                int start = (index + 1) / 2;
+                StringBuilder stars = new StringBuilder();
+                for (int i = 0; i < start; i++) {
+                    stars.append("*");
+                }
+                email = email.substring(0, start) + stars.toString() + email.substring(index);
+                return email;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 上传excel文件
+     *
+     * @param name 文件名
+     * @param savePath 文件保存路径
+     * @return 上传后文件名（含路径）
+     */
+    public static String saveFile(InputStream stream, String name, String savePath) {
+        String ret = null;
+        if (TextUtils.isBlank(savePath)) {
+            savePath = System.getProperty("user.dir");
+            savePath = Paths.get(savePath, "uploads").toString();
+        }
+        if (stream != null && !TextUtils.isBlank(name)) {
+            try {
+                java.nio.file.Path path = FileSystems.getDefault().getPath(Paths.get(savePath, name).toString());
+                if (!Files.exists(path.getParent())) {
+                    path.getParent().toFile().mkdirs();
+                }
+                if (Files.exists(path)) {
+                    Files.delete(path);
+                }
+                Files.copy(stream, path);
+                ret = path.toString();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return ret;
+    }
+
+    /**
      * 读取 excel名单
      *
      * @param path 文件路径
      * @return 收件人名单列表
      */
-    public List<String> parseRecipientsFromExcel(String path) {
+    public static List<String> parseExcel(String path) {
         List<String> ret = null;
         if (!TextUtils.isBlank(path)) {
             try {
@@ -231,15 +313,25 @@ public class Utils {
                     if (sheet != null && sheet.getPhysicalNumberOfRows() > 0) {
                         ret = new ArrayList<>();
                         List<String> finalRet = new ArrayList<>();
+                        DecimalFormat df = new DecimalFormat("0");
                         sheet.forEach(row -> {
                             //读取第一列数据
                             Cell cell = row.getCell(0);
+                            String cellValue = null;
+                            //邮箱
                             if (cell.getCellTypeEnum() == CellType.STRING) {
-                                String cellValue = cell.getRichStringCellValue().getString();
-                                if (!TextUtils.isBlank(cellValue)) {
-                                    finalRet.add(cellValue.trim());
-                                }
+                                cellValue = cell.getRichStringCellValue().getString();
+                            } else if (cell.getCellTypeEnum() == CellType.NUMERIC) {
+                                //手机号
+                                cellValue = df.format(cell.getNumericCellValue());;
                             }
+
+                            if (!TextUtils.isBlank(cellValue)) {
+                                //数据校验
+                                String data = checkData(cellValue.trim());
+                                finalRet.add(data);
+                            }
+
                         });
                         ret = finalRet;
                     }
@@ -250,5 +342,17 @@ public class Utils {
             }
         }
         return ret;
+    }
+
+    /**
+     * 校验发送时间,限定30分钟后48小时内有效。
+     *
+     * @param sendAt 发送时间
+     * @return true or false
+     */
+    public static boolean checkSendAt(Date sendAt) {
+        return sendAt != null
+                && sendAt.after(new Date(System.currentTimeMillis() + (30 * 60 * 1000)))
+                && sendAt.before(new Date(System.currentTimeMillis() + (48 * 3600 * 1000)));
     }
 }
