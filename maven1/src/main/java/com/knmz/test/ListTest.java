@@ -15,6 +15,9 @@ public class ListTest {
         a.add("b");
         a.add("c");
         a.add("d");
+        a.add(null);
+        System.out.println(a.get(4));
+        System.out.println(a);
 
         List<String> b = new ArrayList<>();
         b.add("c");
@@ -37,5 +40,6 @@ public class ListTest {
         List<String> f = new ArrayList<>(a);
         f.removeAll(e);
         System.out.println(f);
+
     }
 }
