@@ -66,12 +66,6 @@ public class RegexExample1 {
         boolean result2 = Pattern.matches(pattern2, content2);
         System.out.println("result2: " + result2);
 
-        /*
-         * 二、定位符：^ $ \b \B
-         */
-        // 数字开头，abc结尾
-//        String pattern3 = "^[0-9]+abc$";
-//        String content3 = "123456abc";
 
         // 字母开头 包含字母、数字、下划线、连接符的3-15个字符长度。
 //        String pattern3 = "^[a-z0-9_-]{3,15}$";
