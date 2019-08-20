@@ -1,5 +1,6 @@
 package com.knmz.regex;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -74,12 +75,63 @@ public class RegexExample1 {
         // 该标题只包含两个尾随数字，并且出现在行首
 //        String pattern3 = "^Chapter [1-9][0-9]{0,1}";
 //        String pattern3 = "^Chapter [1-9][0-9]{0,1}$";
+//        String content3 = "Chapter 12";
+
+        // \b匹配一个单词边界，即字与空格间的位置。
 //        String pattern3 = "\\bCha";
+//        String content3 = "Cha";
+
 //        String pattern3 = "ter\\b";
+//        String content3 = "ter";
+
+        // \B非单词边界匹配
         String pattern3 = "\\Bapt";
         String content3 = "Chapter";
         boolean result3 = Pattern.matches(pattern3, content3);
         System.out.println("result3: " + result3);
+
+        // 查找重复的单词
+//        String pattern4 = "/\b([a-z]+) \1\b/ig";
+//        String content4 = "Is is the cost of of gasoline going up up";
+
+        // . 特殊字符在中括号表达式时 如 [.] 只会匹配 .字符，等价于 \.，而非匹配除换行符 \n 外的所有字符。
+//        String pattern4 = "[.]";
+//        String content4 = ".";
+
+//        String pattern4 = ".";
+//        String content4 = "h";
+
+        // ^ 和 [^指定字符串] 之间的区别: ^指的是匹配字符串开始的位置,[^指定字符串] 指的是除指定字符串以外的其他字符串
+        // 匹配一个数字的字符串
+//        String pattern4 = "(^[0-9])+";
+//        String content4 = "2";
+
+        // 匹配有一至多个数字的字符串组合
+        String pattern4 = "[^[0-9]]+";
+        String content4 = "1154545";
+
+        boolean result4 = Pattern.matches(pattern4, content4);
+        System.out.println("result4: " + result4);
+
+        // (?=xox) 和 (?<=xox) 的区别：匹配字符之间的一个虚无的 “空位”。
+        // (?=xox) 匹配 xox 之前的空位
+        String pattern5 = "(?=xox)";
+        String content5 = "abxoxcd";
+
+        // 按指定模式在字符串查找
+        Matcher m = Pattern.compile(pattern5).matcher(content5);
+        if (m.find( )) {
+            System.out.println("Found value: " + m.group(0) );
+        } else {
+            System.out.println("NO MATCH");
+        }
+
+        //  (?<=xox) 匹配 xox 之后的空位
+//        String pattern5 = "(?<=xox)";
+//        String content5 = "abxoxcd";
+
+        boolean result5 = Pattern.matches(pattern5, content5);
+        System.out.println("result5: " + result5);
 
     }
 }
