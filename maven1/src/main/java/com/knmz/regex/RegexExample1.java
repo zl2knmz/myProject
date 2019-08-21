@@ -17,6 +17,7 @@ public class RegexExample1 {
         String pattern = ".*runoob.*";
         boolean result = Pattern.matches(pattern, content);
         System.out.println("result: " + result);
+
         // quote方法：\Q字符串\E,给字符串添加头\Q和尾\E
 //        String q = Pattern.quote(content);
 //        System.out.println(q);
@@ -147,12 +148,15 @@ public class RegexExample1 {
 //        String pattern6 = "(?<=/event/).*\\??";
 
         // 9501927920800
-        String pattern6 = "(?<=/event/).{13,13}";
+        String pattern6 = "(?<=/event/).{13}";
         String content6 = "https://www.huodongxing.com/event/9501927920800?qd=123";
 
 //        boolean sub = content6.matches(pattern6);
 //        boolean result6 = Pattern.matches(pattern6, content6);
 //        System.out.println("result6: " + result6);
+
+//        String pattern6 = "once";
+//        String content6 = "There once was a man from NewYork";
 
         String firstString = getMatcherFirst(pattern6, content6);
         System.out.println("firstString: " + firstString);
