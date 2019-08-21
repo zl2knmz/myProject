@@ -1,5 +1,7 @@
 package com.knmz.regex;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -133,5 +135,63 @@ public class RegexExample1 {
         boolean result5 = Pattern.matches(pattern5, content5);
         System.out.println("result5: " + result5);
 
+        // 通过正则获取指定字符串，获取活动id
+
+        // false
+//        String pattern6 = "^/event/(.*)\\??";
+
+        // 9501927920800
+//        String pattern6 = "(?<=/event/).*(?=\\?)";
+
+        // 9501927920800?qd=123
+//        String pattern6 = "(?<=/event/).*\\??";
+
+        // 9501927920800
+        String pattern6 = "(?<=/event/).{13,13}";
+        String content6 = "https://www.huodongxing.com/event/9501927920800?qd=123";
+
+//        boolean sub = content6.matches(pattern6);
+//        boolean result6 = Pattern.matches(pattern6, content6);
+//        System.out.println("result6: " + result6);
+
+        String firstString = getMatcherFirst(pattern6, content6);
+        System.out.println("firstString: " + firstString);
+
+        List<String> allString = getMatcherAll(pattern6, content6);
+        System.out.println("allString: " + allString);
+
+    }
+
+    /**
+     * @param source 字符串
+     * @param regex 正则表达式
+     * 获取满足正则表达式的第一个子串
+     */
+    private static String getMatcherFirst(String regex, String source) {
+        String result = "";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(source);
+        while (matcher.find()) {
+            result = matcher.group(0);
+        }
+        return result;
+    }
+
+    /**
+     * @param source 字符串
+     * @param regex 正则表达式
+     * 获取满足正则表达式的所有子串
+     */
+    private static List<String> getMatcherAll(String regex, String source) {
+        List<String> stringList = new ArrayList<>();
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(source);
+        int i = 0;
+        while (matcher.find()) {
+            String subString = matcher.group(i);
+            stringList.add(subString);
+            i++;
+        }
+        return stringList;
     }
 }
