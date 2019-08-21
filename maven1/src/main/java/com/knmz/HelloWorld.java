@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 
@@ -62,6 +63,18 @@ public class HelloWorld {
         // 13位毫秒时间戳
         long a = System.currentTimeMillis();
         System.out.println(a);
+
+        // 15位纳秒级时间戳
+        long b = System.nanoTime();
+        System.out.println(b);
+
+        // 10位秒级时间戳
+        long c = Instant.now().getEpochSecond();
+        System.out.println(c);
+
+        // 秒数，时间线后面的秒数字段中的纳秒数。始终是正的，并且从不超过99999999。
+        int d = Instant.now().getNano();
+        System.out.println(d);
     }
 
     public static int forReturnTest() {
