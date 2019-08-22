@@ -75,6 +75,8 @@ public class HelloWorld {
         // 秒数，时间线后面的秒数字段中的纳秒数。始终是正的，并且从不超过99999999。
         int d = Instant.now().getNano();
         System.out.println(d);
+
+        System.out.println("aaa");
     }
 
     public static int forReturnTest() {
