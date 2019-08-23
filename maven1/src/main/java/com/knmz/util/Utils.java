@@ -355,4 +355,13 @@ public class Utils {
                 && sendAt.after(new Date(System.currentTimeMillis() + (30 * 60 * 1000)))
                 && sendAt.before(new Date(System.currentTimeMillis() + (48 * 3600 * 1000)));
     }
+
+    public static long getTimeInMillisBeforeTomorrow() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 999);
+        return cal.getTimeInMillis();
+    }
 }

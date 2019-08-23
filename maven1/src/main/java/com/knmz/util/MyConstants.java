@@ -27,4 +27,9 @@ public class MyConstants {
 
     /**APP推送ios平台*/
     public final static String PLATFORM_IOS = "ios";
+
+    public final static String TEST_TO_FORMAT = "TEST_TO_%s";
+    public final static String TEST_ID_FORMAT = "TEST_ID_%d";
+
+    public final static String TEST_REDIS = "TEST_REDIS";
 }
