@@ -48,7 +48,7 @@ public class DButil {
             conn.commit();
             return rows;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("sql error: " + sql, e);
         } finally {
             closeUpdate();
         }
@@ -90,12 +90,12 @@ public class DButil {
             conn.commit();
             conn.setAutoCommit(true);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("sql error: " + sql, e);
             try {
                 conn.rollback();
                 conn.setAutoCommit(true);
             } catch (SQLException e1) {
-                e1.printStackTrace();
+                LOGGER.error("rollback error: " + sql, e1);
             }
         } finally {
             //关闭资源
@@ -139,7 +139,7 @@ public class DButil {
             return list;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("sql error: " + sql, e);
         } finally {
             closeQuery(rs);
         }
@@ -178,7 +178,7 @@ public class DButil {
             return map;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("sql error: " + sql, e);
         } finally {
             closeQuery(rs);
         }
@@ -193,7 +193,7 @@ public class DButil {
             //local
             conn = DriverManager.getConnection("jdbc:phoenix:192.168.1.220");
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("phoenix init connection error " , e);
         }
     }
 
@@ -210,7 +210,7 @@ public class DButil {
                 conn.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("close update error " , e);
         }
     }
 
@@ -231,7 +231,7 @@ public class DButil {
                 conn.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("close query error " , e);
         }
     }
 
