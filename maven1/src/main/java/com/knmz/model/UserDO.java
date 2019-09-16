@@ -71,4 +71,21 @@ public class UserDO {
      * 更新时间
      */
     private Date updateDate;
+
+    public UserDO() {}
+
+    public UserDO(Long id, String name, String department, String empId, Integer privilege, String phone, String pwd, String operator, String op_time, Integer status, Date createDate, Date updateDate) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.empId = empId;
+        this.privilege = privilege;
+        this.phone = phone;
+        this.pwd = pwd;
+        this.operator = operator;
+        this.op_time = op_time;
+        this.status = status;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
 }
