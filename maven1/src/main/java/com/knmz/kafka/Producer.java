@@ -17,7 +17,6 @@ import java.util.UUID;
 public class Producer {
 
     public static void main(String[] args) {
-        new Date();
         UserDO userDO = new UserDO(12345678L,"wuliWeiyi","技术部","1001",1,"18770913789","pwd",
                 "zl", "2019-09-16 18:20:00",1,new Date(),new Date());
         try {
@@ -57,7 +56,7 @@ public class Producer {
     private static Properties getKafkaConfig() {
         Properties prop = new Properties();
         prop.setProperty("bootstrap.servers", "192.168.1.95:9092");
-        prop.setProperty("client.id", "datax_analysis_" + UUID.randomUUID().toString());
+        prop.setProperty("client.id", "user_do_" + UUID.randomUUID().toString());
         prop.setProperty("acks", "all");
         prop.setProperty("retries", "0");
         prop.setProperty("batch.size", "16384");

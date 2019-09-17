@@ -1,17 +1,17 @@
 package com.knmz.kafka;
 
+import com.alibaba.fastjson.JSON;
+import com.knmz.model.UserDO;
 import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
+import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
-import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.kstream.Produced;
-import org.apache.kafka.streams.state.KeyValueStore;
 
-import java.util.Arrays;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -19,7 +19,7 @@ import java.util.Properties;
  * @Date: 2019/9/16 18:06
  */
 public class Stream {
-    public static void main(final String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         // kafka stream
         Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "test-application");
@@ -31,13 +31,18 @@ public class Stream {
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, String> textLines = builder.stream("user_do");
         KTable<String, Long> wordCounts = textLines
-                .flatMapValues(textLine -> Arrays.asList(textLine.toLowerCase().split("\\W+")))
-                .groupBy((key, word) -> word)
-                .count(Materialized.<String, Long, KeyValueStore<Bytes, byte[]>>as("counts-store"));
+                .map((k, v) -> {
+                    UserDO user = JSON.parseObject(v, UserDO.class);
+                    user.setUpdateDate(new Date());
+                    user.setName("hdx_zl");
+                    return new KeyValue<>(JSON.toJSONString(user), "1");
+                })
+                .groupByKey()
+                .count();
+
         wordCounts.toStream().to("user_do_stream", Produced.with(Serdes.String(), Serdes.Long()));
 
         KafkaStreams streams = new KafkaStreams(builder.build(), props);
         streams.start();
-
     }
 }
