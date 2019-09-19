@@ -92,9 +92,7 @@ public class IpToCity {
      */
     public static CityDTO getCity(String ip) {
         CityDTO model = new CityDTO();
-
         if (StringUtils.isNotBlank(ip)) {
-
             CityResponse response = null;
             try {
                 InetAddress ipAddress = InetAddress.getByName(ip);
@@ -107,7 +105,7 @@ public class IpToCity {
 
             City city = response.getCity();
             Subdivision division = response.getLeastSpecificSubdivision();
-            Country coutry = response.getCountry();
+            Country country = response.getCountry();
             if (city != null && city.getGeoNameId() != null) {
                 model.setCityId(String.valueOf(city.getGeoNameId()));
                 if (city.getNames() != null && city.getNames().size() > 0 && city.getNames().get("zh-CN") != null) {
@@ -116,13 +114,12 @@ public class IpToCity {
                     model.setCity(city.getName());
                 }
             }
-            if (division != null
-                    && division.getNames() != null && division.getNames().size() > 0) {
+            if (division != null && division.getNames() != null && division.getNames().size() > 0) {
                 model.setProvince(division.getNames().get("zh-CN"));
             }
 
-            if (response.getCountry() != null && coutry.getNames() != null && coutry.getNames().size() > 0) {
-                model.setCountry(coutry.getNames().get("zh-CN"));
+            if (response.getCountry() != null && country.getNames() != null && country.getNames().size() > 0) {
+                model.setCountry(country.getNames().get("zh-CN"));
             }
 
         }
