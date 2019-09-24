@@ -34,10 +34,10 @@ public class PinyinTool {
      * 如： 明天 转换成 MINGTIAN
      *
      * @param str：要转化的汉字
-     * @param spera：转化结果的分割符
+     * @param separator：转化结果的分割符
      * @param type 转换成拼音的格式（全部大写、全部小写、首字母大写）
      */
-    public static String toPinYin(String str, String spera, Type type) {
+    public static String toPinYin(String str, String separator, Type type) {
         if (str == null || str.trim().length() == 0) {
             return "";
         }
@@ -68,7 +68,7 @@ public class PinyinTool {
                     if (type == Type.FIRSTUPPER) {
                         temp = t[0].toUpperCase().charAt(0) + temp.substring(1);
                     }
-                    py += temp + (i == str.length() - 1 ? "" : spera);
+                    py += temp + (i == str.length() - 1 ? "" : separator);
                 }
             }
         }
