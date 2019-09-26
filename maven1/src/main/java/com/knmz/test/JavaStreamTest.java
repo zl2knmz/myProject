@@ -9,8 +9,9 @@ import java.util.stream.Stream;
 /**
  * @Author: zl
  * @Date: 2019/3/17 21:49
+ * java 8 list集合Stream应用测试
  */
-public class UseStream {
+public class JavaStreamTest {
 
     public static void main(String[] args) {
 

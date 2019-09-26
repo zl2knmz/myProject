@@ -10,6 +10,7 @@ import org.joda.time.format.DateTimeFormatter;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class HelloWorld {
     public static void main(String[] args) {
@@ -90,4 +91,29 @@ public class HelloWorld {
         return total;
     }
 
+    public static void varInitTest() {
+        Random random = new Random();
+        // 随机数[0,10)
+        int index = random.nextInt(10);
+
+        int a = 0;
+        int b = 0;
+        int c = 0;
+        int d = 0;
+
+        if (5 > index) {
+            a = 1;
+            b = 2;
+            c = 3;
+            d = 4;
+        }
+
+        if (b > a) {
+            System.out.println(111);
+        }
+
+        if (d > c) {
+            System.out.println(222);
+        }
+    }
 }

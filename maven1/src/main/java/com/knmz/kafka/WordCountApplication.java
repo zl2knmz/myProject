@@ -1,4 +1,4 @@
-package com.knmz.test;
+package com.knmz.kafka;
 /**
  * @Author: zl
  * @Date: 2019/4/3 11:57
