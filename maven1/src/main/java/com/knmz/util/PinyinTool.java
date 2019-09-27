@@ -6,9 +6,10 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+
 /**
- * @Author: zl
- * @Date: 2019/9/24 16:56
+ * @author zl
+ * @date 2019/9/24 16:56
  * 汉字转化为拼音的工具类
  */
 public class PinyinTool {
@@ -20,6 +21,9 @@ public class PinyinTool {
         format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
     }
 
+    /**
+     * 汉字转换成拼音的类型
+     */
     public enum Type {
         // 全部大写
         UPPERCASE,
@@ -34,7 +38,7 @@ public class PinyinTool {
      * 如： 明天 转换成 MINGTIAN
      *
      * @param str：要转化的汉字
-     * @param separator：转化结果的分割符
+     * @param separator：转化结果的分割符，如：分隔符- 转换结果 MING-TIAN
      * @param type 转换成拼音的格式（全部大写、全部小写、首字母大写）
      */
     public static String toPinYin(String str, String separator, Type type) {
@@ -47,13 +51,13 @@ public class PinyinTool {
             format.setCaseType(HanyuPinyinCaseType.LOWERCASE);
         }
 
-        String py = "";
+        StringBuilder pinYin = new StringBuilder();
         String temp = "";
         String[] t = null;
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             if ((int) c <= 128) {
-                py += c;
+                pinYin.append(c);
             } else {
                 try {
                     t = PinyinHelper.toHanyuPinyinStringArray(c, format);
@@ -62,16 +66,17 @@ public class PinyinTool {
                 }
 
                 if (t == null) {
-                    py += c;
+                    pinYin.append(c);
                 } else {
                     temp = t[0];
                     if (type == Type.FIRSTUPPER) {
                         temp = t[0].toUpperCase().charAt(0) + temp.substring(1);
                     }
-                    py += temp + (i == str.length() - 1 ? "" : separator);
+                    String tempStr = temp + (i == str.length() - 1 ? "" : separator);
+                    pinYin.append(tempStr);
                 }
             }
         }
-        return py.trim();
+        return pinYin.toString().trim();
     }
 }

@@ -12,8 +12,8 @@ import java.util.List;
 public class FileStreamTest {
     public static void main(String[] args) {
         // 读txt文件
-        String pathName = "E:\\Program Files\\image\\phone.txt";
-//        String pathName = "E:\\Program Files\\image\\email.txt";
+//        String pathName = "E:\\Program Files\\image\\phone.txt";
+        String pathName = "E:\\Program Files\\image\\email.txt";
         StringBuilder stringBuilder = FileStreamUtil.readFile(pathName);
         List<String> stringList = Arrays.asList(stringBuilder.toString().split(","));
         System.out.println("读到个数：" + stringList.size());
@@ -23,7 +23,7 @@ public class FileStreamTest {
 //        String context = "写文件啦\r\n";
 //        FileStreamUtil.writeFile(pathNameWrite, context);
 
-        StringBuilder stringBuilderWrite = new StringBuilder();
+        /*StringBuilder stringBuilderWrite = new StringBuilder();
         if (stringList.size() > 0) {
             int i = 0;
             for (String data : stringList) {
@@ -39,6 +39,6 @@ public class FileStreamTest {
 
             List<String> stringWriteList = Arrays.asList(stringBuilderWrite.toString().split(","));
             System.out.println("写到个数：" + stringWriteList.size());
-        }
+        }*/
     }
 }
