@@ -1,6 +1,6 @@
-package com.knmz.util;
+package com.knmz.redis;
 
-import com.knmz.model.RedisConfiguration;
+import com.knmz.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

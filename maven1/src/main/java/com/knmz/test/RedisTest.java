@@ -1,8 +1,8 @@
 package com.knmz.test;
 
-import com.knmz.util.JedisHelper;
+import com.knmz.redis.JedisHelper;
+import com.knmz.redis.LettuceClient;
 import com.knmz.util.MyConstants;
-import com.knmz.util.Utils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,6 +34,10 @@ public class RedisTest {
 
         // 通过key 删除指定的 field
 //        JedisHelper.hdel(MyConstants.TEST_REDIS, "123");
+
+        // Lettuce操作redis
+        LettuceClient lettuceClient = new LettuceClient();
+        lettuceClient.setex("lettuce", "123456", 120);
     }
 
 }

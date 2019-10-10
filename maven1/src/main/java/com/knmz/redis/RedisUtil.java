@@ -1,6 +1,5 @@
-package com.knmz.util;
+package com.knmz.redis;
 
-import redis.clients.jedis.BinaryClient;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
