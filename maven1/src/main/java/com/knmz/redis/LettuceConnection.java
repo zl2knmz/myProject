@@ -9,6 +9,7 @@ import io.lettuce.core.api.sync.RedisCommands;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.time.Duration;
 
 /**
  * Lettuce
@@ -25,6 +26,7 @@ public class LettuceConnection {
     @PostConstruct
     public void init() {
         client = RedisClient.create(RedisURI.create("192.168.1.95", 6379));
+        client.setDefaultTimeout(Duration.ofSeconds(10));
         connection = client.connect();
     }
 

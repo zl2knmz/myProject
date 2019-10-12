@@ -13,18 +13,18 @@ import java.util.concurrent.TimeUnit;
 public class RedisTest {
 
     public static void main(String[] args) {
-        String key = String.format(MyConstants.TEST_ID_FORMAT, 823);
+        String key = String.format(MyConstants.TEST_ID_FORMAT, 1012);
         System.out.println("key = "+key);
 
         // 初始化redis客户端
-        JedisHelper.init();
+//        JedisHelper.init();
 
-        if (JedisHelper.exists(key)) {
-            System.out.println("exists key = "+key);
-        }
+//        if (JedisHelper.exists(key)) {
+//            System.out.println("exists key = "+key);
+//        }
 
         // 设置key value并指定这个键值的有效期
-        JedisHelper.setex(key, System.currentTimeMillis(), 1, TimeUnit.DAYS);
+//        JedisHelper.setex(key, System.currentTimeMillis(), 1, TimeUnit.DAYS);
 
         // 通过key给field设置指定的值,如果key不存在,则先创建。
 //        JedisHelper.hset(MyConstants.TEST_REDIS, "123", "456");
@@ -37,7 +37,7 @@ public class RedisTest {
 
         // Lettuce操作redis
         LettuceClient lettuceClient = new LettuceClient();
-        lettuceClient.setex("lettuce", "123456", 120);
+        lettuceClient.setex(key, "lettuce", 120);
     }
 
 }

@@ -57,9 +57,10 @@ public class HelloWorld {
         /*int total = forReturnTest();
         System.out.println(total);*/
 
-        String pushData = "12431241";
+        // String split截取
+        /*String pushData = "12431241";
         List<String> listTo = Arrays.asList(pushData.split(","));
-        System.out.println(11);
+        System.out.println(listTo);*/
 
         // 13位毫秒时间戳
         long a = System.currentTimeMillis();
@@ -76,6 +77,8 @@ public class HelloWorld {
         // 秒数，时间线后面的秒数字段中的纳秒数。始终是正的，并且从不超过99999999。
         int d = Instant.now().getNano();
         System.out.println(d);
+
+
     }
 
     public static int forReturnTest() {
