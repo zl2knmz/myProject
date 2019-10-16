@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author zl
  * @date 2019/10/15 11:17
  * 应用程序缓存，ConcurrentHashMap实现缓存，使用单例模式。
- * 设置过期时间缓存时，并未删除对应的key,只是不取，容易导致OOM。
  */
 public class MapCacheSingleton {
     private static MapCacheSingleton instance = new MapCacheSingleton();
@@ -58,6 +57,9 @@ public class MapCacheSingleton {
             // 未过期的value
             if (cacheObject.getTime() <= 0 || currentTime < cacheObject.getTime()) {
                 return cacheObject.getValue();
+            } else {
+                // 删除过期的key
+                map.remove(key);
             }
         }
         return null;

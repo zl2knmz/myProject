@@ -47,7 +47,7 @@ public class MapTest {
 
         long time = LocalDateTime.now().plusMinutes(1L).toInstant(ZoneOffset.of("+8")).toEpochMilli();;
         long time1 = Instant.now().minusSeconds(100L).getEpochSecond();
-        mapCacheSingleton.set("key1", "value-time", time1);
+        mapCacheSingleton.set("key1", "value-time", time);
         String str1 = mapCacheSingleton.get("key1") == null ? null : mapCacheSingleton.get("key1").toString();
         System.out.println(str1);
     }
