@@ -1,6 +1,6 @@
 package com.knmz.test;
 
-import com.knmz.util.MapCacheSingleton;
+import com.knmz.util.cache.MapCacheSingleton;
 import com.knmz.util.Utils;
 import org.junit.Test;
 

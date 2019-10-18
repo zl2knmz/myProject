@@ -1,4 +1,4 @@
-package com.knmz.util;
+package com.knmz.util.cache;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
