@@ -32,7 +32,8 @@ public class Employee {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("Name", this.getName()).add("Department", getDept())
+                .add("Name", this.getName())
+                .add("Department", getDept())
                 .add("EmployeeID", this.getEmpID()).toString();
     }
 }

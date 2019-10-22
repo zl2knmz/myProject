@@ -24,7 +24,8 @@ public class GuavaCache {
     private static Cache<String, Object> cache;
 
     static {
-        cache = CacheBuilder.newBuilder().maximumSize(10000)
+        cache = CacheBuilder.newBuilder()
+                .maximumSize(10000)
                 .expireAfterWrite(24, TimeUnit.HOURS)
                 .initialCapacity(10)
                 .removalListener(new RemovalListener<String, Object>() {

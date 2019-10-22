@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
  * @author zl
  * @date 2019/10/18 18:35
  */
-@Slf4j
+//@Slf4j
 public class GuavaCacheTest {
     @Test
     public void testBaisc() throws ExecutionException, InterruptedException {
@@ -33,11 +33,11 @@ public class GuavaCacheTest {
                 .expireAfterAccess(30L, TimeUnit.MILLISECONDS)
                 .build(CacheLoaderCreatetor.createCacheLoader());
         Employee employee = cache.get("wangji");
-        log.info("获取结果：" + employee.toString());
+        System.out.println("获取结果：" + employee.toString());
 
         TimeUnit.MILLISECONDS.sleep(31);
         employee = cache.getUnchecked("wangji");
-        log.info("重新创建加载信息：" + employee.toString());
+        System.out.println("重新创建加载信息：" + employee.toString());
     }
 
     @Test
@@ -51,34 +51,40 @@ public class GuavaCacheTest {
         assertThat(cache.size(), equalTo(3L));
 
         cache.getUnchecked("new wang");
-        Employee employee = cache.getIfPresent("wangji"); //不会重新加载创建cache
-        log.info("最新的把老的替换掉：" + (employee == null ? "是的" : "否"));
-        Employee newEmployee = cache.getIfPresent("new wang"); //不会重新加载创建cache
-        log.info("获取结果：" + newEmployee);
+        // 不会重新加载创建cache
+        Employee employee = cache.getIfPresent("wangji");
+        System.out.println("最新的把老的替换掉：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        Employee newEmployee = cache.getIfPresent("new wang");
+        System.out.println("获取结果：" + newEmployee);
     }
 
     @Test
     public void testWeight() throws ExecutionException, InterruptedException {
-        //如果不同的高速缓存条目有不同的“权重”，例如，如果你的缓存值有着完全不同的记忆的足迹--你可以用cachebuilder指定一个权重函数。秤（秤）和一个cachebuilder最大缓存量的最大重量（长）
+        /*
+        如果不同的高速缓存条目有不同的“权重”，例如，如果你的缓存值有着完全不同的记忆的足迹--你可以用cachebuilder指定一个权重函数。
+        秤（秤）和一个cachebuilder最大缓存量的最大重量（长）
+        */
         LoadingCache<String, Employee> cache = CacheBuilder.newBuilder()
                 .maximumWeight(150)
                 .weigher(new Weigher<String, Employee>() {
                     @Override
                     public int weigh(String key, Employee employee) {
-                        int weight = employee.getName().length() + employee.getEmpID().length() + employee.getDept().length();//权重计算器
-                        log.info("weight is :" + weight);
+                        //权重计算器
+                        int weight = employee.getName().length() + employee.getEmpID().length() + employee.getDept().length();
+                        System.out.println("weight is :" + weight);
                         return weight;
                     }
                 })
                 .build(CacheLoaderCreatetor.createCacheLoader());
         cache.get("wangji");
-        log.info("cacheSize：" + cache.size());
+        System.out.println("cacheSize：" + cache.size());
         cache.get("wangwang");
-        log.info("cacheSize：" + cache.size());
+        System.out.println("cacheSize：" + cache.size());
         cache.get("old wang");
-        log.info("cacheSize：" + cache.size());
+        System.out.println("cacheSize：" + cache.size());
         cache.get("new wang");
-        log.info("cacheSize：" + cache.size());
+        System.out.println("cacheSize：" + cache.size());
     }
 
     /**
@@ -92,25 +98,30 @@ public class GuavaCacheTest {
                 .build(CacheLoaderCreatetor.createCacheLoader());
         cache.getUnchecked("wangji");
         TimeUnit.SECONDS.sleep(3);
-        Employee employee = cache.getIfPresent("wangji"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        Employee employee = cache.getIfPresent("wangji");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
         cache.getUnchecked("guava");
 
         TimeUnit.SECONDS.sleep(2);
-        employee = cache.getIfPresent("guava"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        employee = cache.getIfPresent("guava");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
 
         TimeUnit.SECONDS.sleep(2);
-        employee = cache.getIfPresent("guava"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        employee = cache.getIfPresent("guava");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
 
         TimeUnit.SECONDS.sleep(2);
-        employee = cache.getIfPresent("guava"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        employee = cache.getIfPresent("guava");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
 
         TimeUnit.SECONDS.sleep(2);
-        employee = cache.getIfPresent("guava"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        employee = cache.getIfPresent("guava");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
 
     }
 
@@ -124,22 +135,26 @@ public class GuavaCacheTest {
                 .build(CacheLoaderCreatetor.createCacheLoader());
         cache.getUnchecked("guava");
         TimeUnit.SECONDS.sleep(2);
-        Employee employee = cache.getIfPresent("guava"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        Employee employee = cache.getIfPresent("guava");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
 
         TimeUnit.SECONDS.sleep(2);
-        employee = cache.getIfPresent("guava"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
-
-        cache.put("guava", new Employee("guava", "guava" + "dept", "guava" + "id")); //手动插入
+        // 不会重新加载创建cache
+        employee = cache.getIfPresent("guava");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
+        // 手动插入
+        cache.put("guava", new Employee("guava", "guava" + "dept", "guava" + "id"));
         TimeUnit.SECONDS.sleep(2);
-        employee = cache.getIfPresent("guava"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        employee = cache.getIfPresent("guava");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
 
         cache.put("guava", new Employee("guava", "guava" + "dept", "guava" + "id"));
         TimeUnit.SECONDS.sleep(2);
-        employee = cache.getIfPresent("guava"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        employee = cache.getIfPresent("guava");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
 
     }
 
@@ -159,8 +174,9 @@ public class GuavaCacheTest {
 
         System.gc();
         TimeUnit.MILLISECONDS.sleep(100);
-        Employee employee = cache.getIfPresent("guava"); //不会重新加载创建cache
-        log.info("被销毁：" + (employee == null ? "是的" : "否"));
+        // 不会重新加载创建cache
+        Employee employee = cache.getIfPresent("guava");
+        System.out.println("被销毁：" + (employee == null ? "是的" : "否"));
     }
 
     @Test
@@ -172,8 +188,8 @@ public class GuavaCacheTest {
         int i = 0;
         for (; ; ) {
             cache.put("Alex" + i, new Employee("Alex" + 1, "Alex" + 1, "Alex" + 1));
-            log.info("The Employee [" + (i++) + "] is store into cache.");
-            log.info("cache size" + cache.size());
+            System.out.println("The Employee [" + (i++) + "] is store into cache.");
+            System.out.println("cache size" + cache.size());
             TimeUnit.MILLISECONDS.sleep(600);
         }
     }
@@ -195,10 +211,10 @@ public class GuavaCacheTest {
                 .build(CacheLoaderCreatetor.createNullCacheLoader());
         thrown.expect(CacheLoader.InvalidCacheLoadException.class);
         try {
-            //不存在创建了一个null的value，不被允许的！
+            // 不存在创建了一个null的value，不被允许的！
             cache.getUnchecked("null");
         } catch (Exception e) {
-            log.error("error", e);
+//            log.error("error", e);
             throw e;
         }
     }
@@ -209,14 +225,14 @@ public class GuavaCacheTest {
         Optional<Employee> employeeOptional = cache.getUnchecked("guava");
         if (employeeOptional.isPresent()) {
             Employee employee = employeeOptional.get();
-            log.info("employee：" + employee.toString());
+            System.out.println("employee：" + employee.toString());
         }
 
         Optional<Employee> employeeNull = cache.getUnchecked("null");
         if (!employeeNull.isPresent()) {
-            log.info("employee is null");
+            System.out.println("employee is null");
             Employee def = cache.getUnchecked("null").or(new Employee("default", "default", "default"));
-            log.info("employee deful：" + def.toString());
+            System.out.println("employee deful：" + def.toString());
         }
     }
 
@@ -227,8 +243,8 @@ public class GuavaCacheTest {
         {
             if (notification.wasEvicted()) {
                 RemovalCause cause = notification.getCause();
-                log.info("remove cacase is :" + cause.toString());
-                log.info("key:" + notification.getKey() + "value:" + notification.getValue());
+                System.out.println("remove cacase is :" + cause.toString());
+                System.out.println("key:" + notification.getKey() + "value:" + notification.getValue());
             }
         };
         LoadingCache<String, String> cache = CacheBuilder.newBuilder()
@@ -252,9 +268,10 @@ public class GuavaCacheTest {
                 put("guava1", "guava1");
             }
         };
-        cache.putAll(preData); //提前插入
-        log.info("cache size :" + cache.size());
-        log.info("guava:" + cache.getUnchecked("guava"));
+        // 提前插入
+        cache.putAll(preData);
+        System.out.println("cache size :" + cache.size());
+        System.out.println("guava:" + cache.getUnchecked("guava"));
     }
 
     @Test
@@ -263,7 +280,7 @@ public class GuavaCacheTest {
         CacheLoader<String, Long> cacheLoader = CacheLoader
                 .from(k -> {
                     counter.incrementAndGet();
-                    log.info("创建 key :" + k);
+                    System.out.println("创建 key :" + k);
                     return System.currentTimeMillis();
                 });
         LoadingCache<String, Long> cache = CacheBuilder.newBuilder()
@@ -273,6 +290,6 @@ public class GuavaCacheTest {
         Long result1 = cache.getUnchecked("guava");
         TimeUnit.SECONDS.sleep(3);
         Long result2 = cache.getUnchecked("guava");
-        log.info(result1.longValue() != result2.longValue() ? "是的" : "否");
+        System.out.println(result1.longValue() != result2.longValue() ? "是的" : "否");
     }
 }
