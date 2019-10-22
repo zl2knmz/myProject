@@ -11,12 +11,12 @@ public class ConcreteBuilder1 extends BaseBuilder {
 
     @Override
     public void buildPart1() {
-        product.add("部件1-1");
+        product.add("部件1");
     }
 
     @Override
     public void buildPart2() {
-        product.add("部件1-2");
+        product.add("部件2");
     }
 
     @Override
