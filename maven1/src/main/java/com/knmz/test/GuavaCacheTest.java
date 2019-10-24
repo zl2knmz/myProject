@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import com.google.common.cache.*;
 import com.knmz.model.Employee;
 import com.knmz.util.cache.CacheLoaderCreatetor;
+import com.knmz.util.cache.GuavaCache;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Rule;
 import org.junit.Test;
@@ -291,5 +292,15 @@ public class GuavaCacheTest {
         TimeUnit.SECONDS.sleep(3);
         Long result2 = cache.getUnchecked("guava");
         System.out.println(result1.longValue() != result2.longValue() ? "是的" : "否");
+    }
+
+    /**
+     * Cache测试
+     */
+    @Test
+    public void testCache() throws Exception {
+        GuavaCache.put("test-cache", "12345678");
+        Object val = GuavaCache.get("test-cache");
+        System.out.println(val);
     }
 }

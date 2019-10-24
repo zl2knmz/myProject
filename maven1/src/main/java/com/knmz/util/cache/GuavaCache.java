@@ -23,21 +23,32 @@ public class GuavaCache {
      */
     private static Cache<String, Object> cache;
 
+    /*
+     * maximumSize：最大key数 10000个
+     * initialCapacity：初始容量 100
+     * concurrencyLevel：并发数 4
+     * expireAfterWrite：给定时间没有被写访问(创建或覆盖) 30分钟
+     * recordStats：开启 Guava Cache 的统计功能，打开后Cache.stats()方法会返回统计信息。
+     * removalListener：移除监听器
+     */
     static {
         cache = CacheBuilder.newBuilder()
                 .maximumSize(10000)
                 .expireAfterWrite(24, TimeUnit.HOURS)
-                .initialCapacity(10)
+                .initialCapacity(100)
+                .concurrencyLevel(4)
+                .recordStats()
                 .removalListener(new RemovalListener<String, Object>() {
                     @Override
                     public void onRemoval(RemovalNotification<String, Object> rn) {
                         if (LOGGER.isInfoEnabled()) {
-                            LOGGER.info("被移除缓存{}:{}", rn.getKey(), rn.getValue());
+                            LOGGER.info("guava cache remove {}:{}", rn.getKey(), rn.getValue());
                         }
                     }
-                }).build();
+                })
+                .build();
     }
-
+    
     /**
      * 获取缓存
      */

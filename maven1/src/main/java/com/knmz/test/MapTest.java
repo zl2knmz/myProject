@@ -22,7 +22,7 @@ public class MapTest {
      */
     @Test
     public void testMapSize() throws IOException {
-        Map<String, Integer> user = new HashMap<>();
+        Map<String, Integer> user = new HashMap<>(16);
         int i = 0;
         int j = 1000000;
         String key = "123456";
@@ -52,4 +52,42 @@ public class MapTest {
         System.out.println(str1);
     }
 
+    /**
+     * 测试 map
+     */
+    @Test
+    public void testMapRemove() throws IOException {
+        Map<String, String> map = new HashMap<>(16);
+
+        String key = "杜甫";
+        String value = "诗圣";
+
+        String key1 = "李白";
+        String value1 = "青莲居士";
+
+        String key2 = "欧阳修";
+        String value2 = "六一居士";
+
+        String key3 = "白居易";
+        String value3 = "香山居士";
+
+        String key4 = "李清照";
+        String value4 = "易安居士";
+
+        String key5 = "苏轼";
+        String value5 = "东坡居士";
+
+        map.put(key, value);
+        map.put(key1, value1);
+        map.put(key2, value2);
+        map.put(key3, value3);
+        map.put(key4, value4);
+        map.put(key5, value5);
+
+        map.remove("杜甫");
+        System.out.println(map);
+
+        map.remove("杜甫");
+        System.out.println(map);
+    }
 }
