@@ -1,9 +1,6 @@
 package com.knmz.util.cache;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
+import com.google.common.cache.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,5 +78,18 @@ public class GuavaCache {
         if (keys != null && keys.size() > 0) {
             cache.invalidateAll(keys);
         }
+    }
+
+    /**
+     * 统计信息
+     * hitCount=命中的次数,
+     * missCount=未命中次数,
+     * loadSuccessCount=成功加载新值的次数,
+     * loadExceptionCount=失败加载新值的次数,
+     * totalLoadTime=全部加载时间,
+     * evictionCount=丢失的条数
+     */
+    public static CacheStats stats() {
+        return cache.stats();
     }
 }

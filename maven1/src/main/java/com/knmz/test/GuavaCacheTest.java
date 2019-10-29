@@ -302,5 +302,6 @@ public class GuavaCacheTest {
         GuavaCache.put("test-cache", "12345678");
         Object val = GuavaCache.get("test-cache");
         System.out.println(val);
+        System.out.println(GuavaCache.stats());
     }
 }
