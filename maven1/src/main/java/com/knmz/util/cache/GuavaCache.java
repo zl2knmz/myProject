@@ -82,12 +82,12 @@ public class GuavaCache {
 
     /**
      * 统计信息
-     * hitCount=命中的次数,
+     * hitCount=命中次数,
      * missCount=未命中次数,
-     * loadSuccessCount=成功加载新值的次数,
-     * loadExceptionCount=失败加载新值的次数,
-     * totalLoadTime=全部加载时间,
-     * evictionCount=丢失的条数
+     * loadSuccessCount=加载成功数,
+     * loadExceptionCount=加载异常数,
+     * totalLoadTime=加载总共耗时,
+     * evictionCount=缓存被移出数
      */
     public static CacheStats stats() {
         return cache.stats();
