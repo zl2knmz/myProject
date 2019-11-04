@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class JedisHelper {
     private final static Logger LOGGER = LoggerFactory.getLogger(JedisHelper.class);
-    private final static String KEY_PREFIX = "DATAX";
+//    private final static String KEY_PREFIX = "DATAX";
     private final static String OK = "OK";
     private static JedisPool jedisPool;
 
@@ -76,12 +76,12 @@ public class JedisHelper {
         }
     }
 
-    private static String setKeyPrefix(String key) throws IllegalArgumentException {
+    /*private static String setKeyPrefix(String key) throws IllegalArgumentException {
         if (StringUtils.isBlank(key)) {
             throw new IllegalArgumentException("jedis key can not be blank.");
         }
         return String.format("%s_%s", KEY_PREFIX, key);
-    }
+    }*/
 
 
     public static boolean ping() {
@@ -101,7 +101,7 @@ public class JedisHelper {
      */
     public static String get(String key) {
         String ret = null;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             ret = jedis.get(key);
         } catch (Exception ex) {
@@ -112,7 +112,7 @@ public class JedisHelper {
 
     public static <T> T get(String key, Class<T> type, T defaultValue) {
         T ret = defaultValue;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             String value = jedis.get(key);
             if (StringUtils.isNotBlank(value)) {
@@ -132,7 +132,7 @@ public class JedisHelper {
      */
     public static boolean set(String key, Object value) {
         boolean ret = false;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             String result = jedis.set(key, Utils.getObjectMapper().writeValueAsString(value));
             if (OK.equals(result)) {
@@ -153,7 +153,7 @@ public class JedisHelper {
      */
     public static boolean setex(String key, Object value, long duration, TimeUnit timeUnit) {
         boolean ret = false;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             String result = jedis.setex(key, Math.toIntExact(timeUnit.toSeconds(duration)), Utils.getObjectMapper().writeValueAsString(value));
             if (OK.equals(result)) {
@@ -172,7 +172,7 @@ public class JedisHelper {
      */
     public static boolean del(String key) {
         boolean ret = false;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             ret = jedis.del(key) == 1;
         } catch (Exception ex) {
@@ -188,7 +188,7 @@ public class JedisHelper {
      */
     public static boolean incr(String key) {
         boolean ret = false;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             ret = jedis.incr(key) > 0;
         } catch (Exception ex) {
@@ -205,7 +205,7 @@ public class JedisHelper {
      */
     public static boolean pexpireAt(String key, long millisecondsTimestamp) {
         boolean ret = false;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             ret = jedis.pexpireAt(key, millisecondsTimestamp) > 0;
         } catch (Exception ex) {
@@ -222,7 +222,7 @@ public class JedisHelper {
      */
     public static boolean incrAndPexpireAt(String key, long millisecondsTimestamp) {
         boolean ret = false;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             if (jedis.incr(key) > 0) {
                 if (jedis.pttl(key) < 0) {
@@ -244,7 +244,7 @@ public class JedisHelper {
      */
     public static boolean exists(String key) {
         boolean ret = false;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             ret = jedis.exists(key);
         } catch (Exception ex) {
@@ -262,7 +262,7 @@ public class JedisHelper {
      */
     public static boolean hset(String key, String field, String value) {
         boolean ret = false;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             jedis.hset(key, field, value);
             ret = true;
@@ -280,7 +280,7 @@ public class JedisHelper {
      */
     public static boolean hdel(String key, String... fields) {
         boolean ret = false;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             jedis.hdel(key, fields);
             ret = true;
@@ -297,7 +297,7 @@ public class JedisHelper {
      */
     public static Map<String, String> hgetAll(String key) {
         Map<String, String> ret = null;
-        key = setKeyPrefix(key);
+//        key = setKeyPrefix(key);
         try (Jedis jedis = jedisPool.getResource()) {
             ret = jedis.hgetAll(key);
         } catch (Exception ex) {
