@@ -8,6 +8,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -63,7 +64,7 @@ public class HelloWorld {
         System.out.println(listTo);*/
 
         // 13位毫秒时间戳
-        long a = System.currentTimeMillis();
+        /*long a = System.currentTimeMillis();
         System.out.println(a);
 
         // 15位纳秒级时间戳
@@ -76,9 +77,32 @@ public class HelloWorld {
 
         // 秒数，时间线后面的秒数字段中的纳秒数。始终是正的，并且从不超过99999999。
         int d = Instant.now().getNano();
-        System.out.println(d);
+        System.out.println(d);*/
 
+        // 测试String转Integer，是小数时报错
+        List<String> price_s = new ArrayList<>();
+        price_s.add("9.9");
+        price_s.add("19.9");
+        price_s.add("0");
 
+        List<Double> price = new ArrayList<>();
+        initPrice(price, price_s);
+        System.out.println(price);
+        System.out.println(0.0 == 0);
+    }
+
+    private static void initPrice(List<Double> price, List<String> price_s) {
+        if (price_s != null && price_s.size() > 0) {
+            for (int i = 0; i < price_s.size(); i++) {
+                try {
+//                    price.add(Integer.parseInt(price_s.get(i)));
+                    price.add(Double.valueOf(price_s.get(i)));
+                } catch (Exception e) {
+                    System.out.println("报错啦");
+                }
+
+            }
+        }
     }
 
     public static int forReturnTest() {
