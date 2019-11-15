@@ -3,8 +3,8 @@ package com.knmz.model;
 import lombok.Data;
 
 /**
- * @Author: zl
- * @Date: 2019/5/14 11:16
+ * @author zl
+ * @date 2019/5/14 11:16
  * 解析活动表中报名表单数据
  */
 @Data

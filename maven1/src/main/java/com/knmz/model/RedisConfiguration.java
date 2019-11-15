@@ -3,8 +3,8 @@ package com.knmz.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @Author: zl
- * @Date: 2019/8/23 15:40
+ * @author zl
+ * @date 2019/8/23 15:40
  */
 public class RedisConfiguration {
     @JsonProperty

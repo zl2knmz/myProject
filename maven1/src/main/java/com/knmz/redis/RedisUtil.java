@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @Author: zl
- * @Date: 2019/8/23 16:30
+ * @author zl
+ * @date 2019/8/23 16:30
  */
 public class RedisUtil {
     private JedisPool pool = null;

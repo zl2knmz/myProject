@@ -1,8 +1,8 @@
 package com.knmz.util;
 
 /**
- * @Author: zl
- * @Date: 2019/5/13 11:39
+ * @author zl
+ * @date 2019/5/13 11:39
  */
 public class LatLonUtil {
     private static double PI = 3.14159265;

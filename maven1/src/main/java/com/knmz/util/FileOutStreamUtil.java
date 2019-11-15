@@ -3,8 +3,8 @@ package com.knmz.util;
 import java.io.*;
 
 /**
- * @Author: zl
- * @Date: 2019/6/26 11:48
+ * @author zl
+ * @date 2019/6/26 11:48
  */
 public class FileOutStreamUtil {
 

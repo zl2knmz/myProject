@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * @Author: zl
- * @Date: 2019/5/21 14:22
+ * @author zl
+ * @date 2019/5/21 14:22
  */
 @Data
 public class CityDTO {

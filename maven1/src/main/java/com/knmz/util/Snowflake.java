@@ -1,8 +1,8 @@
 package com.knmz.util;
 
 /**
- * @Author: zl
- * @Date: 2019/3/17 21:49
+ * @author zl
+ * @date 2019/3/17 21:49
  */
 public class Snowflake {
     private final static long unusedBits = 1L;

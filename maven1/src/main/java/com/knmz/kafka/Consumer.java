@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.Properties;
 
 /**
- * @Author: zl
- * @Date: 2019/9/16 18:06
+ * @author zl
+ * @date 2019/9/16 18:06
  */
 public class Consumer {
     public static void main(String[] args) {

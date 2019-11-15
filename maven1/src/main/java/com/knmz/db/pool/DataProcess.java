@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: zl
- * @Date: 2019/6/25 18:12
+ * @author zl
+ * @date 2019/6/25 18:12
  * 功能介绍：使用连接池对mysql数据库操作：查询、更新（插入/修改/删除）、批量更新
  */
 public class DataProcess {

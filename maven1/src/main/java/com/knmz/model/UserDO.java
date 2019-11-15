@@ -6,8 +6,8 @@ import lombok.NonNull;
 import java.util.Date;
 
 /**
- * @Author: zl
- * @Date: 2019/3/17 21:55
+ * @author zl
+ * @date 2019/3/17 21:55
  */
 @Data
 public class UserDO {

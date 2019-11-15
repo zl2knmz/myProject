@@ -1,8 +1,8 @@
 package com.knmz.thread;
 
 /**
- * @Author: zl
- * @Date: 2019/7/3 11:57
+ * @author zl
+ * @date 2019/7/3 11:57
  */
 public class ARunnable implements Runnable {
     volatile boolean stop;

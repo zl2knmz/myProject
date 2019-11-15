@@ -3,8 +3,8 @@ package com.knmz.util.phoneix;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * @Author: zl
- * @Date: 2019/6/24 11:44
+ * @author zl
+ * @date 2019/6/24 11:44
  * 用户宽表中，城市id -> 城市名
  */
 public class CityIdToName {

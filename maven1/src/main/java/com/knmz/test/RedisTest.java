@@ -7,8 +7,8 @@ import com.knmz.util.MyConstants;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: zl
- * @Date: 2019/8/23 16:04
+ * @author zl
+ * @date 2019/8/23 16:04
  */
 public class RedisTest {
 

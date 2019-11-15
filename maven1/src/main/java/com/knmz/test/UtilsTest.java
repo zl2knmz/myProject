@@ -5,8 +5,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
 /**
- * @Author: zl
- * @Date: 2019/9/24 17:16
+ * @author zl
+ * @date 2019/9/24 17:16
  */
 public class UtilsTest {
 

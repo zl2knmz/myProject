@@ -1,8 +1,8 @@
 package com.knmz.util.phoneix;
 
 /**
- * @Author: zl
- * @Date: 2019/6/24 11:00
+ * @author zl
+ * @date 2019/6/24 11:00
  * 宽表工具类
  */
 public class BigTableUtil {

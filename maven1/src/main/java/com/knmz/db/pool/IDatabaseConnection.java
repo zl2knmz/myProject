@@ -3,8 +3,8 @@ package com.knmz.db.pool;
 import java.sql.Connection;
 
 /**
- * @Author: zl
- * @Date: 2019/6/10 23:46
+ * @author zl
+ * @date 2019/6/10 23:46
  * Description: 定义一个接口，更换数据库的时候方便
  */
 public interface IDatabaseConnection {

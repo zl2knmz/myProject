@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author: zl
- * @Date: 2019/7/26 17:54
+ * @author zl
+ * @date 2019/7/26 17:54
  */
 public class ListTest {
 

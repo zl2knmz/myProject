@@ -15,8 +15,8 @@ import java.util.Date;
 import java.util.Properties;
 
 /**
- * @Author: zl
- * @Date: 2019/9/16 18:06
+ * @author zl
+ * @date 2019/9/16 18:06
  */
 public class Stream {
     public static void main(String[] args) throws Exception {

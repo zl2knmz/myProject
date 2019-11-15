@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * JedisHelper
  *
- * @Author: zl
- * @Date: 2019/2/12 16:39
+ * @author zl
+ * @date 2019/2/12 16:39
  */
 public class JedisHelper {
     private final static Logger LOGGER = LoggerFactory.getLogger(JedisHelper.class);

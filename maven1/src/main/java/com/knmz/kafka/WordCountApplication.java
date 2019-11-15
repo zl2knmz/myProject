@@ -1,7 +1,7 @@
 package com.knmz.kafka;
 /**
- * @Author: zl
- * @Date: 2019/4/3 11:57
+ * @author zl
+ * @date 2019/4/3 11:57
  */
 
 import org.apache.kafka.common.serialization.Serdes;

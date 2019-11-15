@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Author: zl
- * @Date: 2019/8/28 11:58
+ * @author zl
+ * @date 2019/8/28 11:58
  */
 public class FileStreamTest {
     public static void main(String[] args) {

@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 /**
- * @Author: zl
- * @Date: 2019/5/21 14:15
+ * @author zl
+ * @date 2019/5/21 14:15
  * 根据ip获取对应城市
  */
 public class IpToCity {

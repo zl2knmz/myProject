@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.util.LinkedList;
 
 /**
- * @Author: zl
- * @Date: 2019/6/10 23:50
+ * @author zl
+ * @date 2019/6/10 23:50
  * Description: 构建一个连接池
  */
 public class MysqlPool implements IDatabaseConnection {

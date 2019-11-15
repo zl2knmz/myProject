@@ -11,8 +11,8 @@ import java.util.Properties;
 import java.util.UUID;
 
 /**
- * @Author: zl
- * @Date: 2019/9/16 18:06
+ * @author zl
+ * @date 2019/9/16 18:06
  */
 public class Producer {
 

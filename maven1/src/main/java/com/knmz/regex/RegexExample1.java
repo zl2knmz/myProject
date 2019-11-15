@@ -6,8 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @Author: zl
- * @Date: 2019/8/13 23:09
+ * @author zl
+ * @date 2019/8/13 23:09
  */
 public class RegexExample1 {
     public static void main(String args[]) {

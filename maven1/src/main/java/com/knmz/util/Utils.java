@@ -28,8 +28,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: zl
- * @Date: 2019/5/21 14:15
+ * @author zl
+ * @date 2019/5/21 14:15
  * 常用工具类
  */
 public class Utils {

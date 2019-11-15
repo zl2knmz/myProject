@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.net.URI;
 
 /**
- * @Author: zl
- * @Date: 2019/7/11 17:03
+ * @author zl
+ * @date 2019/7/11 17:03
  * 读写hdfs文件
  */
 public class OperateHdfs {

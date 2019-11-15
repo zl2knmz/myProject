@@ -5,8 +5,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * @Author: zl
- * @Date: 2019/5/14 11:10
+ * @author zl
+ * @date 2019/5/14 11:10
  * 解析报名表单中用户的公司、职位、学历
  */
 public class ParseFormData {

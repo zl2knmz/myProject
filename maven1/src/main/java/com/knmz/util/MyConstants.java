@@ -6,8 +6,8 @@ import org.joda.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 /**
- * @Author: zl
- * @Date: 2019/5/21 14:15
+ * @author zl
+ * @date 2019/5/21 14:15
  * 常量类
  */
 public class MyConstants {

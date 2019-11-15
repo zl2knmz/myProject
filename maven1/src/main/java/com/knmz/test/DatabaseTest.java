@@ -8,8 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * @Author: zl
- * @Date: 2019/6/10 23:52
+ * @author zl
+ * @date 2019/6/10 23:52
  */
 public class DatabaseTest {
     private static IDatabaseConnection mysqlServer = new MysqlPool();
