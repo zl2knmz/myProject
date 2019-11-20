@@ -26,20 +26,22 @@ public class ListTest {
         b.add("f");
 
         List<String> c = new ArrayList<>(a);
+        // 两个list集合取交集
         c.retainAll(b);
         System.out.println(c);
 
         List<String> d = new ArrayList<>(a);
+        // 两个list集合取差集
         d.removeAll(b);
         System.out.println(d);
 
         List<String> e = new ArrayList<>();
         e.add("a");
-        e.add("c");
+        e.add("e");
 
         List<String> f = new ArrayList<>(a);
-        f.removeAll(e);
-        System.out.println(f);
-
+        // 差集
+        e.removeAll(f);
+        System.out.println(e);
     }
 }
