@@ -20,6 +20,9 @@ public class JavaStreamTest {
         strings.stream().filter(string -> !string.isEmpty()).forEach(System.out::println);
         //Hollis, , HollisChuang, H, hollis
 
+        String a = String.join(",", strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList()));
+        System.out.println("a=" + a);
+
         List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
         System.out.println("map");
         numbers.stream().map(i -> i * i).forEach(System.out::println);

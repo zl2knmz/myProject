@@ -8,6 +8,8 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -63,24 +65,39 @@ public class HelloWorld {
         List<String> listTo = Arrays.asList(pushData.split(","));
         System.out.println(listTo);*/
 
-        // 13位毫秒时间戳
-        /*long a = System.currentTimeMillis();
+        // 13位毫秒时间戳 1574247317549
+        long a = System.currentTimeMillis();
         System.out.println(a);
 
-        // 15位纳秒级时间戳
+        // 15位纳秒级时间戳 114587769486220
         long b = System.nanoTime();
         System.out.println(b);
 
-        // 10位秒级时间戳
+        // 10位秒级时间戳 1574247317
         long c = Instant.now().getEpochSecond();
         System.out.println(c);
 
         // 秒数，时间线后面的秒数字段中的纳秒数。始终是正的，并且从不超过99999999。
         int d = Instant.now().getNano();
-        System.out.println(d);*/
+        System.out.println(d);
+
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        java.time.format.DateTimeFormatter df = java.time.format.DateTimeFormatter.ofPattern(pattern);
+        // localDateTime 当前时间=2019-11-20T18:55:17.983
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("localDateTime 当前时间=" + localDateTime);
+        String formatTime = localDateTime.format(df);
+        System.out.println("formatTime localDateTime 当前时间=" + formatTime);
+        String time = "2018-06-12 16:04:43";
+        LocalDateTime localDateTime1 = LocalDateTime.parse(time,java.time.format.DateTimeFormatter.ofPattern(pattern));
+        System.out.println("localDateTime parse 当前时间=" + localDateTime1);
+
+        // localTime 当前时间=18:55:17.983
+        LocalTime localTime = LocalTime.now();
+        System.out.println("localTime 当前时间=" + localTime);
 
         // 测试String转Integer，是小数时报错
-        List<String> price_s = new ArrayList<>();
+        /*List<String> price_s = new ArrayList<>();
         price_s.add("9.9");
         price_s.add("19.9");
         price_s.add("0");
@@ -88,7 +105,7 @@ public class HelloWorld {
         List<Double> price = new ArrayList<>();
         initPrice(price, price_s);
         System.out.println(price);
-        System.out.println(0.0 == 0);
+        System.out.println(0.0 == 0);*/
     }
 
     private static void initPrice(List<Double> price, List<String> price_s) {
