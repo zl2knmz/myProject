@@ -4,6 +4,7 @@ import com.knmz.util.FileStreamUtil;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zl
@@ -12,11 +13,14 @@ import java.util.List;
 public class FileStreamTest {
     public static void main(String[] args) {
         // 读txt文件
-//        String pathName = "E:\\Program Files\\image\\phone.txt";
-        String pathName = "E:\\Program Files\\image\\email.txt";
+        String pathName = "E:\\Program Files\\image\\phone.txt";
+//        String pathName = "E:\\Program Files\\image\\email.txt";
         StringBuilder stringBuilder = FileStreamUtil.readFile(pathName);
         List<String> stringList = Arrays.asList(stringBuilder.toString().split(","));
         System.out.println("读到个数：" + stringList.size());
+        // 去重
+        List<String> stringListDistinct = stringList.stream().distinct().collect(Collectors.toList());
+        System.out.println("去重后读到个数：" + stringListDistinct.size());
 
         // 写txt文件
         String pathNameWrite = "E:\\Program Files\\image\\output.txt";
