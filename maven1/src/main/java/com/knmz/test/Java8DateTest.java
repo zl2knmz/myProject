@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author zl
  * @date 2019/11/21 10:14
+ * java 8 时间
  */
 public class Java8DateTest {
     public static void main(String[] args) {
@@ -29,17 +30,19 @@ public class Java8DateTest {
 
         String pattern = "yyyy-MM-dd HH:mm:ss";
         DateTimeFormatter df = DateTimeFormatter.ofPattern(pattern);
-        // localDateTime 当前时间=2019-11-20T18:55:17.983
+        // LocalDateTime 当前时间=2019-11-20T18:55:17.983
         LocalDateTime localDateTime = LocalDateTime.now();
-        System.out.println("localDateTime 当前时间=" + localDateTime);
-        String formatTime = localDateTime.format(df);
-        System.out.println("formatTime localDateTime 当前时间=" + formatTime);
-        String time = "2018-06-12 16:04:43";
-        LocalDateTime localDateTime1 = LocalDateTime.parse(time,java.time.format.DateTimeFormatter.ofPattern(pattern));
-        System.out.println("localDateTime parse 当前时间=" + localDateTime1);
+        System.out.println("LocalDateTime 当前时间=" + localDateTime);
 
-        // localTime 当前时间=18:55:17.983
+        String formatTime = localDateTime.format(df);
+        System.out.println("LocalDateTime formatter 当前时间=" + formatTime);
+
+        String time = "2018-06-12 16:04:43";
+        LocalDateTime localDateTime1 = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(pattern));
+        System.out.println("LocalDateTime parse 当前时间=" + localDateTime1);
+
+        // LocalTime 当前时间=18:55:17.983
         LocalTime localTime = LocalTime.now();
-        System.out.println("localTime 当前时间=" + localTime);
+        System.out.println("LocalTime 当前时间=" + localTime);
     }
 }

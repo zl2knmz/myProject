@@ -47,7 +47,7 @@ public class RedisTest {
     @Test
     public void bitSetTest() {
         BloomFilter<String> filter = new BloomFilter<String>(0.0001, 10000);
-        Jedis jedis = new Jedis("192.168.56.1", 6379);
+        Jedis jedis = new Jedis("192.168.16.225", 6379);
         //jedis.auth("1234");
         filter.bind(new RedisBitSet(jedis, "bloomfilter:key:name"));
 
