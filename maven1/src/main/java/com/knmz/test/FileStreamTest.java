@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class FileStreamTest {
     public static void main(String[] args) {
         // 读txt文件
-        String pathName = "E:\\Program Files\\image\\phone.txt";
+        String pathName = "D:\\Program Files\\image\\phone.txt";
 //        String pathName = "E:\\Program Files\\image\\email.txt";
         StringBuilder stringBuilder = FileStreamUtil.readFile(pathName);
         List<String> stringList = Arrays.asList(stringBuilder.toString().split(","));
@@ -23,7 +23,7 @@ public class FileStreamTest {
         System.out.println("去重后读到个数：" + stringListDistinct.size());
 
         // 写txt文件
-        String pathNameWrite = "E:\\Program Files\\image\\output.txt";
+        String pathNameWrite = "D:\\Program Files\\image\\output.txt";
 //        String context = "写文件啦\r\n";
 //        FileStreamUtil.writeFile(pathNameWrite, context);
 
