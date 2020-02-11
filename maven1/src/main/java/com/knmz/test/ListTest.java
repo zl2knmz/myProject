@@ -43,5 +43,23 @@ public class ListTest {
         // 差集
         e.removeAll(f);
         System.out.println(e);
+
+        List<String> list = new ArrayList<>();
+        String str1 = "123";
+        String str2 = "456";
+        list.add(str1);
+        list.add(str2);
+        System.out.println(list);
+        /*str1 = "789";
+        list.add(str1);
+        System.out.println(list);*/
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals("123")) {
+                list.set(i, "789");
+                break;
+            }
+        }
+        System.out.println(list);
     }
 }

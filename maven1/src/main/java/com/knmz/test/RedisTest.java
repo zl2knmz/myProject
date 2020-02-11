@@ -2,7 +2,11 @@ package com.knmz.test;
 
 import com.knmz.redis.JedisHelper;
 import com.knmz.redis.LettuceClient;
+import com.knmz.redis.RedisBitSet;
 import com.knmz.util.MyConstants;
+import com.knmz.util.bloom.BloomFilter;
+import org.junit.Test;
+import redis.clients.jedis.Jedis;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +18,7 @@ public class RedisTest {
 
     public static void main(String[] args) {
         String key = String.format(MyConstants.TEST_ID_FORMAT, 1012);
-        System.out.println("key = "+key);
+        System.out.println("key = " + key);
 
         // 初始化redis客户端
 //        JedisHelper.init();
@@ -38,6 +42,26 @@ public class RedisTest {
         // Lettuce操作redis
         LettuceClient lettuceClient = new LettuceClient();
         lettuceClient.setex(key, "lettuce", 120);
+    }
+
+    @Test
+    public void bitSetTest() {
+        BloomFilter<String> filter = new BloomFilter<String>(0.0001, 10000);
+        Jedis jedis = new Jedis("192.168.16.225", 6379);
+        //jedis.auth("1234");
+        filter.bind(new RedisBitSet(jedis, "bloomfilter:key:name"));
+
+        filter.add("test1");
+        filter.add("test2");
+        filter.add("test3");
+        System.out.println(filter.contains("test2"));
+        System.out.println(filter.contains("test4"));
+        System.out.println(filter.count());
+        System.out.println(filter.isEmpty());
+        filter.clear();
+
+        System.out.println(filter.isEmpty());
+        System.out.println(filter.contains("test1"));
     }
 
 }
