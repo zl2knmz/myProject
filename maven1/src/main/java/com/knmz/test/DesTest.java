@@ -13,6 +13,9 @@ public class DesTest {
      */
     private final String password = "hdx.20201024";
 
+    /**
+     * DES加密
+     */
     @Test
     public void testDesEncode() {
         String phoneNum = "18770913915";
@@ -24,6 +27,9 @@ public class DesTest {
         System.out.println(enEmail);
     }
 
+    /**
+     * DES解密
+     */
     @Test
     public void testDesDecode() {
         String enPhoneNum = "/TqXMHpr11DVPF3NgMeyGA==";
