@@ -33,4 +33,25 @@ public class UtilsTest {
         System.out.println(sha);
     }
 
+    /**
+     * String 的 replace 方法测试
+     *
+     * @author zl
+     */
+    @Test
+    public void replaceTest() {
+        String text = "报个名啦！链接1：\n" +
+                "https://www.huodongxing.com/event/4538977446421?qd=525746874888486912&utm_source=525746874888486912&utm_medium=2&utm_campaign=HDXPUSH\n" +
+                "\n" +
+                "报个名啦！链接2：\n" +
+                "https://www.huodongxing.com/news/750898249196?qd=525746874888486912&utm_source=525746874888486912&utm_medium=2&utm_campaign=HDXPUSH\n";
+        String oldStr = "https://www.huodongxing.com/event/4538977446421?qd=525746874888486912&utm_source=525746874888486912&utm_medium=2&utm_campaign=HDXPUSH";
+        String newStr = "http://hdxu.cn/8bvA3";
+        if (text.contains(oldStr)) {
+            text = text.replace(oldStr, newStr);
+            System.out.println("start- " + text);
+        }
+        System.out.println("end- " + text);
+    }
+
 }
