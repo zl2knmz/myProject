@@ -11,7 +11,7 @@ public class DesTest {
     /**
      * 加密解密的密钥
      */
-    private final String password = "hdx.20201024";
+    private final String password = "Hdx.20201024";
 
     /**
      * DES加密
@@ -32,11 +32,11 @@ public class DesTest {
      */
     @Test
     public void testDesDecode() {
-        String enPhoneNum = "/TqXMHpr11DVPF3NgMeyGA==";
+        String enPhoneNum = "1LNelk/5o/Kkg3s559F2ig==";
         String dePhoneNum = DesUtils.decrypt(password, enPhoneNum);
         System.out.println(dePhoneNum);
 
-        String enEmail = "U/ZIJ5WDW5CxLd7ZQakdgAxGqQ+A3Hmh";
+        String enEmail = "zD+C4Ycgcpxlo+KShDVwAj0PUNMG4oJa";
         String deEmail = DesUtils.decrypt(password, enEmail);
         System.out.println(deEmail);
     }
