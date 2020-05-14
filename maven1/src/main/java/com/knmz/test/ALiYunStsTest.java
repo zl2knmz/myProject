@@ -14,9 +14,9 @@ import com.aliyuncs.sts.model.v20150401.AssumeRoleResponse;
  */
 public class ALiYunStsTest {
     public static void main(String[] args) {
-        String endpoint = "oss-cn-beijing.aliyuncs.com";
-        String accessKeyId = "LTAI4GFZ8iu15d6xxD4bu3Xq";
-        String accessKeySecret = "LG7sbswzUZx7lyklNO5woyBcHx0zMD";
+        String endpoint = "";
+        String accessKeyId = "";
+        String accessKeySecret = "";
         String roleArn = "<role-arn>";
         String roleSessionName = "session-name";
         String policy = "{\n" +
