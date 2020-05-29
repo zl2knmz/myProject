@@ -54,4 +54,41 @@ public class UtilsTest {
         System.out.println("end- " + text);
     }
 
+    /**
+     * 测试Long long
+     * @author zl
+     *
+     */
+    @Test
+    public void longTest() {
+        Long a = 111435352345235L;
+        Long b = 111435352345235L;
+        if (a.longValue() == b.longValue()) {
+            System.out.println(true);
+        } else {
+            System.out.println(false);
+        }
+
+        if (a.equals(b)) {
+            System.out.println(true);
+        } else {
+            System.out.println(false);
+        }
+
+        Long c = 111L;
+        Long d = 111L;
+        if (c == d) {
+            System.out.println(true);
+        } else {
+            System.out.println(false);
+        }
+
+        long e = 1111111L;
+        long f = 1111111L;
+        if (e == f) {
+            System.out.println(true);
+        } else {
+            System.out.println(false);
+        }
+    }
 }
