@@ -30,3 +30,5 @@ maven1/target/knmz-tools-1\.0\.0\.jar
 maven1/\.idea/
 
 maven1/target/classes/META-INF/maven1\.kotlin_module
+
+maven1/target/classes/
