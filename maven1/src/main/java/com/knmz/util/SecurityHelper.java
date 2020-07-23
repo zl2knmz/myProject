@@ -1,11 +1,8 @@
 package com.knmz.util;
 
 public class SecurityHelper {
-
-    public static String doDecrypt(String key, String salt, String encryptText) {
-        Encryption encryption = Encryption.getDefault("kuaidi", "Z5gYs3", new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
-        return encryption.decryptOrNull(encryptText);
+    public static String doEncrypt(String key, String salt, String encryptText) {
+        Encryption encryption = Encryption.getDefault(key, salt, new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+        return encryption.encryptOrNull(encryptText);
     }
-
-
 }

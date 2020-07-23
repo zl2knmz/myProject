@@ -1,7 +1,5 @@
 package com.knmz.util;
 
-
-
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
@@ -39,6 +37,87 @@ public class Encryption {
         }
     }
 
+    /**
+     * Encrypt a String
+     *
+     * @param data the String to be encrypted
+     * @return the encrypted String or {@code null} if you send the data as {@code null}
+     * @throws UnsupportedEncodingException       if the Builder charset name is not supported or if
+     *                                            the Builder charset name is not supported
+     * @throws NoSuchAlgorithmException           if the Builder digest algorithm is not available
+     *                                            or if this has no installed provider that can
+     *                                            provide the requested by the Builder secret key
+     *                                            type or it is {@code null}, empty or in an invalid
+     *                                            format
+     * @throws NoSuchPaddingException             if no installed provider can provide the padding
+     *                                            scheme in the Builder digest algorithm
+     * @throws InvalidAlgorithmParameterException if the specified parameters are inappropriate for
+     *                                            the cipher
+     * @throws InvalidKeyException                if the specified key can not be used to initialize
+     *                                            the cipher instance
+     * @throws InvalidKeySpecException            if the specified key specification cannot be used
+     *                                            to generate a secret key
+     * @throws BadPaddingException                if the padding of the data does not match the
+     *                                            padding scheme
+     * @throws IllegalBlockSizeException          if the size of the resulting bytes is not a
+     *                                            multiple of the cipher block size
+     * @throws NullPointerException               if the Builder digest algorithm is {@code null} or
+     *                                            if the specified Builder secret key type is
+     *                                            {@code null}
+     * @throws IllegalStateException              if the cipher instance is not initialized for
+     *                                            encryption or decryption
+     */
+    public String encrypt(String data) throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, InvalidKeyException, InvalidKeySpecException, BadPaddingException, IllegalBlockSizeException {
+        if (data == null) return null;
+        SecretKey secretKey = getSecretKey(hashTheKey(mBuilder.getKey()));
+        byte[] dataBytes = data.getBytes(mBuilder.getCharsetName());
+        Cipher cipher = Cipher.getInstance(mBuilder.getAlgorithm());
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey, mBuilder.getIvParameterSpec(), mBuilder.getSecureRandom());
+        return Base64.encodeToString(cipher.doFinal(dataBytes), mBuilder.getBase64Mode());
+    }
+
+    /**
+     * This is a sugar method that calls encrypt method and catch the exceptions returning
+     * {@code null} when it occurs and logging the error
+     *
+     * @param data the String to be encrypted
+     * @return the encrypted String or {@code null} if you send the data as {@code null}
+     */
+    public String encryptOrNull(String data) {
+        try {
+            return encrypt(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * This is a sugar method that calls encrypt method in background, it is a good idea to use this
+     * one instead the default method because encryption can take several time and with this method
+     * the process occurs in a AsyncTask, other advantage is the Callback with separated methods,
+     * one for success and other for the exception
+     *
+     * @param data     the String to be encrypted
+     * @param callback the Callback to handle the results
+     */
+    public void encryptAsync(final String data, final Callback callback) {
+        if (callback == null) return;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String encrypt = encrypt(data);
+                    if (encrypt == null) {
+                        callback.onError(new Exception("Encrypt return null, it normally occurs when you send a null data"));
+                    }
+                    callback.onSuccess(encrypt);
+                } catch (Exception e) {
+                    callback.onError(e);
+                }
+            }
+        }).start();
+    }
 
     /**
      * Decrypt a String
@@ -96,6 +175,32 @@ public class Encryption {
         }
     }
 
+    /**
+     * This is a sugar method that calls decrypt method in background, it is a good idea to use this
+     * one instead the default method because decryption can take several time and with this method
+     * the process occurs in a AsyncTask, other advantage is the Callback with separated methods,
+     * one for success and other for the exception
+     *
+     * @param data     the String to be decrypted
+     * @param callback the Callback to handle the results
+     */
+    public void decryptAsync(final String data, final Callback callback) {
+        if (callback == null) return;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String decrypt = decrypt(data);
+                    if (decrypt == null) {
+                        callback.onError(new Exception("Decrypt return null, it normally occurs when you send a null data"));
+                    }
+                    callback.onSuccess(decrypt);
+                } catch (Exception e) {
+                    callback.onError(e);
+                }
+            }
+        }).start();
+    }
 
     /**
      * creates a 128bit salted aes key
