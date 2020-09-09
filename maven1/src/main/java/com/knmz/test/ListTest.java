@@ -1,5 +1,8 @@
 package com.knmz.test;
 
+import com.knmz.model.Student;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,4 +65,30 @@ public class ListTest {
         }
         System.out.println(list);
     }
+
+    @Test
+    public void listObjectTest() {
+        List<Student> employeeList = new ArrayList<>();
+        Student student = new Student("zl1", "RD", null);
+        employeeList.add(student);
+        for (Student employee: employeeList) {
+            System.out.println("1 " + employee);
+        }
+        student.setEmpID("1001");
+        for (Student employee: employeeList) {
+            System.out.println("2 " + employee);
+        }
+
+        Student student1 = new Student();
+        student1.setName("zhangSan");
+        employeeList.add(student1);
+        for (Student employee: employeeList) {
+            System.out.println("3 " + employee);
+        }
+        student1.setDept("FD");
+        for (Student employee: employeeList) {
+            System.out.println("4 " + employee);
+        }
+    }
+
 }
