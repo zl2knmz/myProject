@@ -4,6 +4,8 @@ import com.knmz.util.PinyinTool;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @author zl
  * @date 2019/9/24 17:16
@@ -90,5 +92,22 @@ public class UtilsTest {
         } else {
             System.out.println(false);
         }
+    }
+
+    @Test
+    public void stringSplitTest() {
+        String logo = "2134";
+        String logo1 = "2134,";
+        String logo2 = "2134,54234";
+        String[] logoArr = logo.split(",");
+        System.out.println(logoArr.length);
+        System.out.println(Arrays.toString(logoArr));
+    }
+
+    @Test
+    public void integerTest() {
+        Integer a = null;
+        a = 200;
+        System.out.println(200 == a);
     }
 }
