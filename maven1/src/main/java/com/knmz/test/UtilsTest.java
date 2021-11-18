@@ -97,8 +97,8 @@ public class UtilsTest {
     @Test
     public void stringSplitTest() {
         String logo = "2134";
-        String logo1 = "2134,";
-        String logo2 = "2134,54234";
+//        String logo1 = "2134,";
+//        String logo2 = "2134,54234";
         String[] logoArr = logo.split(",");
         System.out.println(logoArr.length);
         System.out.println(Arrays.toString(logoArr));
