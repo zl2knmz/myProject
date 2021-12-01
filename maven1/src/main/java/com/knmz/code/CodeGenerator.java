@@ -21,20 +21,19 @@ public class CodeGenerator {
         String dataBase = "accupasscn";                        //数据库名
         String userName = "root";                       //用户名
         String password = "root";                     //密码
+        // 修改表名
+        String[] tableList = {"live_room_vas_subscribe"};
+
         String baseProjectPackage = "com";     //包路径
         String model = "";                          //模块名称
         String author = "zl";
-        // 修改表名
-        String[] tableList = {"live_room_vas_subscribe"};
         String baseController = "";  //继承的baseController
         String projectPath = "./";               //项目路径
 
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
-
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-//        String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor(author);
         gc.setOpen(false);
