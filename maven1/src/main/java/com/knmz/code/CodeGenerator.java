@@ -10,7 +10,9 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.io.File;
 
-// 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
+/**
+ * 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
+ */
 public class CodeGenerator {
 
     public static void main(String[] args) {
@@ -25,7 +27,7 @@ public class CodeGenerator {
         String author = "";
         String[] tableList = {"live_room_online"};
         String baseController = "com.xw.core.base.BaseController";  //继承的baseController
-        String projectPath = "D:/develop/GithubProjects/myProject/maven1";               //项目路径
+        String projectPath = "./";               //项目路径
 
 
         // 代码生成器
