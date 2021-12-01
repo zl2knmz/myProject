@@ -27,21 +27,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 #end
 
 /**
- * <p>
  * $!{table.comment}
- * </p>
  *
  * @author ${author}
- * @since ${date}
+ * @date ${date}
  */
 #if(${entityLombokModel})
 @Data
-#if(${superEntityClass})
-@EqualsAndHashCode(callSuper = true)
-#else
-@EqualsAndHashCode(callSuper = false)
-#end
-@Accessors(chain = true)
 #end
 #if(${table.convert})
 @TableName("${table.name}")
@@ -52,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 #if(${superEntityClass})
 public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
-public class ${entity} extends Model<${entity}> implements Serializable {
+public class ${entity} implements Serializable {
 #else
 public class ${entity} implements Serializable {
 #end
@@ -145,40 +137,4 @@ public class ${entity} implements Serializable {
 #end
 #end
 
-/**
-#if(${entityColumnConstant})
-#foreach($field in ${table.fields})
-    public static final String ${field.name.toUpperCase()} = "${field.name}";
-
-#end
-#end
-#if(${activeRecord})
-    @Override
-    protected Serializable pkVal() {
-#if(${keyPropertyName})
-        return this.${keyPropertyName};
-#else
-        return null;
-#end
-    }
-
-#end
-#if(!${entityLombokModel})
-    @Override
-    public String toString() {
-        return "${entity}{" +
-#foreach($field in ${table.fields})
-#if($!{foreach.index}==0)
-        "${field.propertyName}=" + ${field.propertyName} +
-#else
-        ", ${field.propertyName}=" + ${field.propertyName} +
-#end
-#end
-#if(${superEntityClass})
-        super.toString() +
-#end
-        "}";
-    }
-#end
- */
 }
