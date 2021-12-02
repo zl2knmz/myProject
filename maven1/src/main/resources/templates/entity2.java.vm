@@ -38,7 +38,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 @Data
 #end
 #if(${table.convert})
-@TableName("${table.name}")
+@TableName("`${table.name}`")
 #end
 #if(${swagger2})
 @ApiModel(value="${entity}对象", description="$!{table.comment} ")
@@ -65,27 +65,27 @@ public class ${entity} implements Serializable {
 #if(${field.keyFlag})
 ## 主键
 #if(${field.keyIdentityFlag})
-    @TableId(value = "${field.name}", type = IdType.AUTO)
+    @TableId(value = "`${field.name}`", type = IdType.AUTO)
 #elseif(!$null.isNull(${idType}) && "$!idType" != "")
-    @TableId(value = "${field.name}", type = IdType.${idType})
+    @TableId(value = "`${field.name}`", type = IdType.${idType})
 #elseif(${field.convert})
-    @TableId("${field.name}")
+    @TableId("`${field.name}`")
 #end
 ## 普通字段
 #elseif(${field.fill})
 ## -----   存在字段填充设置   -----
 #if(${field.convert})
-    @TableField(value = "${field.name}", fill = FieldFill.${field.fill})
+    @TableField(value = "`${field.name}`", fill = FieldFill.${field.fill})
 #else
     @TableField(fill = FieldFill.${field.fill})
 #end
 #elseif(${field.convert})
 #if(${field.name.indexOf("create_")} == 0)
-    @TableField(value = "${field.name}", fill = FieldFill.INSERT)
+    @TableField(value = "`${field.name}`", fill = FieldFill.INSERT)
 #elseif(${field.name.indexOf("update_")} == 0)
-    @TableField(value = "${field.name}", fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "`${field.name}`", fill = FieldFill.INSERT_UPDATE)
 #else
-    @TableField("${field.name}")
+    @TableField("`${field.name}`")
 #end
 #end
 ## 乐观锁注解
