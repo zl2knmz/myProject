@@ -4,6 +4,7 @@ import com.knmz.model.Student;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -89,6 +90,31 @@ public class ListTest {
         for (Student employee: employeeList) {
             System.out.println("4 " + employee);
         }
+    }
+
+    @Test
+    public void listContainsTest() {
+        List<String> a = new ArrayList<>();
+        a.add("a");
+        a.add("b");
+        a.add("c");
+        a.add("d");
+        System.out.println("result1 " + a.contains("a"));
+
+        List<String> listA = Arrays.asList("a", "c", "d");
+        System.out.println("result2 " + a.containsAll(listA));
+        System.out.println("result3 " + listA.containsAll(a));
+
+        String[] array = new String[]{"a", "e", "f"};
+        List<String> listB = Arrays.asList(array);
+
+        // 两个list集合取交集
+        boolean result4 = a.retainAll(listB);
+        System.out.println("result4 " + result4);
+
+        // 运行报错 UnsupportedOperationException
+        boolean result5 = listB.retainAll(a);
+        System.out.println("result5 " + result5);
     }
 
 }
