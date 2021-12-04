@@ -3,6 +3,7 @@ package com.knmz.test;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -44,5 +45,15 @@ public class Java8DateTest {
         // LocalTime 当前时间=18:55:17.983
         LocalTime localTime = LocalTime.now();
         System.out.println("LocalTime 当前时间=" + localTime);
+
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("a " + now);
+
+        LocalDateTime now1 = now.plusDays(1).withHour(0).withMinute(0).withSecond(0);
+        System.out.println("b " + now1);
+
+        long now2 = now1.toEpochSecond(ZoneOffset.of("+8")) - now.toEpochSecond(ZoneOffset.of("+8"));
+        System.out.println("c " + now2);
+
     }
 }
