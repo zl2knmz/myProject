@@ -32,3 +32,5 @@ maven1/\.idea/
 maven1/target/classes/META-INF/maven1\.kotlin_module
 
 maven1/target/classes/
+
+*.iml
