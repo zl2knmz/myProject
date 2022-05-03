@@ -1,10 +1,10 @@
-package com.cloud.generic.choujiang;
+package com.cloud.generic.demo3;
 
 /**
  * @author zl
  * @date 2022/5/3 0:26
  */
-public class MainClass {
+public class Test03 {
     public static void main(String[] args) {
         ProductGetter<String> stringProductGetter = new ProductGetter<>();
         String[] strProducts = {"iPhone", "huaWei", "扫地机器人", "咖啡机"};

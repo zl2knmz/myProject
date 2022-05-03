@@ -1,6 +1,6 @@
 package com.cloud.generic.demo6;
 
-import com.cloud.generic.choujiang.ProductGetter;
+import com.cloud.generic.demo3.ProductGetter;
 
 import java.util.ArrayList;
 

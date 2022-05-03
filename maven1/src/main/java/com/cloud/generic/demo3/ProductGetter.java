@@ -1,4 +1,4 @@
-package com.cloud.generic.choujiang;
+package com.cloud.generic.demo3;
 
 import java.util.ArrayList;
 import java.util.Random;

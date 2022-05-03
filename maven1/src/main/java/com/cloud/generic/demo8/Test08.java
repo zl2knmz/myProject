@@ -1,8 +1,5 @@
 package com.cloud.generic.demo8;
 
-import com.cloud.generic.choujiang.ProductGetter;
-
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.TreeSet;
 
