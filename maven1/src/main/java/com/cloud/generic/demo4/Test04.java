@@ -11,6 +11,11 @@ public class Test04 {
         String value = stringChildFirst.getValue();
         System.out.println(value);
 
+        ChildFirst<Integer> intChildFirst = new ChildFirst<>();
+        intChildFirst.setValue(123);
+        int value1 = intChildFirst.getValue();
+        System.out.println(value1);
+
         System.out.println("------------------------");
         ChildSecond childSecond = new ChildSecond();
         childSecond.setValue(1111111111);
