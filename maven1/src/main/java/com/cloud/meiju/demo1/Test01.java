@@ -1,4 +1,5 @@
-package com.cloud.meiju;
+package com.cloud.meiju.demo1;
+
 
 /**
  * @author zl

@@ -1,4 +1,4 @@
-package com.cloud.meiju;
+package com.cloud.meiju.demo2;
 
 /**
  * 一、枚举类的使用

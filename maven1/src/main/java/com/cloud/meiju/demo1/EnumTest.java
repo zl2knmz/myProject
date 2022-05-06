@@ -1,4 +1,4 @@
-package com.cloud.meiju;
+package com.cloud.meiju.demo1;
 
 /**
  * 枚举类 不能创建对象 不能继承 不能实现
