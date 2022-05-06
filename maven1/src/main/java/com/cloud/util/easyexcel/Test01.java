@@ -88,6 +88,28 @@ public class Test01 {
                 .doWrite(getUserData());
     }
 
+    /**
+     * 将Java对象中指定的属性, 插入到Eexcel表格中的指定列(在Excel表格中进行列排序), 使用index属性指定列顺序.
+     */
+    @Test
+    public void testWriteExcel6() {
+        String filename = "D:\\work\\easyExcel\\user6.xlsx";
+        List<ComplexHeadUser> users = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            ComplexHeadUser user = ComplexHeadUser.builder()
+                    .userId(i)
+                    .userName("大哥" + i)
+                    .hireDate(new Date())
+                    .build();
+            users.add(user);
+        }
+        // 向Excel中写入数据
+        EasyExcel.write(filename, ComplexHeadUser.class)
+                .sheet("用户信息")
+                .doWrite(users);
+    }
+
+
 
     /**
      * 根据user模板构建数据
