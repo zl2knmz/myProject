@@ -19,26 +19,6 @@ public class EnumsUtil {
     }
 
     /**
-     * 获取枚举区分大小写
-     */
-    private static <T extends IEnum> T valueOf(Class<T> clazz, String code, boolean ignoreCase) {
-        T[] enums = values(clazz);
-
-        if (enums == null || enums.length == 0) {
-            return null;
-        }
-
-        for (T t : enums) {
-            if (ignoreCase && StrUtil.toString(t.getCode()).equalsIgnoreCase(code)) {
-                return t;
-            } else if (StrUtil.toString(t.getCode()).equals(code)) {
-                return t;
-            }
-        }
-        return null;
-    }
-
-    /**
      * 获取枚举
      *
      * @param clazz
@@ -60,5 +40,25 @@ public class EnumsUtil {
     public static <T extends IEnum> T valueOf(Class<T> clazz, String code) {
 
         return valueOf(clazz, code, false);
+    }
+
+    /**
+     * 获取枚举区分大小写
+     */
+    private static <T extends IEnum> T valueOf(Class<T> clazz, String code, boolean ignoreCase) {
+        T[] enums = values(clazz);
+
+        if (enums == null || enums.length == 0) {
+            return null;
+        }
+
+        for (T t : enums) {
+            if (ignoreCase && StrUtil.toString(t.getCode()).equalsIgnoreCase(code)) {
+                return t;
+            } else if (StrUtil.toString(t.getCode()).equals(code)) {
+                return t;
+            }
+        }
+        return null;
     }
 }
