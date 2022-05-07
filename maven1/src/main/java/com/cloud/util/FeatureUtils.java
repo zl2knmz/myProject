@@ -17,20 +17,22 @@ public class FeatureUtils {
     public static int getActivityFeatured(int value, int featured, boolean open) {
         int result = 0;
         int maxLength = 27;
+        // 2进制
+        int radix = 2;
 
         char[] ats = new char[maxLength];
         if (open) {
             // 开启featured
             Arrays.fill(ats, '0');
             ats[maxLength - featured] = '1';
-            int a = Integer.parseInt(new String(ats), 2);
+            int a = Integer.parseInt(new String(ats), radix);
             result = (value | a);
             System.out.println("open featured=" + featured);
         } else {
             // 关feature
             Arrays.fill(ats, '1');
             ats[maxLength - featured] = '0';
-            int a = Integer.parseInt(new String(ats), 2);
+            int a = Integer.parseInt(new String(ats), radix);
             result = (value & a);
             System.out.println("close featured=" + featured);
         }
