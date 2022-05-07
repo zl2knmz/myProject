@@ -1,5 +1,7 @@
 package com.cloud.util;
 
+import java.util.Arrays;
+
 /**
  * @author zl
  * @date 2022/5/7 11:24
@@ -16,22 +18,17 @@ public class FeatureUtils {
         int result = 0;
         int maxLength = 27;
 
+        char[] ats = new char[maxLength];
         if (open) {
             // 开启featured
-            char[] ats = new char[maxLength];
-            for (int i = 0; i < ats.length; i++) {
-                ats[i] = '0';
-            }
+            Arrays.fill(ats, '0');
             ats[maxLength - featured] = '1';
             int a = Integer.parseInt(new String(ats), 2);
             result = (value | a);
             System.out.println("open featured=" + featured);
         } else {
             // 关feature
-            char[] ats = new char[maxLength];
-            for (int i = 0; i < ats.length; i++) {
-                ats[i] = '1';
-            }
+            Arrays.fill(ats, '1');
             ats[maxLength - featured] = '0';
             int a = Integer.parseInt(new String(ats), 2);
             result = (value & a);
