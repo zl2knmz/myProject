@@ -13,6 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ReEnterLockDemo {
     static Object objectLockA = new Object();
+    static Lock lock = new ReentrantLock();
 
     /**
      * cd D
@@ -48,7 +49,6 @@ public class ReEnterLockDemo {
         System.out.println("==========内");
     }
 
-    static Lock lock = new ReentrantLock();
 
     public static void m5() {
         new Thread(() -> {
@@ -70,7 +70,7 @@ public class ReEnterLockDemo {
         new Thread(() -> {
             lock.lock();
             try {
-                System.out.println(Thread.currentThread().getName()+"\t"+"=====调用开始");
+                System.out.println(Thread.currentThread().getName() + "\t" + "=====调用开始");
             } finally {
                 lock.unlock();
             }
