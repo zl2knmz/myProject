@@ -24,4 +24,14 @@ public class Solution2 {
         }
     }
 
+    public char[] reverseString(char[] s) {
+        int index = s.length - 1;
+        int count = s.length / 2;
+        for (int i = 0; i < count; i++) {
+            char temp = s[i];
+            s[i] = s[index - i];
+            s[index - i] = temp;
+        }
+        return s;
+    }
 }
