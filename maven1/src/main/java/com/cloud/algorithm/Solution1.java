@@ -5,7 +5,7 @@ package com.cloud.algorithm;
  * @date 2020/1/14 16:56
  * 给定一个整数，编写一个函数来判断它是否是 2 的幂次方。
  */
-public class Solution_2 {
+public class Solution1 {
     public boolean isPowerOfTwo(int n) {
         boolean result = false;
         if (1 == n) {
