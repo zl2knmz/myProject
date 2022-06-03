@@ -8,11 +8,17 @@ import java.util.Map;
  * @date 2022/5/31 23:59
  */
 public class LRUCacheDemo1<K, V> extends LinkedHashMap<K, V> {
-    // 缓存坑位
+    /**
+     * 缓存坑位
+     */
     private int capacity;
 
+    /**
+     * accessOrder  the ordering mode -
+     * true: for access-order
+     * false: for insertion-order
+     */
     public LRUCacheDemo1(int capacity) {
-        // true false
         super(capacity, 0.75F, true);
         this.capacity = capacity;
     }
