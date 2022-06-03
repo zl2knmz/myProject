@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * LRU是Least Recently Used的缩写，即最近最少使用，是一种常用的页面置换算法。
+ * 手写LRU算法
+ *
  * @author zl
  * @date 2022/5/31 23:12
  */

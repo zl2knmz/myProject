@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * 利用LinkedHashMap实现LRU算法
+ *
  * @author zl
  * @date 2022/5/31 23:59
  */
