@@ -12,6 +12,7 @@ public class LRUCacheDemo1<K, V> extends LinkedHashMap<K, V> {
     private int capacity;
 
     public LRUCacheDemo1(int capacity) {
+        // true false
         super(capacity, 0.75F, true);
         this.capacity = capacity;
     }
