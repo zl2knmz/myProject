@@ -1,6 +1,8 @@
 package com.cloud.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author zl
@@ -39,11 +41,39 @@ public class FeatureUtils {
         return result;
     }
 
+    /**
+     * 查看活动表 feature 开了哪些开关
+     *
+     * @param featured 数据库featured值
+     * @return list 开了哪些位数
+     */
+    public static List<Integer> getFeaturedList(long featured) {
+        int maxLength = 29;
+        List<Integer> featureList = new ArrayList<>();
+        String result = Long.toBinaryString(featured);
+        char[] tmp = result.toCharArray();
+        char[] bytes = new char[tmp.length];
+        for (int i = tmp.length - 1, j = 0; i >= 0; i--, j++) {
+            bytes[j] = tmp[i];
+        }
+        for (int i = 0; i < bytes.length; i++) {
+            if ("1".equals(String.valueOf(bytes[i])) && i < maxLength){
+                featureList.add(i + 1);
+            }
+        }
+        if (featureList.size() == 0) {
+            featureList.add(0);
+        }
+        return featureList;
+    }
+
+
     public static void main(String[] args) {
         // 2048 22 2099200 22=2097152 27=67108864
         int a = getActivityFeatured(2048, 27, true);
         System.out.println(a);
         int b = getActivityFeatured(67110912, 27, false);
         System.out.println(b);
+        System.out.println(getFeaturedList(2099200));
     }
 }
