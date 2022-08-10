@@ -117,4 +117,28 @@ public class ListTest {
         System.out.println("result5 " + result5);
     }
 
+    @Test
+    public void listAddAllTest() {
+        List<String> a = new ArrayList<>();
+        a.add("a");
+        a.add("b");
+        a.add("c");
+        a.add("d");
+        System.out.println(a);
+
+        List<String> b = new ArrayList<>();
+        b.add("x");
+        b.add("y");
+        b.add("z");
+        System.out.println(b);
+
+        a.addAll(b);
+        System.out.println(a);
+
+        List<String> c = new ArrayList<>();
+//        List<String> c = null;
+        b.addAll(c);
+        System.out.println(b);
+    }
+
 }
