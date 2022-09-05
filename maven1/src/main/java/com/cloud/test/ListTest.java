@@ -141,4 +141,17 @@ public class ListTest {
         System.out.println(b);
     }
 
+    @Test
+    public void listContains() {
+        List<String> a = new ArrayList<>();
+        a.add("4231414135134");
+        a.add("5867847554345");
+        a.add("4352353554545");
+        a.add("5336756768545");
+        System.out.println(a.contains("4231414135134"));
+
+        String b = "4231414135134";
+        System.out.println( b.contains("4135134"));
+    }
+
 }
