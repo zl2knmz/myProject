@@ -34,12 +34,14 @@ public class Test {
         TransAop transAop = new TransAop();
         Service proxyFactory = (Service) ProxyFactory.getAgent(book,logAop);
         proxyFactory.buy();
+        System.out.println("-------------");
         // 动态代理show方法被调用
         proxyFactory.show();
         System.out.println("-------------");
 
         Service proxyFactory1 = (Service) ProxyFactory.getAgent(product,transAop);
         proxyFactory1.buy();
+        System.out.println("-------------");
         proxyFactory1.show();
     }
 }
