@@ -33,6 +33,8 @@ public class Test {
         LogAop logAop = new LogAop();
         TransAop transAop = new TransAop();
         Service proxyFactory = (Service) ProxyFactory.getAgent(book,logAop);
+        // com.sun.proxy.$Proxy4
+        System.out.println("proxyFactory type=" + proxyFactory.getClass().getTypeName());
         proxyFactory.buy();
         System.out.println("-------------");
         // 动态代理show方法被调用
