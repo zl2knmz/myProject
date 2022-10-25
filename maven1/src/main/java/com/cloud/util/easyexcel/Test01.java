@@ -109,6 +109,37 @@ public class Test01 {
                 .doWrite(users);
     }
 
+    @Test
+    public void testWriteExcel7() {
+        List<ComplexHeadUser> list = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            ComplexHeadUser user = ComplexHeadUser.builder()
+                    .userId(i)
+                    .userName("大哥" + i)
+                    .hireDate(new Date())
+                    .build();
+            list.add(user);
+        }
+
+        // 导出Excel
+        String sheetName = "Sheet1";
+        // 定义Excel文件名
+//        String fileName = sheetName + String.valueOf(System.currentTimeMillis()).substring(4, 13);
+        String fileName = "exchange_export";
+        EasyExcelUtil.export(null, fileName, sheetName, list, ComplexHeadUser.class);
+    }
+
+    @Test
+    public void testWriteExcel8() {
+//        MultipartFile file;
+        // 导入Excel
+        List<ComplexHeadUser> list = EasyExcelUtil.importExcel(null, ComplexHeadUser.class, null);
+        assert list != null;
+        for (ComplexHeadUser user : list) {
+            System.out.println(user);
+        }
+
+    }
 
 
     /**
