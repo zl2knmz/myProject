@@ -4,6 +4,7 @@ import com.cloud.design.agent.impl.BookServiceImpl;
 import com.cloud.design.agent.impl.LogAop;
 import com.cloud.design.agent.impl.ProductServiceImpl;
 import com.cloud.design.agent.impl.TransAop;
+import org.junit.Test;
 
 /**
  * 测试类
@@ -11,9 +12,9 @@ import com.cloud.design.agent.impl.TransAop;
  * @author zl
  * @date 2022/10/23 16:53
  */
-public class Test {
+public class Test01 {
     // 静态代理
-    @org.junit.Test
+    @Test
     public void test01() {
         BookServiceImpl book = new BookServiceImpl();
         LogAop logAop = new LogAop();
@@ -26,7 +27,7 @@ public class Test {
     }
 
     // 动态代理
-    @org.junit.Test
+    @Test
     public void test02() {
         BookServiceImpl book = new BookServiceImpl();
         ProductServiceImpl product = new ProductServiceImpl();
