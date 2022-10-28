@@ -189,7 +189,7 @@ public class JavaStreamTest {
     @Test
     public void match4() {
         // Integer占用的内存比int多很多，在Stream流操作中会自动装修和拆箱操作
-        Integer arr[] = {1, 2, 3, 5, 6, 8};
+        Integer[] arr = {1, 2, 3, 5, 6, 8};
         Stream.of(arr)
                 .filter(i -> i > 0)
                 .forEach(System.out::println);
