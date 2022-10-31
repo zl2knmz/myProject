@@ -1,8 +1,17 @@
 package com.cloud.test;
 
 import java.lang.ref.WeakReference;
+
 /**
  * 弱引用回收测试
+ *
+ * 当有强引用指向value内存区域时，即使进行gc，弱引用也不会被释放，对象不回被回收。
+ *
+ * 当无强引用指向value内存区域是，此时进行gc，弱引用会被释放，对象将会执行回收流程。
+ *
+ * 下面我们来简单地介绍下引用队列的概念。实际上，WeakReference类有两个构造函数：
+ * 创建一个指向给定对象的弱引用``WeakReference(T referent)
+ * 创建一个指向给定对象并且登记到给定引用队列的弱引用``WeakReference(T referent, ReferenceQueue<? ``super` `T> q)
  *
  * @author zl
  * @date 2022/10/31 16:36
