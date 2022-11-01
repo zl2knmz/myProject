@@ -46,7 +46,7 @@ public class LibPhoneNumberUtil {
     /**
      * 手机号格式化
      *
-     * @param phoneNumber 手机号
+     * @param phoneNumber       手机号
      * @param phoneNumberFormat 格式化类型：INTERNATIONAL, NATIONAL, E164
      *                          INTERNATIONAL 国际标准, 输出 "+41 44 668 18 00"
      *                          NATIONAL 国内标准, 输出 "044 668 18 00"
@@ -63,7 +63,7 @@ public class LibPhoneNumberUtil {
     /**
      * 格式化成从其他国家打过来的格式
      *
-     * @param phoneNumber 手机号
+     * @param phoneNumber       手机号
      * @param regionCallingFrom 格式化类型：US, CH
      * @return String
      */
@@ -95,7 +95,7 @@ public class LibPhoneNumberUtil {
         // 校验号码
         boolean isVaild = checkPhoneNumber(swissNumberStr);
         // return true
-        System.out.println("号码校验结果：" + isVaild);
+        System.out.println(swissNumberStr + ", 号码校验结果：" + isVaild);
 
         // 2、校验带国际电话区号
         String countryCode = "886";
@@ -104,28 +104,28 @@ public class LibPhoneNumberUtil {
         // 校验号码
         boolean isVaild1 = checkPhoneNumber(countryCode, phoneNumber);
         // return true
-        System.out.println("国际电话区号-号码校验结果：" + isVaild1);
+        System.out.println(countryCode + "," + phoneNumber + ", 国际电话区号-号码校验结果：" + isVaild1);
 
 
         // 3、格式化的号码
         String swissNumberStr1 = "044 668 18 00";
         // 国际标准, 输出 "+41 44 668 18 00"
         String international = formatPhoneNumber(swissNumberStr1, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL);
-        System.out.println("国际标准格式化：" + international);
+        System.out.println(swissNumberStr1 + ", 国际标准格式化：" + international);
 
         // 国内标准, 输出 "044 668 18 00"
         String national = formatPhoneNumber(swissNumberStr1, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
-        System.out.println("国内标准格式化：" + national);
+        System.out.println(swissNumberStr1 + ", 国内标准格式化：" + national);
 
         // E164标准, 输出 "+41446681800"
         String e164 = formatPhoneNumber(swissNumberStr1, PhoneNumberUtil.PhoneNumberFormat.E164);
-        System.out.println("E164标准格式化：" + e164);
+        System.out.println(swissNumberStr1 + ", E164标准格式化：" + e164);
 
         // 4、格式化的号码
         String swissNumberStr2 = "044 668 18 00";
         // 格式化成从美国打过来的格式，输出 "011 41 44 668 18 00"
         String callingFrom = getRegionCallingFrom(swissNumberStr2, "US");
-        System.out.println("格式化成从美国打过来的格式：" + callingFrom);
+        System.out.println(swissNumberStr2 + ", 格式化成从美国打过来的格式：" + callingFrom);
     }
 
 }
