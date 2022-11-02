@@ -1,6 +1,7 @@
 package com.cloud.offer.day3;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import org.junit.Test;
 
 import java.util.concurrent.*;
 
@@ -42,6 +43,110 @@ public class ThreadPoolDemo {
 
         singleThreadPool.execute(() -> System.out.println(Thread.currentThread().getName()));
         singleThreadPool.shutdown();
+    }
+
+    @Test
+    public void test() {
+        // 线程池创建线程
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+
+        ExecutorService singleThreadPool = new ThreadPoolExecutor(2,
+                10,
+                0L,
+                TimeUnit.SECONDS,
+                new LinkedBlockingQueue<Runnable>(1024),
+                namedThreadFactory,
+                new ThreadPoolExecutor.AbortPolicy());
+
+        singleThreadPool.execute(new Thread1());
+        singleThreadPool.execute(new Thread2());
+        singleThreadPool.execute(new Thread3());
+        singleThreadPool.execute(new Thread4());
+        singleThreadPool.execute(new Thread5());
+        singleThreadPool.execute(new Thread6());
+
+        try {
+            Thread.sleep(9000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            singleThreadPool.shutdown();
+        }
+
+    }
+
+
+    static class Thread1 implements Runnable  {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("线程1........." + Thread.currentThread().getName());
+        }
+    }
+
+    static class Thread2 implements Runnable  {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("线程2........." + Thread.currentThread().getName());
+        }
+    }
+
+    static class Thread3 implements Runnable  {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("线程3........." + Thread.currentThread().getName());
+        }
+    }
+
+    static class Thread4 implements Runnable  {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("线程4........." + Thread.currentThread().getName());
+        }
+    }
+
+    static class Thread5 implements Runnable  {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("线程5........." + Thread.currentThread().getName());
+        }
+    }
+
+    static class Thread6 implements Runnable  {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("线程6........." + Thread.currentThread().getName());
+        }
     }
 
 }
