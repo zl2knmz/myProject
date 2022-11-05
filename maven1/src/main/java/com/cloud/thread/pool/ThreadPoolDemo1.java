@@ -1,12 +1,11 @@
 package com.cloud.thread.pool;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import org.junit.Test;
-
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 自定义线程池的使用
+ *
  * @author zl
  * @date 2022/5/14 22:09
  */
@@ -39,12 +38,12 @@ public class ThreadPoolDemo1 {
                 new MyRejectedExecutionHandler());
 
         for (int i = 0; i < 100; i++) {
-            threadPoolExecutor.execute(()->{
-                System.out.println("===>" + Thread.currentThread().getName()+"-run");
+            threadPoolExecutor.execute(() -> {
+                System.out.println("===>" + Thread.currentThread().getName() + "-run");
                 try {
-                    Thread.sleep(30 *1000);
+                    Thread.sleep(30 * 1000);
                 } catch (InterruptedException e) {
-                    System.out.println("异常线程"+ Thread.currentThread().getName());
+                    System.out.println("异常线程" + Thread.currentThread().getName());
                 }
             });
         }
@@ -52,13 +51,13 @@ public class ThreadPoolDemo1 {
         System.out.println("LinkedBlockingDeque size:" + threadPoolExecutor.getQueue().size());
     }
 
-    public  static final AtomicInteger count = new AtomicInteger(0);
+    public static final AtomicInteger count = new AtomicInteger(0);
 
     public static class MyRejectedExecutionHandler implements RejectedExecutionHandler {
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
             // 模拟异常抛出，这里采用计数方式
-            System.out.println("执行拒绝策略"+ count.incrementAndGet());
+            System.out.println("执行拒绝策略" + count.incrementAndGet());
         }
     }
 
@@ -66,10 +65,11 @@ public class ThreadPoolDemo1 {
         private final String threadName;
         private final AtomicInteger atomicInteger;
 
-        public MyThreadFactory(String threadName){
-            this.threadName=threadName;
+        public MyThreadFactory(String threadName) {
+            this.threadName = threadName;
             atomicInteger = new AtomicInteger(0);
         }
+
         @Override
         public Thread newThread(Runnable r) {
             return new Thread(r, threadName + "_" + atomicInteger.incrementAndGet());
