@@ -1,4 +1,4 @@
-package com.cloud.offer.day3;
+package com.cloud.thread.pool;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.junit.Test;
@@ -17,20 +17,20 @@ public class ThreadPoolDemo {
 
         /**
          * 线程池7个参数
-         *@param corePoolSize the number of threads to keep in the pool, even
+         *@param corePoolSize 核心线程数 the number of threads to keep in the pool, even
          *        if they are idle, unless {@code allowCoreThreadTimeOut} is set
-         * @param maximumPoolSize the maximum number of threads to allow in the
+         * @param maximumPoolSize 最大线程数 the maximum number of threads to allow in the
          *        pool
-         * @param keepAliveTime when the number of threads is greater than
+         * @param keepAliveTime 核心线程存活时间 when the number of threads is greater than
          *        the core, this is the maximum time that excess idle threads
          *        will wait for new tasks before terminating.
-         * @param unit the time unit for the {@code keepAliveTime} argument
-         * @param workQueue the queue to use for holding tasks before they are
+         * @param unit 存活时间 单位 the time unit for the {@code keepAliveTime} argument
+         * @param workQueue 阻塞队列 the queue to use for holding tasks before they are
          *        executed.  This queue will hold only the {@code Runnable}
          *        tasks submitted by the {@code execute} method.
-         * @param threadFactory the factory to use when the executor
+         * @param threadFactory 线程工厂-取名 the factory to use when the executor
          *        creates a new thread
-         * @param handler the handler to use when execution is blocked
+         * @param handler 拒绝策略4种 the handler to use when execution is blocked
          *        because the thread bounds and queue capacities are reached
          */
         ExecutorService singleThreadPool = new ThreadPoolExecutor(1,
