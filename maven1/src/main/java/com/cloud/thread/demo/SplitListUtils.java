@@ -1,7 +1,6 @@
 package com.cloud.thread.demo;
 
 import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @author zl
  * @date 2022/11/8 10:13
  */
-@Slf4j
+
 public class SplitListUtils {
 
     /**
@@ -69,12 +68,20 @@ public class SplitListUtils {
             list.add("hello-" + i);
         }
         // 大集合里面包含多个小集合
-        List<List<String>> temps = split(list, 100);
-        int j = 0;
-        // 对大集合里面的每一个小集合进行操作
-        for (List<String> obj : temps) {
-            System.out.println(String.format("row:%s -> size:%s,data:%s", ++j, obj.size(), obj));
+//        List<List<String>> temps = split(list, 100);
+//        int j = 0;
+//        // 对大集合里面的每一个小集合进行操作
+//        for (List<String> obj : temps) {
+//            System.out.println(String.format("row:%s -> size:%s,data:%s", ++j, obj.size(), obj));
+//        }
+
+        List<Object> list1 = Lists.newArrayList();
+        int size1 = 1099;
+        for (int i = 0; i < size1; i++) {
+            list1.add("hello-" + i);
         }
+        // 测试
+        threadMethod(list1);
     }
 
     /**
@@ -83,7 +90,7 @@ public class SplitListUtils {
      * 开多线程来执行批量任务是十分重要的一种批量操作思路，
      * 其实这种思路实现起来也十分简单，就拿批量更新的操作举例
      */
-    public void threadMethod(List<Object> totalList) {
+    public static void threadMethod(List<Object> totalList) {
         List<Object> updateList = new ArrayList();
         // 初始化线程池, 参数一定要一定要一定要调好！！！！
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
@@ -103,10 +110,11 @@ public class SplitListUtils {
             threadPool.execute(new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    for (Object yangshiwen : singleList) {
+                    System.out.println("线程执行-" + Thread.currentThread().getName());
+                    for (Object obj : singleList) {
                         // 将每一个对象进行数据封装, 并添加到一个用于存储更新数据的list
-                        // ......
-
+                        System.out.println("updateList add data=" + obj);
+                        updateList.add(obj);
                     }
                 }
             }));
@@ -118,11 +126,11 @@ public class SplitListUtils {
             countDownLatch.await();
         } catch (InterruptedException e) {
 //            throw new BusinessLogException(ResponseEnum.FAIL);
-            log.info("批量更新集合数据异常.........");
+            System.out.println("countDownLatch 异常.........");
         }
         // 通过mybatis的批量插入的方式来进行数据的插入, 这一步还是要做判空
         if (null != updateList && updateList.size() > 0) {
-            log.info("批量更新集合数据........." + updateList);
+            System.out.println("批量更新集合数据........." + updateList.size());
         }
     }
 
