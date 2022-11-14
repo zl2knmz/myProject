@@ -6,7 +6,7 @@ package com.cloud.thread.localthread;
  * @author zl
  * @date 2022/10/31 11:52
  */
-public class LocalThreadTest {
+public class ThreadLocalTest {
     private static ThreadLocal<Integer> localInt = new ThreadLocal<>();
 
     // ThreadLocal提供的静态方法withInitial来初始化一个ThreadLocal。
@@ -26,21 +26,21 @@ public class LocalThreadTest {
     }
 
     public static void main(String[] args) {
-        int i = LocalThreadTest.setAndGet(0);
+        int i = ThreadLocalTest.setAndGet(0);
         System.out.println(Thread.currentThread().getName() + ",localInt=" + i);
-        LocalThreadTest.remove();
+        ThreadLocalTest.remove();
         System.out.println(Thread.currentThread().getName() + ",localInt=" + i);
 
         System.out.println("------1------");
-        int i1 = LocalThreadTest.setAndGet(1);
+        int i1 = ThreadLocalTest.setAndGet(1);
         System.out.println(Thread.currentThread().getName() + ",localInt=" + i1);
-        LocalThreadTest.remove();
+        ThreadLocalTest.remove();
         System.out.println(Thread.currentThread().getName() + ",localInt=" + i1);
 
         System.out.println("------2------");
-        int i2 = LocalThreadTest.setAndGet(2);
+        int i2 = ThreadLocalTest.setAndGet(2);
         System.out.println(Thread.currentThread().getName() + ",localInt=" + i2);
-        LocalThreadTest.remove();
+        ThreadLocalTest.remove();
         System.out.println(Thread.currentThread().getName() + ",localInt=" + i2);
 
         System.out.println("----threadLocal---所有线程初始化-----");
