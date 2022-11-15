@@ -1,4 +1,4 @@
-package com.cloud.thread.localthread.praent;
+package com.cloud.thread.threadlocal.praent;
 
 /**
  * InheritableThreadLocal 子线程可以拿到父线程的中的 ThreadLocal 值

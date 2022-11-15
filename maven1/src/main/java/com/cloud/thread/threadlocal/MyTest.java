@@ -1,4 +1,4 @@
-package com.cloud.thread.localthread;
+package com.cloud.thread.threadlocal;
 
 import org.junit.Test;
 

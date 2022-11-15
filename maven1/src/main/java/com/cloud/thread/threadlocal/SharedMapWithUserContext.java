@@ -1,4 +1,4 @@
-package com.cloud.thread.localthread;
+package com.cloud.thread.threadlocal;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
