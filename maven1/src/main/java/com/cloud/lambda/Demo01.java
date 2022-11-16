@@ -17,6 +17,7 @@ public class Demo01 {
     public static void main(String[] args) {
         testRunnable();
         testRunnable1();
+        testRunnable2();
     }
 
     private static void testRunnable() {
@@ -37,6 +38,12 @@ public class Demo01 {
         }).start();
     }
 
+    /**
+     * 当匿名内部类只有一个实现方法时可以直接简化
+     */
+    private static void testRunnable2() {
+        new Thread(() -> System.out.println("新的线程被执行了......")).start();
+    }
 
     public int testIntBinaryOperator(IntBinaryOperator intBinaryOperator) {
         int a = 10;
