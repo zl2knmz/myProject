@@ -6,7 +6,7 @@ package com.cloud.generic;
  */
 public class Test {
 
-    class Plate<T>{
+    static class Plate<T>{
         private T item;
         public Plate(T t){item=t;}
         public void set(T t){item=t;}
@@ -29,10 +29,11 @@ public class Test {
 //
 //    }
 
-    public  void main(String[] args) {
+    public static void main(String[] args) {
 
 //        Plate<Fruit> p=new Plate<Apple>(new Apple());
 
         Plate<? extends Fruit> p1 = new Plate<>(new Apple());
+        p1.get().getName();
     }
 }
