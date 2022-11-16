@@ -18,18 +18,18 @@ package com.cloud.thread.threadlocal.praent;
  * @date 2022/11/14 23:09
  */
 public class InheritableThreadLocalTest {
-    private static ThreadLocal<String> threadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<String> THREAD_LOCAL = new ThreadLocal<>();
 
-    private static InheritableThreadLocal<String> inheritableThreadLocal = new InheritableThreadLocal<>();
+    private static final InheritableThreadLocal<String> INHERITABLE_THREAD_LOCAL = new InheritableThreadLocal<>();
 
     public static void main(String[] args) throws Exception {
-        threadLocal.set("飞天小牛肉");
-        System.out.println(Thread.currentThread().getName() + ",父线程的值：" + threadLocal.get());
+        THREAD_LOCAL.set("飞天小牛肉");
+        System.out.println(Thread.currentThread().getName() + ",父线程的值：" + THREAD_LOCAL.get());
         test();
 
         // 子线程拿到父线程的中的 ThreadLocal 值
-        inheritableThreadLocal.set("糖醋排骨");
-        System.out.println(Thread.currentThread().getName() + ",父线程的值：" + inheritableThreadLocal.get());
+        INHERITABLE_THREAD_LOCAL.set("糖醋排骨");
+        System.out.println(Thread.currentThread().getName() + ",父线程的值：" + INHERITABLE_THREAD_LOCAL.get());
         test1();
     }
 
@@ -37,18 +37,18 @@ public class InheritableThreadLocalTest {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println(Thread.currentThread().getName() + ",子线程的值：" + threadLocal.get());
+                System.out.println(Thread.currentThread().getName() + ",子线程的值：" + THREAD_LOCAL.get());
             }
         }).start();
         Thread.sleep(2000);
-        threadLocal.remove();
+        THREAD_LOCAL.remove();
     }
 
     private static void test1() throws Exception {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println(Thread.currentThread().getName() + ",子线程的值：" + inheritableThreadLocal.get());
+                System.out.println(Thread.currentThread().getName() + ",子线程的值：" + INHERITABLE_THREAD_LOCAL.get());
             }
         }).start();
         Thread.sleep(2000);
