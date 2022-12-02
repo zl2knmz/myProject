@@ -3,10 +3,7 @@ package com.cloud.test;
 import lombok.Data;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -216,11 +213,20 @@ public class JavaStreamTest {
 
 
     /**
-     *
+     * List<String> -> List<Long>
      */
     @Test
-    public void match8() {
+    public void mapToLong() {
+        String roleIds = "11,22";
+        List<String> stringList = Arrays.asList(roleIds.split(","));
+        System.out.println(stringList);
 
+        List<Long> roleList = new ArrayList<>();
+        stringList.stream().mapToLong(Long::parseLong).forEach(roleList::add);
+        System.out.println(roleList);
+
+        List<Long> longList = stringList.stream().map(Long::parseLong).collect(Collectors.toList());
+        System.out.println(longList);
     }
 
 

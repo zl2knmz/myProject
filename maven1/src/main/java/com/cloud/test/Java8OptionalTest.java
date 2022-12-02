@@ -1,5 +1,7 @@
 package com.cloud.test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,6 +21,17 @@ public class Java8OptionalTest {
         // Optional.of - 如果传递的参数是 null，抛出异常 NullPointerException
         Optional<Integer> b = Optional.of(value2);
         System.out.println(java8Tester.sum(a,b));
+
+        List<Long> longList = new ArrayList<>();
+//        List<Long> longList = null;
+        Optional<List<Long>> c = Optional.ofNullable(longList);
+        System.out.println(c.orElse(null));
+        System.out.println(c.get());
+        System.out.println(c.isPresent());
+
+        Optional<List<Long>> d = Optional.of(longList);
+        System.out.println(d.get());
+        System.out.println(d.isPresent());
     }
 
     public Integer sum(Optional<Integer> a, Optional<Integer> b){
