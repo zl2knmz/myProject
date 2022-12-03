@@ -1,5 +1,7 @@
 package com.cloud.test;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,5 +49,28 @@ public class Java8OptionalTest {
         //Optional.get - 获取值，值需要存在
         Integer value2 = b.get();
         return value1 + value2;
+    }
+
+    @Test
+    public void test1(){
+        String str = null;
+        String str1 = "123";
+        String str2 = "456";
+        Optional<String> stringOptional = Optional.of(str2);
+//        Optional<String> stringOptional = Optional.ofNullable(str);
+        boolean present = stringOptional.isPresent();
+        System.out.println(present);
+        if (present) {
+            String s = stringOptional.get();
+            System.out.println(s);
+        }
+
+        System.out.println("1111111111");
+
+        String s1 = stringOptional.orElse("1111");
+        System.out.println(s1);
+
+        String str3 = Optional.ofNullable(str2).orElse("2222");
+        System.out.println(str3);
     }
 }
