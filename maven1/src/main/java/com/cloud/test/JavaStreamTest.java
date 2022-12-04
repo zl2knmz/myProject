@@ -229,6 +229,14 @@ public class JavaStreamTest {
         System.out.println(longList);
     }
 
+    @Test
+    public void testPeek() {
+        IntStream.of(1, 2, 3, 4, 5)
+                .filter(e -> e >= 3)
+                .peek(value -> System.out.printf("filter element: %d\n", value))
+                .mapToObj(String::valueOf)
+                .forEach(System.out::println);
+    }
 
     @Data
     static class Person {
