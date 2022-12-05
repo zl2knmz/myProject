@@ -11,7 +11,7 @@ import java.util.Optional;
  * @date 2022/12/2 11:19
  */
 public class Java8OptionalTest {
-    public static void main(String args[]){
+    public static void main(String args[]) {
 
         Java8OptionalTest java8Tester = new Java8OptionalTest();
         Integer value1 = null;
@@ -22,7 +22,7 @@ public class Java8OptionalTest {
 
         // Optional.of - 如果传递的参数是 null，抛出异常 NullPointerException
         Optional<Integer> b = Optional.of(value2);
-        System.out.println(java8Tester.sum(a,b));
+        System.out.println(java8Tester.sum(a, b));
 
         List<Long> longList = new ArrayList<>();
 //        List<Long> longList = null;
@@ -36,7 +36,7 @@ public class Java8OptionalTest {
         System.out.println(d.isPresent());
     }
 
-    public Integer sum(Optional<Integer> a, Optional<Integer> b){
+    public Integer sum(Optional<Integer> a, Optional<Integer> b) {
 
         // Optional.isPresent - 判断值是否存在
         System.out.println("第一个参数值存在: " + a.isPresent());
@@ -52,7 +52,7 @@ public class Java8OptionalTest {
     }
 
     @Test
-    public void test1(){
+    public void test1() {
         String str = null;
         String str1 = "123";
         String str2 = "456";
@@ -70,7 +70,13 @@ public class Java8OptionalTest {
         String s1 = stringOptional.orElse("1111");
         System.out.println(s1);
 
-        String str3 = Optional.ofNullable(str2).orElse("2222");
+        String str21 = null;
+        String str3 = Optional.ofNullable(str21).orElse("2222");
         System.out.println(str3);
+
+        String str4 = null;
+        Optional<String> optional = Optional.ofNullable(str4);
+        // java.util.NoSuchElementException: No value present
+        System.out.println("str4=" + optional.get());
     }
 }
