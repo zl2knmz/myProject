@@ -1,10 +1,12 @@
-package com.cloud.thread;
+package com.cloud.thread.runnable;
 
 /**
+ * 实现Runnable接口创建线程
+ *
  * @author zl
  * @date 2019/7/3 11:57
  */
-public class ARunnable implements Runnable {
+public class MyRunnable implements Runnable {
     volatile boolean stop;
 
     void tellToStop() {
@@ -16,7 +18,7 @@ public class ARunnable implements Runnable {
         System.out.println("进入不可停止区域 1。。。");
 //        doingLongTime(5);
         System.out.println("退出不可停止区域 1。。。");
-        System.out.println("检测标志stop = "+ String.valueOf(stop));
+        System.out.println("检测标志stop = " + stop);
         if (stop) {
             System.out.println("停止执行");
             return;
@@ -27,8 +29,12 @@ public class ARunnable implements Runnable {
     }
 
     static void stopByFlag() {
-        ARunnable ar = new ARunnable();
+        MyRunnable ar = new MyRunnable();
         new Thread(ar).start();
         ar.tellToStop();
+    }
+
+    public static void main(String[] args) {
+        stopByFlag();
     }
 }
