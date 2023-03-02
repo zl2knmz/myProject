@@ -27,12 +27,12 @@ public class MyThreadPool {
      * IO密集型应用  2N （N是cpu数量）
      */
     public static ThreadPoolExecutor initThreadPool() {
-        LinkedBlockingQueue queue = new LinkedBlockingQueue<>(5);
+        LinkedBlockingQueue queue = new LinkedBlockingQueue<>(50);
         final ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat("myThread-%d").setDaemon(true).build();
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
                 5,
                 10,
-                10,
+                60,
                 TimeUnit.SECONDS,
                 queue,
                 factory,
@@ -47,7 +47,7 @@ public class MyThreadPool {
 
     public static void main(String[] args) {
         ThreadPoolExecutor threadPoolExecutor = initThreadPool();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             threadPoolExecutor.execute(() -> {
                 System.out.println("===>" + Thread.currentThread().getName() + "-run");
                 try {
@@ -57,7 +57,6 @@ public class MyThreadPool {
                 }
             });
         }
-
     }
 
 }
