@@ -3,6 +3,7 @@ package com.cloud.thread.runnable;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 使用线程池创建线程
@@ -11,6 +12,8 @@ import java.util.concurrent.*;
  * @date 2023/2/28 16:22
  */
 public class MyThreadPool {
+
+    private static final AtomicInteger COUNT = new AtomicInteger(0);
 
     /**
      * 比如一次性提交了100个任务，每个任务执行30秒，那么按照下面的这个线程池的参数，100个任务都是如何被执行的呢？
@@ -24,7 +27,7 @@ public class MyThreadPool {
      * IO密集型应用  2N （N是cpu数量）
      */
     public static ThreadPoolExecutor initThreadPool() {
-        LinkedBlockingQueue queue = new LinkedBlockingQueue<>(20);
+        LinkedBlockingQueue queue = new LinkedBlockingQueue<>(5);
         final ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat("myThread-%d").setDaemon(true).build();
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
                 5,
@@ -36,7 +39,7 @@ public class MyThreadPool {
                 new RejectedExecutionHandler() {
                     @Override
                     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-                        System.out.println(Thread.currentThread().getName() + "-reject");
+                        System.out.println(Thread.currentThread().getName() + "-reject-" + COUNT.incrementAndGet());
                     }
                 });
         return threadPoolExecutor;
