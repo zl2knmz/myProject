@@ -10,10 +10,10 @@ import java.util.concurrent.FutureTask;
  * @author zl
  * @date 2023/2/28 16:03
  */
-public class MyCallable implements Callable {
+public class MyCallable implements Callable<String> {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        FutureTask<String> futureTask = new FutureTask<String>(new MyCallable());
+        FutureTask<String> futureTask = new FutureTask<>(new MyCallable());
         Thread thread = new Thread(futureTask);
         thread.start();
         String s = futureTask.get();
@@ -21,7 +21,7 @@ public class MyCallable implements Callable {
     }
 
     @Override
-    public Object call() {
+    public String call() {
         return "hi call";
     }
 }
