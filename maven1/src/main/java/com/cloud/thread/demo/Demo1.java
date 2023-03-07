@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2023/3/2 16:48
  */
 public class Demo1 {
-    private  final AtomicInteger COUNT = new AtomicInteger(0);
+    private final AtomicInteger COUNT = new AtomicInteger(0);
 
     public ThreadPoolExecutor initThreadPool() {
         LinkedBlockingQueue queue = new LinkedBlockingQueue<>(10);
@@ -34,18 +34,15 @@ public class Demo1 {
         return threadPoolExecutor;
     }
 
-    public List<Integer> sumSync() {
-        int sum = 0;
+    public List<Integer> sumSync(int size) {
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < size; i++) {
             list.add(i);
-            sum = sum + i;
         }
-        System.out.println("sum ===> " + sum);
 
         List<Integer> sumList = new ArrayList<>();
 //        List<List<Integer>> parts = SplitListUtils.split(list, 100);
-        List<List<Integer>> parts = Lists.partition(list, 5);
+        List<List<Integer>> parts = Lists.partition(list, 10);
 
         ThreadPoolExecutor threadPoolExecutor = this.initThreadPool();
         for (List<Integer> part : parts) {
@@ -58,8 +55,17 @@ public class Demo1 {
     }
 
     public static void main(String[] args) {
-        List<Integer> list = new Demo1().sumSync();
-        System.out.println("======list======="+list.size());
+        int size = 1000;
+
+        int sum = 0;
+        for (int i = 0; i < size; i++) {
+            sum = sum + i;
+        }
+        System.out.println("sum ===> " + sum);
+
+        List<Integer> list = new Demo1().sumSync(size);
+        System.out.println("======list=======" + list.size());
+
         int result = 0;
         for (Integer integer : list) {
             result = result + integer;
