@@ -13,11 +13,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2023/3/2 16:48
  */
 public class Demo1 {
-    private static final AtomicInteger COUNT = new AtomicInteger(0);
-    private static Boolean flag = true;
-    private static int result = 0;
+    private  final AtomicInteger COUNT = new AtomicInteger(0);
 
-    public static ThreadPoolExecutor initThreadPool() {
+    public ThreadPoolExecutor initThreadPool() {
         LinkedBlockingQueue queue = new LinkedBlockingQueue<>(10);
         final ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat("myThread-%d").setDaemon(true).build();
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
@@ -36,52 +34,36 @@ public class Demo1 {
         return threadPoolExecutor;
     }
 
-
-    public static void main(String[] args) {
+    public List<Integer> sumSync() {
         int sum = 0;
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             list.add(i);
             sum = sum + i;
         }
+        System.out.println("sum ===> " + sum);
 
         List<Integer> sumList = new ArrayList<>();
 //        List<List<Integer>> parts = SplitListUtils.split(list, 100);
-        List<List<Integer>> parts = Lists.partition(list, 50);
-        System.out.println("parts size = " + parts.size());
+        List<List<Integer>> parts = Lists.partition(list, 5);
 
-        ThreadPoolExecutor threadPoolExecutor = initThreadPool();
+        ThreadPoolExecutor threadPoolExecutor = this.initThreadPool();
         for (List<Integer> part : parts) {
             threadPoolExecutor.execute(() -> {
-                int b = 0;
-                for (Integer integer : part) {
-
-//                        if (flag) {
-//                            flag = false;
-//                            synchronized (Demo1.class) {
-//                                result = result + integer;
-//                            }
-//                        }
-//                        flag = true;
-
-
-                    b = b + integer;
-                    System.out.println("---------------b=" + b);
-                }
-                sumList.add(b);
-
-                System.out.println("===>" + Thread.currentThread().getName() + "-" + b);
+                sumList.addAll(part);
+//                System.out.println("===>" + Thread.currentThread().getName());
             });
         }
+        return sumList;
+    }
 
-        int c = 0;
-        for (Integer integer : sumList) {
-            System.out.println("============="+integer);
-            c = c + integer;
+    public static void main(String[] args) {
+        List<Integer> list = new Demo1().sumSync();
+        System.out.println("======list======="+list.size());
+        int result = 0;
+        for (Integer integer : list) {
+            result = result + integer;
         }
-        result = c;
-        System.out.println("sum ===> " + sum);
         System.out.println("result ===> " + result);
-
     }
 }
