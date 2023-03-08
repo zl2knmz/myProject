@@ -52,12 +52,12 @@ public class Demo1 {
         // ArrayList 线程不安全
 //        List<Integer> sumList = new ArrayList<>();
         // 线程安全的List： Vector、Collections.synchronizedList()方法和CopyOnWriteArrayList三种方式
-        Vector<Integer> sumList = new Vector<>();
+//        Vector<Integer> sumList = new Vector<>();
 //        CopyOnWriteArrayList<Integer> sumList = new CopyOnWriteArrayList<>();
-//        List<Integer> sumList = Collections.synchronizedList(new ArrayList<>());
+        List<Integer> sumList = Collections.synchronizedList(new ArrayList<>());
 
 //        List<List<Integer>> parts = SplitListUtils.split(list, 100);
-        List<List<Integer>> parts = Lists.partition(list, 10);
+        List<List<Integer>> parts = Lists.partition(list, 100);
 
         ThreadPoolExecutor threadPoolExecutor = this.initThreadPool();
         for (List<Integer> part : parts) {
@@ -79,7 +79,7 @@ public class Demo1 {
         System.out.println("sum ===> " + sum);
 
         List<Integer> list = new Demo1().sumSync(size);
-        System.out.println("======list=======" + list.size());
+        System.out.println("======list size=======" + list.size());
 
         int result = 0;
         for (Integer integer : list) {
