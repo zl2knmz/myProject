@@ -11,6 +11,8 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 多线程处理List数据
+ *
  * @author zl
  * @date 2023/3/2 16:48
  */
