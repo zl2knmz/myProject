@@ -57,6 +57,7 @@ public class Demo2 {
                 printNumber("A");
             }
         });
+
         Thread B = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -69,6 +70,20 @@ public class Demo2 {
                 printNumber("B");
             }
         });
+
+        Thread C = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("C 开始等待 B");
+                try {
+                    B.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                printNumber("C");
+            }
+        });
+        C.start();
         B.start();
         A.start();
     }
@@ -105,6 +120,7 @@ public class Demo2 {
                 }
             }
         });
+
         Thread B = new Thread(new Runnable() {
             @Override
             public void run() {
