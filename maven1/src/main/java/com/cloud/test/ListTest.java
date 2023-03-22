@@ -5,7 +5,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zl
@@ -152,6 +154,55 @@ public class ListTest {
 
         String b = "4231414135134";
         System.out.println( b.contains("4135134"));
+    }
+
+    /**
+     * list删除元素
+     */
+    @Test
+    public void listRemove() {
+        List<String> a = new ArrayList<>();
+        a.add("张三");
+        a.add("李四");
+        a.add("王五");
+        a.add("刘备");
+        a.add("张飞");
+        a.add("关羽");
+
+        // 1、倒删元素
+        for (int i = a.size()-1; i > 0; i--) {
+            String str = "刘备";
+            if (str.startsWith(a.get(i))){
+                a.remove(str);
+            }
+        }
+
+        // 2、迭代器删除元素
+//        a.removeIf(str -> str.contains("关"));
+        for (Iterator<String> iterator = a.iterator(); iterator.hasNext();) {
+            String str = iterator.next();
+            if (str.contains("关")) {
+                iterator.remove();
+            }
+        }
+
+        // 3、stream过滤元素
+        for (int i = a.size()-1; i > 0; i--) {
+            String str = "张飞";
+            a=a.stream().filter(s -> !str.startsWith(s)).collect(Collectors.toList());
+        }
+        a.forEach(System.out::println);
+
+        // 4、过滤元素
+        List<String> b = new ArrayList<>();
+        for (String s : a) {
+            if (!s.contains("张三")) {
+                b.add(s);
+            }
+        }
+        System.out.println("--------b------");
+        b.forEach(System.out::println);
+
     }
 
 }
