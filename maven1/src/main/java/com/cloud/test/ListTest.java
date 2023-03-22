@@ -74,22 +74,22 @@ public class ListTest {
         List<Student> employeeList = new ArrayList<>();
         Student student = new Student("zl1", "RD", null);
         employeeList.add(student);
-        for (Student employee: employeeList) {
+        for (Student employee : employeeList) {
             System.out.println("1 " + employee);
         }
         student.setEmpID("1001");
-        for (Student employee: employeeList) {
+        for (Student employee : employeeList) {
             System.out.println("2 " + employee);
         }
 
         Student student1 = new Student();
         student1.setName("zhangSan");
         employeeList.add(student1);
-        for (Student employee: employeeList) {
+        for (Student employee : employeeList) {
             System.out.println("3 " + employee);
         }
         student1.setDept("FD");
-        for (Student employee: employeeList) {
+        for (Student employee : employeeList) {
             System.out.println("4 " + employee);
         }
     }
@@ -153,7 +153,7 @@ public class ListTest {
         System.out.println(a.contains("4231414135134"));
 
         String b = "4231414135134";
-        System.out.println( b.contains("4135134"));
+        System.out.println(b.contains("4135134"));
     }
 
     /**
@@ -170,16 +170,16 @@ public class ListTest {
         a.add("关羽");
 
         // 1、倒删元素
-        for (int i = a.size()-1; i > 0; i--) {
+        for (int i = a.size() - 1; i > 0; i--) {
             String str = "刘备";
-            if (str.startsWith(a.get(i))){
+            if (str.startsWith(a.get(i))) {
                 a.remove(str);
             }
         }
 
         // 2、迭代器删除元素
 //        a.removeIf(str -> str.contains("关"));
-        for (Iterator<String> iterator = a.iterator(); iterator.hasNext();) {
+        for (Iterator<String> iterator = a.iterator(); iterator.hasNext(); ) {
             String str = iterator.next();
             if (str.contains("关")) {
                 iterator.remove();
@@ -187,9 +187,9 @@ public class ListTest {
         }
 
         // 3、stream过滤元素
-        for (int i = a.size()-1; i > 0; i--) {
+        for (int i = a.size() - 1; i > 0; i--) {
             String str = "张飞";
-            a=a.stream().filter(s -> !str.startsWith(s)).collect(Collectors.toList());
+            a = a.stream().filter(s -> !str.startsWith(s)).collect(Collectors.toList());
         }
         a.forEach(System.out::println);
 
