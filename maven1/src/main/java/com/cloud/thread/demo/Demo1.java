@@ -6,7 +6,6 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,7 +19,7 @@ public class Demo1 {
     private final AtomicInteger COUNT = new AtomicInteger(0);
 
     public ThreadPoolExecutor initThreadPool() {
-        LinkedBlockingQueue queue = new LinkedBlockingQueue<>(10);
+        LinkedBlockingQueue queue = new LinkedBlockingQueue<>(100);
         final ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat("myThread-%d").setDaemon(true).build();
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
                 5,
@@ -87,9 +86,29 @@ public class Demo1 {
         return count;
     }
 
+    /**
+     * 多线程减数
+     * int[]
+     */
+    public int subSync1(int size) {
+        final int[] count = {100};
+//        Object o = new Object();
+        ThreadPoolExecutor threadPoolExecutor = this.initThreadPool();
+        for (int i = 0; i < size; i++) {
+            threadPoolExecutor.execute(() -> {
+//                synchronized (o){
+                synchronized (this){
+                    count[0] = count[0] -1;
+                };
+                System.out.println("===>" + Thread.currentThread().getName());
+            });
+        }
+        return count[0];
+    }
+
 
     public static void main(String[] args) {
-/*        int size = 1000;
+        /* int size = 1000;
         int sum = 0;
         for (int i = 0; i < size; i++) {
             sum = sum + i;
@@ -113,6 +132,14 @@ public class Demo1 {
             throw new RuntimeException(e);
         }
         System.out.println(atomicInteger.get());
+
+        /*int count = new Demo1().subSync1(100);
+        try {
+            Thread.sleep(10000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(count);*/
 
     }
 
