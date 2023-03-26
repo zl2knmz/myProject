@@ -71,9 +71,25 @@ public class Demo1 {
         return sumList;
     }
 
-    public static void main(String[] args) {
-        int size = 1000;
+    /**
+     * 多线程减数
+     * AtomicInteger 线程安全的 保证原子性
+     */
+    public AtomicInteger subSync(int size) {
+        AtomicInteger count = new AtomicInteger(100);
+        ThreadPoolExecutor threadPoolExecutor = this.initThreadPool();
+        for (int i = 0; i < size; i++) {
+            threadPoolExecutor.execute(() -> {
+                count.getAndDecrement();
+                System.out.println("===>" + Thread.currentThread().getName());
+            });
+        }
+        return count;
+    }
 
+
+    public static void main(String[] args) {
+/*        int size = 1000;
         int sum = 0;
         for (int i = 0; i < size; i++) {
             sum = sum + i;
@@ -87,6 +103,17 @@ public class Demo1 {
         for (Integer integer : list) {
             result = result + integer;
         }
-        System.out.println("result ===> " + result);
+        System.out.println("result ===> " + result);*/
+
+
+        AtomicInteger atomicInteger = new Demo1().subSync(100);
+        try {
+            Thread.sleep(10000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(atomicInteger.get());
+
     }
+
 }
