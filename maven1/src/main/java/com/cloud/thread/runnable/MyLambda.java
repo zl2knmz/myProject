@@ -10,7 +10,7 @@ public class MyLambda {
     public static void main(String[] args) {
         Thread thread = new Thread(() -> {
             System.out.println("run thread lambda");
-        });
+        }, "thread");
         thread.start();
     }
 }

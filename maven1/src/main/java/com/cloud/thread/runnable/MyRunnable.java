@@ -30,7 +30,7 @@ public class MyRunnable implements Runnable {
 
     static void stopByFlag() {
         MyRunnable ar = new MyRunnable();
-        new Thread(ar).start();
+        new Thread(ar, "thread").start();
         ar.tellToStop();
     }
 

@@ -14,7 +14,7 @@ public class MyCallable implements Callable<String> {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         FutureTask<String> futureTask = new FutureTask<>(new MyCallable());
-        Thread thread = new Thread(futureTask);
+        Thread thread = new Thread(futureTask, "thread");
         thread.start();
         String s = futureTask.get();
         System.out.println(s);
