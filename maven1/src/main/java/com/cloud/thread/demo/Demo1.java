@@ -99,7 +99,7 @@ public class Demo1 {
 //                synchronized (o){
                 synchronized (this){
                     count[0] = count[0] -1;
-                };
+                }
                 System.out.println("===>" + Thread.currentThread().getName());
             });
         }
@@ -125,21 +125,21 @@ public class Demo1 {
         System.out.println("result ===> " + result);*/
 
 
-        AtomicInteger atomicInteger = new Demo1().subSync(100);
+        /*AtomicInteger atomicInteger = new Demo1().subSync(100);
         try {
-            Thread.sleep(10000L);
+            Thread.sleep(10 * 1000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(atomicInteger.get());
+        System.out.println(atomicInteger.get());*/
 
-        /*int count = new Demo1().subSync1(100);
+        int count = new Demo1().subSync1(100);
         try {
-            Thread.sleep(10000L);
+            Thread.sleep(10 * 1000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(count);*/
+        System.out.println(count);
 
     }
 
