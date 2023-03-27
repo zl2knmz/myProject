@@ -86,6 +86,7 @@ public class Demo1 {
         return count;
     }
 
+//    private static final int[] count = {100};
     /**
      * 多线程减数
      * int[]
@@ -99,9 +100,17 @@ public class Demo1 {
 //                synchronized (o){
                 synchronized (this){
                     count[0] = count[0] -1;
+//                    System.out.println(count[0]);
                 }
-                System.out.println("===>" + Thread.currentThread().getName());
+//                System.out.println("===>" + Thread.currentThread().getName());
             });
+        }
+
+        // 等待1秒，让所有线程执行完再返回结果
+        try {
+            TimeUnit.SECONDS.sleep(1L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
         return count[0];
     }
@@ -134,11 +143,11 @@ public class Demo1 {
         System.out.println(atomicInteger.get());*/
 
         int count = new Demo1().subSync1(100);
-        try {
-            Thread.sleep(10 * 1000L);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            TimeUnit.SECONDS.sleep(3L);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         System.out.println(count);
 
     }
