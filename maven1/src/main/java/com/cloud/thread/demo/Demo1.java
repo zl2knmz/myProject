@@ -92,14 +92,18 @@ public class Demo1 {
      * int[]
      */
     public int subSync1(int size) {
-        final int[] count = {100};
+        final int[] count = {80};
 //        Object o = new Object();
         ThreadPoolExecutor threadPoolExecutor = this.initThreadPool();
         for (int i = 0; i < size; i++) {
             threadPoolExecutor.execute(() -> {
 //                synchronized (o){
                 synchronized (this){
-                    count[0] = count[0] -1;
+                    if (count[0] > 0) {
+                        count[0] = count[0] -1;
+                    } else {
+                        System.out.println("已经没有库存了");
+                    }
 //                    System.out.println(count[0]);
                 }
 //                System.out.println("===>" + Thread.currentThread().getName());
