@@ -53,7 +53,7 @@ public class Demo5 {
 
     }
 
-    private static void m1() {
+    public static void main2(String[] args) {
         // 3个任务，目前只有一个线程main来处理，请问耗时多少？
         long startTime = System.currentTimeMillis();
         // 暂停毫秒
@@ -64,13 +64,13 @@ public class Demo5 {
         }
 
         try {
-            TimeUnit.MILLISECONDS.sleep(500L);
+            TimeUnit.MILLISECONDS.sleep(300L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            TimeUnit.MILLISECONDS.sleep(500L);
+            TimeUnit.MILLISECONDS.sleep(300L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
