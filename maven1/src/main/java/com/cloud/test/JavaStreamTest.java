@@ -58,6 +58,7 @@ public class JavaStreamTest {
                 .limit(3)
                 .distinct();
         System.out.println("stream");
+        // [5, 6]
         System.out.println(s.collect(Collectors.toList()));
 
         List<String> strings2 = Arrays.asList("Hollis", "HollisChuang", "hollis", "Hollis666", "Hello", "com.cloud.HelloWorld", "Hollis");
@@ -65,6 +66,7 @@ public class JavaStreamTest {
                 .filter(string2 -> string2.startsWith("Hollis"))
                 .collect(Collectors.toList());
         System.out.println("stream1");
+        // [Hollis, HollisChuang, Hollis666, Hollis]
         System.out.println(strings2);
         //Hollis, HollisChuang, Hollis666, Hollis
 
@@ -73,9 +75,11 @@ public class JavaStreamTest {
         System.out.println(strings3.stream().count());
         //7
 
+        // 产生10个随机数
         Random random = new Random();
-        System.out.println("random forEach");
-        random.ints().limit(10).forEach(System.out::println);
+        System.out.println("random IntStream forEach");
+        IntStream intStream = random.ints();
+        intStream.limit(10).forEach(System.out::println);
     }
 
     /**
@@ -99,9 +103,11 @@ public class JavaStreamTest {
     @Test
     public void find() {
         Optional<String> first = Stream.of("10", "3", "3", "4", "5", "1", "7").findFirst();
+        // 10
         System.out.println(first.get());
 
         Optional<String> any = Stream.of("111", "3", "3", "4", "5", "1", "7").findAny();
+        // 111
         System.out.println(any.get());
     }
 
@@ -113,11 +119,13 @@ public class JavaStreamTest {
         Optional<Integer> max = Stream.of("1", "3", "3", "4", "5", "1", "7")
                 .map(Integer::parseInt)
                 .max((o1, o2) -> o1 - o2);
+        // 7
         System.out.println(max.get());
 
         Optional<Integer> min = Stream.of("1", "3", "3", "4", "5", "1", "7")
                 .map(Integer::parseInt)
                 .min((o1, o2) -> o1 - o2);
+        // 1
         System.out.println(min.get());
 
     }
@@ -135,6 +143,11 @@ public class JavaStreamTest {
                     System.out.println("x=" + x + ",y=" + y);
                     return x + y;
                 });
+//        x=0,y=4
+//        x=4,y=5
+//        x=9,y=3
+//        x=12,y=9
+//        21
         System.out.println(sum);
 
         // 获取 最大值
@@ -142,6 +155,7 @@ public class JavaStreamTest {
                 .reduce(0, (x, y) -> {
                     return x > y ? x : y;
                 });
+        // 9
         System.out.println(max);
     }
 
@@ -159,6 +173,7 @@ public class JavaStreamTest {
                         , new Person("张三", 19)
                 ).map(Person::getAge) // 实现数据类型的转换
                 .reduce(0, Integer::sum);
+        // 87
         System.out.println(sumAge);
 
         // 2.求出所有年龄中的最大值
@@ -170,12 +185,14 @@ public class JavaStreamTest {
                         , new Person("张三", 19)
                 ).map(Person::getAge) // 实现数据类型的转换，符合reduce对数据的要求
                 .reduce(0, Math::max); // reduce实现数据的处理
+        // 22
         System.out.println(maxAge);
 
         // 3.统计 字符 a 出现的次数
         Integer count = Stream.of("a", "b", "c", "d", "a", "c", "a")
                 .map(ch -> "a".equals(ch) ? 1 : 0)
                 .reduce(0, Integer::sum);
+        // 3
         System.out.println(count);
 
     }
@@ -208,11 +225,11 @@ public class JavaStreamTest {
         Stream<String> stream2 = Stream.of("x", "y", "z");
         // 通过concat方法将两个流合并为一个新的流
         Stream.concat(stream1, stream2).forEach(System.out::println);
-
+        // a b c x y z
     }
 
-
     /**
+     * String类型转Long
      * List<String> -> List<Long>
      */
     @Test
@@ -221,21 +238,38 @@ public class JavaStreamTest {
         List<String> stringList = Arrays.asList(roleIds.split(","));
         System.out.println(stringList);
 
+        // 方法一
         List<Long> roleList = new ArrayList<>();
         stringList.stream().mapToLong(Long::parseLong).forEach(roleList::add);
         System.out.println(roleList);
 
+        // 方法二
         List<Long> longList = stringList.stream().map(Long::parseLong).collect(Collectors.toList());
         System.out.println(longList);
     }
 
+    /**
+     * 一个java 8的stream是由三部分组成的。
+     * 1 数据源，
+     * 2 零个或一个或多个中间操作，
+     * 3 一个或零个终止操作。
+     * 中间操作是对数据的加工，注意，中间操作是lazy操作，并不会立马启动，需要等待终止操作才会执行。
+     */
     @Test
     public void testPeek() {
+        // peek主要被用在debug用途
         IntStream.of(1, 2, 3, 4, 5)
                 .filter(e -> e >= 3)
                 .peek(value -> System.out.printf("filter element: %d\n", value))
                 .mapToObj(String::valueOf)
                 .forEach(System.out::println);
+
+//        filter element: 3
+//        3
+//        filter element: 4
+//        4
+//        filter element: 5
+//        5
     }
 
     @Data
