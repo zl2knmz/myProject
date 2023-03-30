@@ -1,4 +1,4 @@
-package com.cloud.test;
+package com.cloud.jvm;
 
 import java.lang.ref.WeakReference;
 
