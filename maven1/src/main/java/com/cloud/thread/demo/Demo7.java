@@ -91,7 +91,7 @@ public class Demo7 {
                     int i = 10 / 0;
                 }
                 return result;
-                // 默认线程池是个守护线程，main线程结束后自动结束了
+                // 默认线程池是个守护线程（setDaemon(true)），main线程结束后自动结束了
 //            }).whenComplete((v, e) -> {
                 // 自定义线程池
             }, executorService).whenComplete((v, e) -> {
