@@ -16,6 +16,7 @@ public class Demo7 {
     public static void main1(String[] args) throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(3);
 
+        // 无返回值
         /*CompletableFuture<Void> voidCompletableFuture = CompletableFuture.runAsync(() -> {
             System.out.println(Thread.currentThread().getName());
             try {
@@ -27,7 +28,7 @@ public class Demo7 {
         }, executorService);
         System.out.println(voidCompletableFuture.get());*/
 
-
+        // 有返回值, 可以不传线程Executor池参数默认使用ForkJoinPool线程池（守护线程）
         CompletableFuture<Object> objectCompletableFuture = CompletableFuture.supplyAsync(() -> {
             System.out.println(Thread.currentThread().getName());
             try {
@@ -38,12 +39,12 @@ public class Demo7 {
             return "hello supplyAsync";
 //        }, MyThreadPool.initThreadPool());
         }, executorService);
+            // ForkJoinPool.commonPool-worker-9
 //        });
         System.out.println(objectCompletableFuture.get());
 
+        // 关闭线程池
         executorService.shutdown();
-
-
     }
 
     /**
@@ -93,7 +94,7 @@ public class Demo7 {
                 return result;
                 // 默认线程池是个守护线程（setDaemon(true)），main线程结束后自动结束了
 //            }).whenComplete((v, e) -> {
-                // 自定义线程池
+                // 自定义线程池（用户线程）
             }, executorService).whenComplete((v, e) -> {
                 if (e == null) {
                     System.out.println("--------计算完成，更新系统UpdateValue：" + v);
@@ -111,7 +112,7 @@ public class Demo7 {
             executorService.shutdown();
         }
 
-        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭：暂停3秒钟
+        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭：暂停3秒钟，等待默认的守护线程执行完结果
         /*try {
             TimeUnit.SECONDS.sleep(3L);
         } catch (InterruptedException e) {
