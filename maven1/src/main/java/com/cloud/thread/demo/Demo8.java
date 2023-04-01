@@ -17,19 +17,23 @@ public class Demo8 {
         CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> {
             return "hello 1234";
         });
-
+        // get方法需要处理异常 throws ExecutionException, InterruptedException
 //        System.out.println(completableFuture.get());
+
+        // join方法不需要处理异常
         System.out.println(completableFuture.join());
-
-
     }
 
 }
 
+/**
+ * // @Accessors(chain = true)
+ * 链式赋值 new Student().setId(1).setStudentName("mac").setMajor("english");
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true) // 链式赋值 new Student().setId(1).setStudentName("mac").setMajor("english");
+@Accessors(chain = true)
 class Student {
     private Integer id;
     private String studentName;
