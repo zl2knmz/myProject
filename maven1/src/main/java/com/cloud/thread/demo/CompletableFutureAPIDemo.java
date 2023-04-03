@@ -6,6 +6,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
+ * runAsync() 无返回值
+ * supplyAsync() 有返回值
+ * get() 处理异常
+ * join() 不需要处理异常
+ *
+ * getNow() 如果已完成，则返回结果值（或抛出任何遇到的异常），否则返回给定的值IfAbsent。
+ * complete() 如果没计算完，将返回的 get()值为给定值。true	complete 否则 false	abc
+ *
  * @author zl
  * @date 2023/4/2 22:21
  */

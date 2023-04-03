@@ -20,14 +20,14 @@ public class CompletableFutureAPI3Demo {
             return f + 3;
         }).thenAccept(System.out::println);*/
 
-        // thenRun
+        // thenRun 返回值：null
         System.out.println(CompletableFuture.supplyAsync(() -> "ResultA").thenRun(() -> {}).join());
 
-        // thenAccept
+        // thenAccept 返回值：ResultA null
         System.out.println(CompletableFuture.supplyAsync(() -> "ResultA").thenAccept(System.out::println).join());
 
-        // thenRun
-        System.out.println(CompletableFuture.supplyAsync(() -> "ResultA").thenApply((r) -> r + "ResultB").join());
+        // thenRun 返回值：ResultA ResultB
+        System.out.println(CompletableFuture.supplyAsync(() -> "ResultA").thenApply((r) -> r + " ResultB").join());
 
     }
 }
