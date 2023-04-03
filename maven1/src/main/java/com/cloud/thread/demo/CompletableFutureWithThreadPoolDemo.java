@@ -30,7 +30,9 @@ public class CompletableFutureWithThreadPoolDemo {
 //                }
                 System.out.println("1号任务" + "\t" + Thread.currentThread().getName());
                 return "abcd";
-            }, threadPool).thenRunAsync(() -> {
+//            }).thenRunAsync(() -> {
+            }, threadPool).thenRun(() -> {
+//            }, threadPool).thenRunAsync(() -> {
                 try {
                     TimeUnit.MILLISECONDS.sleep(20L);
                 } catch (InterruptedException e) {
