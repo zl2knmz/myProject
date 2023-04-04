@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
  * 1、没有传入自定义线程池，都用默认线程池ForkJoinPool
  * 2、传入了一个自定义线程池
  *    如果执行第一个任务的时候，传入了一个自定义线程池：
- *        调用ThenRun方法 执行第二个任务时，则第二个任务和第一个任务公用一个线程池。
- *        调用ThenRunAsync方法(异步) 执行第二个任务时，则第一个任务使用自定义线程池，第二个任务使用ForkJoinPool线程池。
+ *        调用 thenRun方法 执行第二个任务时，则第二个任务和第一个任务公用一个线程池。
+ *        调用 thenRunAsync方法(异步) 执行第二个任务时，则第一个任务使用自定义线程池，第二个任务使用ForkJoinPool线程池。
  * 3、备注
  *    有可能处理太快，系统优化切换原则，直接使用main线程处理
  *    其他如：thenAccept和thenAcceptAsync、thenApply、thenApplyAsync方法等，它们之间的区别也是同理。

@@ -4,6 +4,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * applyToEither() 哪个线程执行快，就返回哪个
+ *
  * @author zl
  * @date 2023/4/3 22:59
  */
