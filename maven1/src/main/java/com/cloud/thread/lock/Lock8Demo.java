@@ -7,10 +7,13 @@ import java.util.concurrent.TimeUnit;
  * 8锁案例说明：
  * 1、标准访问有a、b两个线程，请问先打印邮件还是短信 （sendEmail  sendSms）
  * 2、sendEmail方法中加入暂停3秒钟，请问先打印邮件还是短信 （sendEmail  sendSms）
+ *
  * 3、添加一个普通的hello方法，请问先打印邮件还是hello （hello sendEmail）
  * 4、有两部手机，请问先打印邮件还是短信 （sendSms sendEmail）
+ *
  * 5、有两个静态同步方法，有1部手机，请问先打印邮件还是短信 （sendEmail  sendSms）
  * 6、有两个静态同步方法，有2部手机，请问先打印邮件还是短信 （sendEmail  sendSms）
+ *
  * 7、有1个静态同步方法，有1个普通同步方法，有1部手机，请问先打印邮件还是短信 （sendSms sendEmail）
  * 8、有1个静态同步方法，有1个普通同步方法，有2部手机，请问先打印邮件还是短信 （sendSms sendEmail）
  * <p>
@@ -27,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  *
  * 5-6 都换成静态同步方法后，情况又变化
  *  三种 synchronized 锁的内容有一些差别：
- *     对于普通同步方法，锁的是当前实例对象，通常指this，具体的一部手机，所有的普通同步方法用的都是同一把锁--》实例对象本身
+ *     对于普通同步方法，锁的是当前实例对象，通常指this，具体的一部手机，所有的普通同步方法用的都是同一把锁 ——> 实例对象本身
  *     对于静态同步方法，锁的是当前类的Class对象，如 Phone.class唯一的一个模板
  *     对于同步方法块，锁的是 synchronized 括号内的对象
  *
@@ -77,11 +80,7 @@ class Phone {
     public static synchronized void sendEmail() {
         // 锁括号里的对象
 //        synchronized (Phone.class) {}
-        try {
-            TimeUnit.SECONDS.sleep(3L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        try { TimeUnit.SECONDS.sleep(3L); } catch (InterruptedException e) { e.printStackTrace(); }
         System.out.println("-------sendEmail");
     }
 
