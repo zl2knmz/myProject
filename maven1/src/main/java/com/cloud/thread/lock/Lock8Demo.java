@@ -73,8 +73,14 @@ public class Lock8Demo {
 
 /**
  * 资源类
- * synchronized 对象锁
- * static synchronized 类锁
+ * synchronized方法 1、对象锁: 作用于实例方法，当前实例加锁，进入同步代码前要获得当前对象实例的锁
+ * public synchronized void sendEmail() {}
+ *
+ * synchronized代码块：2、对括号里配置的对象加锁
+ * synchronized (this) {}
+ *
+ * static synchronized方法 3、类锁：作用于静态方法，当前类加锁，进去同步代码前要获得当前类对象的锁
+ * public static synchronized void sendEmail() {}
  */
 class Phone {
     public static synchronized void sendEmail() {
