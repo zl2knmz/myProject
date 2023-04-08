@@ -5,6 +5,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * 用户线程之间互不干扰，守护线程随着用户线程结束同JVM一同结束工作
  *
+ * openjdk源码 Thread类
+ * D:\Program Files\download\openjdk-8u42-src-b03-14_jul_2022\openjdk\jdk\src\share\native\java\lang\Thread.c
+ * D:\Program Files\download\openjdk-8u42-src-b03-14_jul_2022\openjdk\hotspot\src\share\vm\runtime\thread.cpp
+ * D:\Program Files\download\openjdk-8u42-src-b03-14_jul_2022\openjdk\hotspot\src\share\vm\prims\jvm.cpp
+ *
  * @author zl
  * @date 2023/3/26 23:33
  */
