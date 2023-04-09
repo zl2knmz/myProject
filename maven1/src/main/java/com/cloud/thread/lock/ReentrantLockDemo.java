@@ -1,6 +1,7 @@
 package com.cloud.thread.lock;
 
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 可重入锁又名递归锁
@@ -23,9 +24,22 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * 可重入锁的种类：
  * 1、隐式锁（即synchronized关键字使用的锁）默认是可重入锁，同步块、同步方法都支持
- * 指的是可重复可递归调用的锁，在外层使用锁之后，在内层任然可以使用，并且不发生死锁，这样的锁就叫做可重入锁。
- * 简单的来说就是：在一个synchronized修饰的方法或代码块的内部调用本类的其他synchronized修饰的方法或代码块时，是永远可以得到锁的。
+ *    指的是可重复可递归调用的锁，在外层使用锁之后，在内层任然可以使用，并且不发生死锁，这样的锁就叫做可重入锁。
+ *    简单的来说就是：在一个synchronized修饰的方法或代码块的内部调用本类的其他synchronized修饰的方法或代码块时，是永远可以得到锁的。
+ *
  * 2、Synchronized的重入的实现机理
+ *    为什么任何一个对象都可以成为一个锁
+ *    objectMonitor.hpp
+ *    每个锁对象拥有一个锁计数器和一个指向持有该锁的线程的指针。
+ *
+ *    当执行monitorenter时，如果目标锁对象的计数器为零，那么说明它没有被其他线程所持有，
+ *    Java虚拟机会将该锁对象的持有线程设置为当前线程，并且将计数器加1。
+ *
+ *    在目标锁对象的计数器不为零的情况下，如果锁对象的持有线程是当前线程，那么Java虚拟机可以将其计数器加1，
+ *    否则需要等待，直至持有持有线程释放该锁。
+ *
+ *     当执行monitorexit时，Java虚拟机则需将锁对象的计数器减1.计数器为零代表锁已被释放。
+ *
  * 3、显示锁（即Lock）也有ReentrantLock这样的可重入锁。
  *
  * @author zl
@@ -49,14 +63,40 @@ public class ReentrantLockDemo {
         System.out.println(Thread.currentThread().getName() + "\t -----come in m3");
     }
 
+    static Lock lock = new ReentrantLock();
     public static void main(String[] args) {
 //        reEntryM1();
 
-        ReentrantLockDemo reentrantLockDemo = new ReentrantLockDemo();
+        /*ReentrantLockDemo reentrantLockDemo = new ReentrantLockDemo();
         new Thread(() -> {
             reentrantLockDemo.m1();
+        }, "t1").start();*/
+
+        new Thread(()->{
+            lock.lock();
+            try {
+                System.out.println(Thread.currentThread().getName() + "\t -----come in 外层调用");
+                lock.lock();
+                try {
+                    System.out.println(Thread.currentThread().getName() + "\t -----come in 内层调用");
+                } finally {
+                    // 这里故意注释，实现加锁次数和释放次数不一样
+                    // 由于加锁次数和释放次数不一样，第二个线程始终无法获取到锁，导致一直在等待。
+                    lock.unlock(); // 正常情况，加锁几次就要解锁几次
+                }
+            } finally {
+                lock.unlock();
+            }
         }, "t1").start();
 
+        new Thread(()->{
+            lock.lock();
+            try {
+                System.out.println(Thread.currentThread().getName() + "\t -----come in 外层调用");
+            } finally {
+                lock.unlock();
+            }
+        }, "t2").start();
     }
 
     private static void reEntryM1() {
