@@ -10,7 +10,7 @@ package com.cloud.thread.lock;
  * javap -v .\LockSyncDemo.class
  *
  * synchronized同步代码块 实现使用的是monitorenter和monitorexit指令
- * 一般情况就是1个enter对应2个exit
+ *   一般情况就是1个enter对应2个exit
  *        6: monitorenter
  *        7: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
  *       10: ldc           #5                  // String hello synchronized code block
@@ -21,7 +21,7 @@ package com.cloud.thread.lock;
  *       20: astore_2
  *       21: aload_1
  *       22: monitorexit
- * 极端情况：m1方法里添加一个异常，一对一
+ *   极端情况：m1方法里添加一个异常，一对一
  *
  *
  * 2、synchronized 锁的是什么（管程（Monitors）
@@ -65,16 +65,10 @@ package com.cloud.thread.lock;
  *     _previous_owner_tid = 0;
  *   }
  *
-
  *
  * @author zl
  * @date 2023/4/6 23:02
  */
-
-class Book extends Object {
-    // java = (C++)--
-}
-
 public class LockSyncDemo {
     Object object = new Object();
     Book book = new Book();
@@ -106,4 +100,8 @@ public class LockSyncDemo {
     public static void main(String[] args) {
 
     }
+}
+
+class Book extends Object {
+    // java = (C++)--
 }
