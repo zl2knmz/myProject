@@ -52,7 +52,7 @@ public class SaleTicketDemo {
  */
 class Ticket {
     private int number = 50;
-//    private AtomicInteger number1 = new AtomicInteger(50);
+    private final AtomicInteger number1 = new AtomicInteger(50);
 
     /**
      *  默认非公平锁
@@ -67,7 +67,11 @@ class Ticket {
         try {
             if (number > 0) {
                 System.out.println(Thread.currentThread().getName() + "卖出第：" + (number--) + "\t 还剩下：" + number);
-//                System.out.println(Thread.currentThread().getName() + "卖出第：" + (number1.decrementAndGet()) + "\t 还剩下：" + number1.get());
+            }
+
+            // juc 原子类
+            if (number1.get() > 0) {
+                System.out.println(Thread.currentThread().getName() + "卖出第=" + (number1.decrementAndGet()) + "\t 还剩下=" + number1.get());
             }
         } finally {
             lock.unlock();
