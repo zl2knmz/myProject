@@ -27,28 +27,29 @@ public class DeadLockDemo {
 
         new Thread(() -> {
             synchronized (objectA) {
-                System.out.println(Thread.currentThread().getName() + "\t------线程A 获取到锁A，希望获得B锁");
+                System.out.println(Thread.currentThread().getName() + "线程 获取到锁A，希望获得锁B");
+                // 等待1秒，让B线程能获取到锁B
                 try {
                     TimeUnit.SECONDS.sleep(1L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 synchronized (objectB) {
-                    System.out.println(Thread.currentThread().getName() + "\t------线程A 获取到锁B");
+                    System.out.println(Thread.currentThread().getName() + "线程 获取到锁B");
                 }
             }
         }, "A").start();
 
         new Thread(() -> {
             synchronized (objectB) {
-                System.out.println(Thread.currentThread().getName() + "\t------线程B 获取到锁B，希望获得A锁");
+                System.out.println(Thread.currentThread().getName() + "线程 获取到锁B，希望获得锁A");
                 try {
                     TimeUnit.SECONDS.sleep(1L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 synchronized (objectA) {
-                    System.out.println(Thread.currentThread().getName() + "\t------线程B 获取到锁A");
+                    System.out.println(Thread.currentThread().getName() + "线程 获取到锁A");
                 }
             }
         }, "B").start();
