@@ -16,7 +16,7 @@ public class BigDecimalTest {
 
         // 乘以100 multiply() 或者 movePointRight() 小数点右移2位
         System.out.println((ticketPrice.movePointRight(2).longValue()));
-        System.out.println((ticketPrice.multiply(new BigDecimal(100)).longValue()));
+        System.out.println((ticketPrice.multiply(new BigDecimal("100")).longValue()));
 
         // 比较大小 -1: 小于、 0: 等于、 1: 大于
         int compareTo = ticketPrice.compareTo(BigDecimal.ZERO);
