@@ -5,9 +5,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * jdk11在线API文档
+ * @https://www.runoob.com/manual/jdk11api/index.html
  *
- * @author zl
- * @https://www.runoob.com/manual/jdk11api/index.html LockSupport与线程中断
+ * LockSupport与线程中断
  * 1、内容介绍
  * <p>
  * 2、线程中断机制
@@ -21,18 +21,28 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * 接着你需要自己写代码不断的检测当前线程的标示位，如果为true，表示别的线程请求这个线程中断，
  * 此时究竟该做什么需要你自己写代码实现。
  * <p>
- * 每个线程对象中都有一个中断标识位，用于表示线程是否被中断；该标识位位true表示中断，为false表示未中断；
+ * 每个线程对象中都有一个中断标识位，用于表示线程是否被中断；该标识位为true表示中断，为false表示未中断；
  * 通过调用线程对象的interrupt方法将该线程的标识位设为true；可以在别的线程中调用，也可以在自己的线程中调用。
  * <p>
  * 3、LockSupport是什么
  * <p>
  * 4、线程等待唤醒机制
+ *
+ * @author zl
  * @date 2023/4/11 23:54
  */
 public class InterruptDemo {
 
     static volatile boolean isStop = false;
     static AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
+    public static void main(String[] args) {
+//        m1_volatile();
+
+//        m2_atomicBoolean();
+
+        m3_interrupt();
+    }
 
     /**
      * void  interrupt() 中断此线程。
@@ -54,11 +64,7 @@ public class InterruptDemo {
      *
      * 静态方法Thread.interrupted()，谈谈你的理解？
      */
-    public static void main(String[] args) {
-//        m1_volatile();
-
-//        m2_atomicBoolean();
-
+    private static void m3_interrupt() {
         Thread t1 = new Thread(() -> {
             while (true) {
                 if (Thread.currentThread().isInterrupted()) {
@@ -87,6 +93,9 @@ public class InterruptDemo {
         t1.interrupt();
     }
 
+    /**
+     * AtomicBoolean 原子类 （线程安全）十八罗汉
+     */
     private static void m2_atomicBoolean() {
         new Thread(() -> {
             while (true) {
@@ -109,6 +118,9 @@ public class InterruptDemo {
         }, "t2").start();
     }
 
+    /**
+     * volatile 可见性 boolean值
+     */
     private static void m1_volatile() {
         new Thread(() -> {
             while (true) {
