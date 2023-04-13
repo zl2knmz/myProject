@@ -78,12 +78,13 @@ public class InterruptDemo {
         }
 
         // t1向 t2发出协商，将t1的中断标志位设为true希望t1停下来
-        new Thread(() -> {
-            t1.interrupt();
-        }, "t2").start();
+//        new Thread(() -> {
+//            t1.interrupt();
+//        }, "t2").start();
 
+        System.out.println(Thread.currentThread().getName() + "-----线程");
         // 也可以t1自己设置
-//        t1.interrupt();
+        t1.interrupt();
     }
 
     private static void m2_atomicBoolean() {
@@ -128,34 +129,6 @@ public class InterruptDemo {
         new Thread(() -> {
             isStop = true;
         }, "t2").start();
-    }
-
-    public static void main1(String[] args) {
-        Thread t1 = new Thread(() -> {
-            while (true) {
-                try {
-                    TimeUnit.SECONDS.sleep(1L);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println(Thread.currentThread().getName() + "线程");
-            }
-
-        }, "t1");
-
-        t1.setDaemon(false);
-        t1.start();
-
-        try {
-            TimeUnit.SECONDS.sleep(5L);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        // main线程调用  t1.interrupt() 中断t1线程 抛出异常
-        t1.interrupt();
-        System.out.println(Thread.currentThread().getName() + "线程");
-
     }
 
 
