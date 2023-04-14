@@ -3,6 +3,10 @@ package com.cloud.thread.lock;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 当对一个线程调用interrupt()时：
+ *     如果线程处于正常活动状态，那么会将该线程的中断标志设置为true，仅此而已。
+ *     所以，interrupt() 并不能正真的中断线程，需要被调用的线程自己进行配合才行。
+
  * @author zl
  * @date 2023/4/13 23:34
  */
