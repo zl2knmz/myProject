@@ -68,7 +68,7 @@ public class LockSupportDemo {
 
         Thread b = new Thread(() -> {
             LockSupport.unpark(a);
-            // unpark 通行凭证不累加
+            // unpark() 通行凭证不累加，a线程将一直处于阻塞状态
             LockSupport.unpark(a);
             System.out.println(Thread.currentThread().getName() + "\t" + "通知");
         }, "b");
