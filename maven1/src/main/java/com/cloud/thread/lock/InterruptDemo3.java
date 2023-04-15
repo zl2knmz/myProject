@@ -18,12 +18,12 @@ public class InterruptDemo3 {
          * 2、t2 ---> t1发出了中断协商，t2调用t1.interrupt()，中断标志位true
          * 3、中断标志位true，正常情况，程序停止。
          * 4、中断标志位true，异常情况，InterruptedException，将会把中断状态清除，并且抛出InterruptedException异常，
-         *    中断标志位false，导致无限循环。
+         *    中断标志位变成false，导致无限循环。
          *
          * 5、在catch块中，需要再次给中断标志位设置为true，2次调用interrupt() 停止程序才OK
          *
          * 总结：
-         *     sleep方法抛出InterruptedException后，中断标识也被清空置为false，我们再catch中没有调用interrupt()方法，
+         *     sleep方法抛出InterruptedException后，中断标识也被清空置为false，我们在catch中没有调用interrupt()方法，
          *     再次将中断标识设置为true，这就导致无限循环了。
          */
         Thread t1 = new Thread(() -> {
@@ -37,7 +37,7 @@ public class InterruptDemo3 {
                     Thread.sleep(200L);
                 } catch (InterruptedException e) {
                     // 为什么要在异常处，再调用一次？？
-                    Thread.currentThread().interrupt(); // 没有它，程序不会停止，中断不打断，看看sleep方法的源码
+//                    Thread.currentThread().interrupt(); // 没有它，程序不会停止，中断不打断，看看sleep方法的源码
                     e.printStackTrace();
                 }
                 System.out.println("---------hello InterruptDemo3");

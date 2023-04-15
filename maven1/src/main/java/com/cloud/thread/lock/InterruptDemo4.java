@@ -37,9 +37,9 @@ public class InterruptDemo4 {
 
 
         // 静态方法：返回当前中断状态，并清除中断状态。
-        Thread.interrupted();
+//        Thread.interrupted();
         // 实例方法：返回当前中断状态
-        Thread.currentThread().isInterrupted();
+//        Thread.currentThread().isInterrupted();
         // 底层调用的都是 private native boolean isInterrupted(boolean ClearInterrupted); 传参不一样
     }
 }
