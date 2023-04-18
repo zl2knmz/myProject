@@ -13,6 +13,8 @@ import java.util.concurrent.*;
  * FutureTask,
  * Callable 。
  *
+ * CompletableFuture
+ *
  * @author zl
  * @date 2023/3/9 22:55
  */
@@ -23,25 +25,18 @@ public class Demo2 {
 //        demo3();
 //        runDAfterABC();
 //        runABCWhenAllReady();
-        doTaskWithResultInWorker();
+//        doTaskWithResultInWorker();
+//        doTaskWithResultInWorker1();
+        doTaskWithResultInWorker2();
     }
 
     /**
      * 如何让两个线程依次执行？
+     * 执行顺序：AB AB AB
      */
     private static void demo1() {
-        Thread A = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                printNumber("A");
-            }
-        });
-        Thread B = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                printNumber("B");
-            }
-        });
+        Thread A = new Thread(() ->  printNumber("A"));
+        Thread B = new Thread(() ->  printNumber("B"));
         A.start();
         B.start();
     }
@@ -49,6 +44,7 @@ public class Demo2 {
     /**
      * B 在 A 全部打印 完后再开始打印
      * join()
+     * 执行顺序：AAA BBB CCC
      */
     private static void demo2() {
         Thread A = new Thread(new Runnable() {
@@ -86,11 +82,17 @@ public class Demo2 {
         C.start();
         B.start();
         A.start();
+
+        // 结果一样
+//        A.start();
+//        B.start();
+//        C.start();
     }
 
     /**
      * A 在打印完 1 后，再让 B 打印 1, 2, 3，最后再回到 A 继续打印 2, 3
-     * A 1, B 1, B 2, B 3, A 2, A 3
+     * 执行顺序：A 1, B 1, B 2, B 3, A 2, A 3
+     *
      * object.wait() 和 object.notify() 两个方法来实现
      * <p>
      * 1、首先创建一个 A 和 B 共享的对象锁 lock = new Object();
@@ -137,14 +139,20 @@ public class Demo2 {
         });
         A.start();
         B.start();
+
+        // 调换执行顺序，死锁了
+//        B.start();
+//        A.start();
     }
 
     /**
      * A B C 三个线程同时运行，各自独立运行完后通知 D；对 D 而言，只要 A B C 都运行完了，D 再开始运行。
+     * 执行顺序：A B C D
+     *
      * 针对这种情况，我们可以利用 CountdownLatch 来实现这类通信方式。它的基本用法是：
      * 1、创建一个计数器，设置初始值，CountdownLatch countDownLatch = new CountDownLatch(2);
      * 2、在 等待线程 里调用 countDownLatch.await() 方法，进入等待状态，直到计数值变成 0；
-     * 3、在 其他线程 里，调用 countDownLatch.countDown() 方法，该方法会将计数值减小 1；
+     * 3、在 其他线程 里调用 countDownLatch.countDown() 方法，该方法会将计数值减小 1；
      * 4、当 其他线程 的 countDown() 方法把计数值变成 0 时，等待线程 里的 countDownLatch.await() 立即退出，继续执行下面的代码。
      */
     private static void runDAfterABC() {
@@ -253,6 +261,80 @@ public class Demo2 {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * CompletableFuture 简化版
+     *
+     * Before completableFuture.get()
+     * Task starts
+     * Task finished and return result
+     * Result: 5050
+     * After completableFuture.get()
+     */
+    private static void doTaskWithResultInWorker1() {
+        CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(() -> {
+            System.out.println("Task starts");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            int result = 0;
+            for (int i = 0; i <= 100; i++) {
+                result += i;
+            }
+            System.out.println("Task finished and return result");
+            return result;
+        });
+
+        System.out.println("Before completableFuture.get()");
+        System.out.println("Result: " + completableFuture.join());
+        System.out.println("After completableFuture.get()");
+    }
+
+    /**
+     * CompletableFuture 高级版（不阻塞主线程）
+     *
+     * Task starts
+     * Before completableFuture.get()
+     * Task finished and return result
+     * Result: 5050
+     * After completableFuture.get()
+     */
+    private static void doTaskWithResultInWorker2() {
+        CompletableFuture.supplyAsync(() -> {
+            System.out.println("Task starts");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            int result = 0;
+            for (int i = 0; i <= 100; i++) {
+                result += i;
+            }
+            System.out.println("Task finished and return result");
+//            int a = 1/0;
+            return result;
+        }).whenComplete((v, e) -> {
+            // 处理完打印主动输出结果，不用主线程等待。
+            if (null == e) {
+                System.out.println("Result: " + v);
+            }
+        }).exceptionally((e) -> {
+            e.printStackTrace();
+            System.out.println("异常情况：" + e.getCause() + "\t" + e.getMessage());
+            return null;
+        });
+
+        System.out.println("Before completableFuture.get()");
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("After completableFuture.get()");
     }
 
     private static void printNumber(String threadName) {
