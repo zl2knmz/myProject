@@ -80,7 +80,7 @@ public class Demo1 {
         for (int i = 0; i < size; i++) {
             threadPoolExecutor.execute(() -> {
                 count.getAndDecrement();
-                System.out.println("===>" + Thread.currentThread().getName());
+                System.out.println("===>" + Thread.currentThread().getName() + " count=" + count.get());
             });
         }
         return count;
@@ -97,10 +97,12 @@ public class Demo1 {
         ThreadPoolExecutor threadPoolExecutor = this.initThreadPool();
         for (int i = 0; i < size; i++) {
             threadPoolExecutor.execute(() -> {
+                // 加不加锁，效果一样
 //                synchronized (o){
                 synchronized (this){
                     if (count[0] > 0) {
                         count[0] = count[0] -1;
+                        System.out.println("剩余库存："+count[0]);
                     } else {
                         System.out.println("已经没有库存了");
                     }
@@ -138,20 +140,15 @@ public class Demo1 {
         System.out.println("result ===> " + result);*/
 
 
-        /*AtomicInteger atomicInteger = new Demo1().subSync(100);
-        try {
-            Thread.sleep(10 * 1000L);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(atomicInteger.get());*/
-
-        int count = new Demo1().subSync1(100);
+//        AtomicInteger atomicInteger = new Demo1().subSync(100);
 //        try {
-//            TimeUnit.SECONDS.sleep(3L);
+//            Thread.sleep(10 * 1000L);
 //        } catch (InterruptedException e) {
 //            throw new RuntimeException(e);
 //        }
+//        System.out.println(atomicInteger.get());
+
+        int count = new Demo1().subSync1(100);
         System.out.println(count);
 
     }
