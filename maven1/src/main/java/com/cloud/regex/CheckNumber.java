@@ -6,10 +6,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * 判断一个字符串是否是数字
+ *
  * 参考文档
+ *@https://blog.csdn.net/qq_44750696/article/details/121230073
  *
  * @author zl
- * @https://blog.csdn.net/qq_44750696/article/details/121230073
  * @date 2023/4/19 17:11
  */
 public class CheckNumber {
@@ -43,21 +45,14 @@ public class CheckNumber {
     }
 
     /**
-     * 判断是否为数字可以使用工具类 StringUtils
-     * 通过方法 isNumeric 进行判断是否为数字
-     *
-     * @param str
-     * @return
+     * 判断是否为数字可以使用工具类 StringUtils的 isNumeric方法进行判断是否为数字
      */
     private static boolean isNumber(String str) {
         return StringUtils.isNumeric(str);
     }
 
     /**
-     * 使用ACSII码
-     *
-     * @param str
-     * @return
+     * 使用ACSII码判断
      */
     public static boolean isNumber2(String str) {
         for (int i = str.length(); --i >= 0; ) {
@@ -71,9 +66,6 @@ public class CheckNumber {
 
     /**
      * 使用Java自带的函数，这个方式三的原理和方式一中的StringUtils.isNumeric()是一样的。
-     *
-     * @param str
-     * @return
      */
     public static boolean isNumber3(String str) {
         for (int i = str.length(); --i >= 0; ) {
@@ -84,37 +76,45 @@ public class CheckNumber {
         return true;
     }
 
-    // 根据阿里巴巴代码规范，将Pattern设置为全局常量
-    // 通过 -?[0-9]+(\\\\.[0-9]+)? 进行匹配是否为数字
-    private static Pattern pattern = Pattern.compile("-?[0-9]+(\\\\.[0-9]+)?");
+    /**
+     * 根据阿里巴巴代码规范，将Pattern设置为全局常量
+     * 通过 -?[0-9]+(\\\\.[0-9]+)? 进行匹配是否为数字
+     * 正则匹配类型：-4323334.41333 ~ 5452435.452332
+     */
+    private static Pattern pattern4 = Pattern.compile("-?[0-9]+(\\\\.[0-9]+)?");
 
     /**
      * 通过正则表达式判断字符串是否为数字
-     *
-     * @param str
-     * @return
      */
     private static boolean isNumber4(String str) {
         // 通过Matcher进行字符串匹配
-        Matcher m = pattern.matcher(str);
+        Matcher m = pattern4.matcher(str);
         // 如果正则匹配通过 m.matches() 方法返回 true ，反之 false
         return m.matches();
     }
 
+    /**
+     * 正则匹配类型：523452524
+     */
     public static boolean isNumber5(String str) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
         return pattern.matcher(str).matches();
     }
 
+    /**
+     * 正则匹配类型：523452524
+     */
     public static boolean isNumber6(String str) {
         Pattern pattern = Pattern.compile("[0-9]*");
         return pattern.matcher(str).matches();
     }
 
+    /**
+     * 正则匹配类型：-4323334.41333 ~ 5452435.452332
+     */
     public static boolean isNumber7(String str) {
-        // ?:0或1个, *:0或多个, +:1或多个
+        // ?: 0或1个, *: 0或多个, +: 1或多个
         return str.matches("-?[0-9]+.?[0-9]*");
-
     }
 
 
