@@ -128,9 +128,25 @@ package com.cloud.thread.jmm;
  * @date 2023/4/16 18:29
  */
 public class TestDemo {
+
+    /**
+     * 使用：把value定义为volatile变量，由于setter方法对value的修改不依赖value的原值，满足volatile关键字使用场景
+     * 理由：利用volatile保证读取操作的可见性，利用synchronize保证复合操作的原子性结合使用锁和volatile变量来减少同步的开销
+     * */
+    private volatile int value = 0;
+
+    public int getValue() {
+        // 利用volatile保证读取操作的可见性
+        return value;
+    }
+
+    public synchronized int setValue() {
+        // 利用synchronize保证复合操作的原子性
+        return ++value;
+    }
+
     public static void main(String[] args) {
         mySort();
-
     }
 
     /**
