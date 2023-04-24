@@ -3,10 +3,7 @@ package com.cloud.test;
 import com.cloud.model.Student;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -203,6 +200,62 @@ public class ListTest {
         System.out.println("--------b------");
         b.forEach(System.out::println);
 
+    }
+
+    /**
+     * list删除元素
+     */
+    @Test
+    public void listSubDistinct() {
+        ArrayList<Long> list = new ArrayList<>();
+        list.add(1001L);
+        list.add(1002L);
+        list.add(1003L);
+        list.add(1004L);
+        list.add(1005L);
+        list.add(1006L);
+        list.add(1001L);
+        list.add(1002L);
+        list.add(1003L);
+
+        System.out.println(list);
+
+//        HashSet<Long> set = new HashSet<>();
+//        set.addAll(list);
+//        System.out.println(set);
+
+        List<Long> list1 = list.stream()
+                .collect(Collectors.toMap(e -> e, e -> 1, Integer::sum))
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+        System.out.println(list1);
+
+        list.removeAll(list1);
+        System.out.println(list);
+    }
+
+    /**
+     * list元素分组求和
+     */
+    @Test
+    public void listSubDistinct1() {
+        LinkedList<Long> list = new LinkedList<>();
+        list.add(1001L);
+        list.add(1002L);
+        list.add(1003L);
+        list.add(1004L);
+        list.add(1005L);
+        list.add(1006L);
+        list.add(1001L);
+        list.add(1002L);
+        list.add(1003L);
+        System.out.println(list);
+
+        Map<Long, Integer> map = list.stream().collect(Collectors.toMap(e -> e, e -> 1, Integer::sum));
+        System.out.println(map);
     }
 
 }
