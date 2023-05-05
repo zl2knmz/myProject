@@ -1,14 +1,21 @@
 package com.cloud.test;
 
-import com.cloud.util.cache.MapCacheSingleton;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.cloud.util.Utils;
+import com.cloud.util.cache.MapCacheSingleton;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +34,7 @@ public class MapTest {
         int j = 1000000;
         String key = "123456";
         int value = 233;
-        while (i < j){
+        while (i < j) {
             user.put(key + i, i + value);
             i++;
         }
@@ -45,7 +52,8 @@ public class MapTest {
         String str = mapCacheSingleton.get("key") == null ? null : mapCacheSingleton.get("key").toString();
         System.out.println(str);
 
-        long time = LocalDateTime.now().plusMinutes(1L).toInstant(ZoneOffset.of("+8")).toEpochMilli();;
+        long time = LocalDateTime.now().plusMinutes(1L).toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        ;
         long time1 = Instant.now().minusSeconds(100L).getEpochSecond();
         mapCacheSingleton.set("key1", "value-time", time);
         String str1 = mapCacheSingleton.get("key1") == null ? null : mapCacheSingleton.get("key1").toString();
@@ -89,5 +97,64 @@ public class MapTest {
 
         map.remove("杜甫");
         System.out.println(map);
+    }
+
+    /**
+     * 测试 map
+     */
+    @Test
+    public void testObjectToMap() {
+        User user = new User().setUser();
+        // 1、利用反射转
+        long s1 = System.currentTimeMillis();
+        Map<String, Object> dataMap = objectToMap(user);
+        long s2 = System.currentTimeMillis();
+        System.out.println("1、花费时间毫秒：" + (s2 - s1));
+        System.out.println(dataMap);
+
+        // 2、fastjson的ParseObject 方法
+        long s3 = System.currentTimeMillis();
+//        Map<String, Object> stringObjectMap = JSON.parseObject(JSON.toJSONString(user), new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> stringObjectMap = JSONObject.parseObject(JSON.toJSONString(user), new TypeReference<Map<String, Object>>() {});
+        long s4 = System.currentTimeMillis();
+        System.out.println("2、花费时间毫秒：" + (s4 - s3));
+        System.out.println(stringObjectMap);
+
+    }
+
+    private static Map<String, Object> objectToMap(Object object) {
+        Map<String, Object> dataMap = new HashMap<>(16);
+        Class<?> clazz = object.getClass();
+        for (Field field : clazz.getDeclaredFields()) {
+            try {
+                field.setAccessible(true);
+                dataMap.put(field.getName(), field.get(object));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return dataMap;
+    }
+}
+
+@Data
+class User {
+    private Long id;
+    private String name;
+    private Integer age;
+    private LocalDateTime birthday;
+    private Double salary;
+    @JsonProperty("create_date")
+    private Date createDate;
+
+    public User setUser() {
+        User user = new User();
+        user.setId(123L);
+        user.setName("王二");
+        user.setAge(18);
+        user.setBirthday(LocalDateTime.now());
+        user.setSalary(2344.4D);
+        user.setCreateDate(new Date());
+        return user;
     }
 }
