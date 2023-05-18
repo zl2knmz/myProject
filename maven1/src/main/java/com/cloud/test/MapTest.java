@@ -1,5 +1,6 @@
 package com.cloud.test;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
@@ -116,6 +117,7 @@ public class MapTest {
         long s3 = System.currentTimeMillis();
 //        Map<String, Object> stringObjectMap = JSON.parseObject(JSON.toJSONString(user), new TypeReference<Map<String, Object>>() {});
         Map<String, Object> stringObjectMap = JSONObject.parseObject(JSON.toJSONString(user), new TypeReference<Map<String, Object>>() {});
+//        Map<String, Object> stringObjectMap = BeanUtil.beanToMap(user);
         long s4 = System.currentTimeMillis();
         System.out.println("2、花费时间毫秒：" + (s4 - s3));
         System.out.println(stringObjectMap);

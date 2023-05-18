@@ -17,7 +17,7 @@ public class MysqlHandler {
      * 数据库连接
      * jdbc:mysql://localhost:3306/maven?useUnicode=true&autoReconnect=true
      */
-    private static final String DBURL = "jdbc:mysql://192.168.1.4:3306/springbootdb?useUnicode=true&autoReconnect=true";
+    private static final String DBURL = "jdbc:mysql://192.168.16.231:3306/springbootdb?useUnicode=true&autoReconnect=true";
 
     /**
      * mysql用户名
@@ -29,7 +29,7 @@ public class MysqlHandler {
      * mysql密码
      * root
      */
-    private static final String PASSWORD = "hdx2057BCa%";
+    private static final String PASSWORD = "root";
     private Connection conn = null;
 
     public Connection buildConnection() {

@@ -272,6 +272,47 @@ public class JavaStreamTest {
 //        5
     }
 
+    @Test
+    public void randomTest() {
+        List<Person> list = new ArrayList<>();
+        list.add(new Person("1",1));
+        list.add(new Person("2",11));
+        list.add(new Person("3",111));
+        list.add(new Person("4",111));
+        list.add(new Person("5",1111));
+        list.add(new Person("6",11111));
+
+        List<Person> result = this.listRandoms(list,3);
+
+        // 打印随机选择的元素
+        System.out.println("随机选择的元素是：" + result);
+    }
+
+    /**
+     * 从集合中随机取出N个不重复的元素
+     *
+     * @param list 需要被取出数据的集合
+     * @param n    取出的元素数量
+     * @return
+     */
+    private List<Person> listRandoms(List<Person> list, int n) {
+        Map<Person, String> map = new HashMap<>(16);
+        List<Person> news = new ArrayList<>();
+        if (list.size() <= n) {
+            return list;
+        } else {
+            while (map.size() < n) {
+                int random = (int) (Math.random() * list.size());
+                Person person = list.get(random);
+                if (!map.containsKey(person)) {
+                    map.put(person, "");
+                    news.add(person);
+                }
+            }
+            return news;
+        }
+    }
+
     @Data
     static class Person {
         String name;
