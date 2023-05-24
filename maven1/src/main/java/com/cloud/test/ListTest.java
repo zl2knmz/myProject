@@ -1,6 +1,7 @@
 package com.cloud.test;
 
 import com.cloud.model.Student;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.util.*;
@@ -258,4 +259,19 @@ public class ListTest {
         System.out.println(map);
     }
 
+    @Test
+    public void listSort() {
+        List<String> list = new ArrayList<>();
+        list.add("1001");
+        list.add("1022");
+        list.add("1013");
+        list.add("1004");
+        list.add("1055");
+        list.add("1006");
+        System.out.println(list);
+
+        list.sort(String::compareTo);
+        String joinKey = StringUtils.join(list, "_");
+        System.out.println(joinKey);
+    }
 }

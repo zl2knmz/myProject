@@ -45,9 +45,14 @@ public class JavaStreamTest {
         numbers3.stream().sorted().forEach(System.out::println);
         //2,2,3,3,3,5,7
 
+        List<Integer> numbers44 = new ArrayList<>();
+        numbers44.add(0);
+        numbers44.add(1);
+
         List<Integer> numbers4 = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+        numbers44.addAll(numbers4);
         System.out.println("distinct");
-        numbers4.stream().distinct().forEach(System.out::println);
+        numbers44.stream().distinct().limit(15).forEach(System.out::println);
         //3,2,7,5
 
         List<String> strings1 = Arrays.asList("Hollis", "HollisChuang", "hollis", "Hello", "com.cloud.HelloWorld", "Hollis");

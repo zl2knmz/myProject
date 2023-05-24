@@ -98,6 +98,8 @@ public class MapTest {
 
         map.remove("杜甫");
         System.out.println(map);
+
+        System.out.println(map.get("杜甫1"));
     }
 
     /**
