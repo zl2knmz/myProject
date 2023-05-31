@@ -308,7 +308,7 @@ public class ListTest {
         System.out.println("map-" + eventAttendeeMap);
 
         List<String> eidList = new ArrayList<>();
-        int num =0;
+        int num = 0;
         for (String key : eventAttendeeMap.keys()) {
             System.out.println("---------" + key);
             System.out.println("---------" + eventAttendeeMap.get(key));
@@ -342,4 +342,39 @@ public class ListTest {
         }
         System.out.println(num);
     }
+
+    @Test
+    public void testSameEventNum() {
+        int num = 0;
+        Map<String, Set<String>> map = new HashMap<>(16);
+        for (int i = 0; i < 10; i++) {
+            this.addMapData(map, "key" + i, "value" + i);
+        }
+
+        this.addMapData(map, "key" + 1, "value" + 2);
+        this.addMapData(map, "key" + 1, "value" + 2);
+        this.addMapData(map, "key" + 2, "value" + 3);
+        this.addMapData(map, "key" + 2, "value" + 3);
+
+        for (Map.Entry<String, Set<String>> stringSetEntry : map.entrySet()) {
+            if (null != stringSetEntry.getValue() && stringSetEntry.getValue().size() > 1) {
+                num++;
+            }
+        }
+
+        System.out.println(map);
+
+        System.out.println(num);
+    }
+
+    private void addMapData(Map<String, Set<String>> map, String key, String value) {
+        if (map.containsKey(key)) {
+            map.get(key).add(value);
+        } else {
+            HashSet<String> set = new HashSet<>();
+            set.add(value);
+            map.put(key, set);
+        }
+    }
+
 }
