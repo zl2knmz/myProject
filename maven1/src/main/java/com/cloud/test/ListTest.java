@@ -1,6 +1,7 @@
 package com.cloud.test;
 
 import com.cloud.model.Student;
+import com.google.common.collect.ArrayListMultimap;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
@@ -273,5 +274,72 @@ public class ListTest {
         list.sort(String::compareTo);
         String joinKey = StringUtils.join(list, "_");
         System.out.println(joinKey);
+    }
+
+    @Test
+    public void testArrayListMultimap() {
+        ArrayListMultimap<String, String> eventAttendeeMap = ArrayListMultimap.create();
+        String eid = "123";
+        String ownerAccount = "000";
+        if (!eventAttendeeMap.get(eid).contains(ownerAccount)) {
+            eventAttendeeMap.put(eid, ownerAccount);
+        }
+        System.out.println("map-" + eventAttendeeMap);
+
+        eid = "123";
+        ownerAccount = "111";
+        if (!eventAttendeeMap.get(eid).contains(ownerAccount)) {
+            eventAttendeeMap.put(eid, ownerAccount);
+        }
+        System.out.println("map-" + eventAttendeeMap);
+
+        eid = "123";
+        ownerAccount = "222";
+        if (!eventAttendeeMap.get(eid).contains(ownerAccount)) {
+            eventAttendeeMap.put(eid, ownerAccount);
+        }
+        System.out.println("map-" + eventAttendeeMap);
+
+        eid = "123";
+        ownerAccount = "111";
+        if (!eventAttendeeMap.get(eid).contains(ownerAccount)) {
+            eventAttendeeMap.put(eid, ownerAccount);
+        }
+        System.out.println("map-" + eventAttendeeMap);
+
+        List<String> eidList = new ArrayList<>();
+        int num =0;
+        for (String key : eventAttendeeMap.keys()) {
+            System.out.println("---------" + key);
+            System.out.println("---------" + eventAttendeeMap.get(key));
+
+            if (eidList.contains(key)) {
+                continue;
+            } else {
+                eidList.add(key);
+            }
+
+            List<String> values = eventAttendeeMap.get(key);
+            if (values.size() > 1) {
+                num++;
+            }
+        }
+        System.out.println(num);
+    }
+
+    @Test
+    public void testArrayListMultimap1() {
+        int num = 0;
+        List<String> eidList = new ArrayList<>();
+        String eid = "123";
+        eidList.add(eid);
+
+        eid = "123";
+        if (!eidList.contains(eid)) {
+            eidList.add(eid);
+        } else {
+            num++;
+        }
+        System.out.println(num);
     }
 }
