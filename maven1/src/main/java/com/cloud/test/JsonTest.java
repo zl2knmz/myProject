@@ -17,7 +17,7 @@ public class JsonTest {
     /**
      * json文件路径
      */
-    private static final String FILEPATH = "E:" + File.separator + "Program Files" + File.separator + "image" + File.separator;
+    private static final String FILEPATH = "D:" + File.separator + "Program Files" + File.separator + "image" + File.separator;
 
     public static void main(String[] args) {
 //        jobTest();
@@ -78,8 +78,8 @@ public class JsonTest {
 
         List<Map<String, Object>> list = DataProcess.executeQuery(sql, null);
         for(Map<String, Object> map : list){
-            String key = map.get("ID").toString();
-            String value = map.get("NAME").toString();
+            String key = map.get("id").toString();
+            String value = map.get("name").toString();
             jsonObject.put(key, value);
         }
 

@@ -11,13 +11,13 @@ public class MysqlHandler {
     /**
      * mysql驱动
      */
-    private static final String DBDRIVER = "com.mysql.jdbc.Driver";
+    private static final String DBDRIVER = "com.mysql.cj.jdbc.Driver";
 
     /**
      * 数据库连接
      * jdbc:mysql://localhost:3306/maven?useUnicode=true&autoReconnect=true
      */
-    private static final String DBURL = "jdbc:mysql://192.168.16.231:3306/springbootdb?useUnicode=true&autoReconnect=true";
+    private static final String DBURL = "jdbc:mysql://192.168.16.231:3306/big_data?useUnicode=true&autoReconnect=true";
 
     /**
      * mysql用户名
