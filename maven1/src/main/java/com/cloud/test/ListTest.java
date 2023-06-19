@@ -277,6 +277,30 @@ public class ListTest {
     }
 
     @Test
+    public void listNull() {
+        List<String> logoList = new ArrayList<>();
+        List<User> list = new ArrayList<>();
+        User user1 = new User();
+        user1.setName("zl");
+
+        User user2 = new User();
+        user2.setName(null);
+
+        list.add(user1);
+        list.add(user2);
+//        list.add(null);
+        System.out.println(list);
+
+        for (User user : list) {
+            System.out.println(user);
+            if (StringUtils.isNotBlank(user.getName())) {
+                logoList.add(user.getName());
+            }
+        }
+        System.out.println(logoList);
+    }
+
+    @Test
     public void testArrayListMultimap() {
         ArrayListMultimap<String, String> eventAttendeeMap = ArrayListMultimap.create();
         String eid = "123";

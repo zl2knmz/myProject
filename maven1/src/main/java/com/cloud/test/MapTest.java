@@ -103,7 +103,7 @@ public class MapTest {
     }
 
     /**
-     * 测试 map
+     * 测试 对象序列化成map
      */
     @Test
     public void testObjectToMap() {
