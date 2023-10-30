@@ -307,6 +307,13 @@
             <version>8.12.57</version>
         </dependency>
 
+        <!--https://github.com/allurx/desensitization/blob/master/README.md-->
+        <dependency>
+            <groupId>red.zyc</groupId>
+            <artifactId>desensitization</artifactId>
+            <version>2.4.6</version>
+        </dependency>
+
 
     </dependencies>
 
