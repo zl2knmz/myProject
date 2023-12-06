@@ -297,6 +297,14 @@ public class ListTest {
                 logoList.add(user.getName());
             }
         }
+
+        list.forEach(user -> {
+            if (StringUtils.isBlank(user.getName())) {
+                user.setName("zl1");
+            }
+        });
+        System.out.println(list);
+
         System.out.println(logoList);
     }
 
