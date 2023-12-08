@@ -5,6 +5,7 @@ import com.google.common.collect.ArrayListMultimap;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -373,6 +374,61 @@ public class ListTest {
             num++;
         }
         System.out.println(num);
+    }
+
+
+    @Test
+    public void randomTest() {
+        List<String> firstTierCity = new ArrayList<>();
+        firstTierCity.add("北京");
+        firstTierCity.add("上海");
+        firstTierCity.add("广州");
+        firstTierCity.add("深圳");
+        int random = (int) (Math.random() * firstTierCity.size());
+        String additionalCity = firstTierCity.get(random);
+        System.out.println(additionalCity);
+
+    }
+
+    @Test
+    public void distinctListTest() {
+        List<User> list = new ArrayList<>();
+        User user1 = new User();
+        user1.setName("zl");
+        user1.setAge(18);
+        user1.setBirthday(LocalDateTime.of(1996, 8, 12, 13, 15, 10));
+        list.add(user1);
+
+        User user2 = new User();
+        user2.setName("za");
+        user2.setAge(19);
+        user1.setBirthday(LocalDateTime.of(1994, 8, 12, 13, 15, 10));
+        list.add(user2);
+
+        User user3 = new User();
+        user3.setName("zl");
+        user3.setAge(20);
+        user3.setBirthday(LocalDateTime.of(1995, 8, 12, 13, 15, 10));
+        list.add(user3);
+
+        User user4 = new User();
+        user4.setName("za");
+        user4.setAge(21);
+        user4.setBirthday(LocalDateTime.of(1991, 8, 12, 13, 15, 10));
+        list.add(user4);
+
+        User user5 = new User();
+        user5.setName("wq");
+        user5.setAge(25);
+        user5.setBirthday(LocalDateTime.of(1990, 8, 12, 13, 15, 10));
+        list.add(user5);
+
+        // list 对象 属性去重
+        List<User> distinctList = list.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() ->
+                new TreeSet<>(Comparator.comparing(User::getName))), ArrayList::new));
+
+        List<User> sortCollect = distinctList.stream().sorted(Comparator.comparing(User::getAge, Comparator.reverseOrder())).collect(Collectors.toList());
+        System.out.println(sortCollect);
     }
 
     @Test
