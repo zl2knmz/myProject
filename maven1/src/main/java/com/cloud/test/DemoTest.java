@@ -63,4 +63,13 @@ public class DemoTest {
         return bd.stripTrailingZeros().toPlainString();
     }
 
+    @Test
+    public void intTest() {
+        double num = 311 * 2.2;
+        int a = (int) Math.ceil(num);
+        int b = (int) (num);
+        System.out.println(a + "-" + b);
+    }
+
+
 }
