@@ -65,10 +65,12 @@ public class DemoTest {
 
     @Test
     public void intTest() {
-        double num = 311 * 2.2;
-        int a = (int) Math.ceil(num);
-        int b = (int) (num);
-        System.out.println(a + "-" + b);
+//        double num = 311 * 2.2;
+//        int a = (int) Math.ceil(num);
+//        int b = (int) (num);
+//        System.out.println(a + "-" + b);
+
+        System.out.println(Integer.parseInt("277") / 100);
     }
 
 
