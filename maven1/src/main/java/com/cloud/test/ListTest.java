@@ -455,6 +455,12 @@ public class ListTest {
         System.out.println(num);
     }
 
+    @Test
+    public void testAsList() {
+        List<String> stringList = Arrays.asList("1,2,4");
+        System.out.println(stringList);
+    }
+
     private void addMapData(Map<String, Set<String>> map, String key, String value) {
         if (map.containsKey(key)) {
             map.get(key).add(value);
