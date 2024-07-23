@@ -2,6 +2,7 @@ package com.cloud.lambda;
 
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.function.IntBinaryOperator;
 
 /**
@@ -82,4 +83,19 @@ public class Demo01 {
         System.out.println(i);
     }
 
+    @Test
+    public void testUtilDate() {
+        Date date = new Date();
+        System.out.println(date.getTime());
+        System.out.println(date.toString());
+        System.out.println(System.currentTimeMillis());
+    }
+
+    @Test
+    public void testStringEquals() {
+        boolean a = "已提取".equals(null);
+        boolean b = "已提取".equals("");
+        System.out.println(a);
+        System.out.println(b);
+    }
 }
