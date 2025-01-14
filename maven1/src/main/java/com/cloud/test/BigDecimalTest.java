@@ -1,6 +1,9 @@
 package com.cloud.test;
 
+import org.junit.Test;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * 金额类： BigDecimal, Long(单位：分), Double
@@ -61,5 +64,27 @@ public class BigDecimalTest {
         System.out.println("除法用value结果：" + result5);
         System.out.println("除法用string结果：" + result52);
 
+    }
+
+    @Test
+    public void test1() {
+        int num1 = 12; // 分子
+        int num2 = 3; // 分母
+
+        // 将整数转换为BigDecimal
+        BigDecimal bd1 = new BigDecimal(num1);
+        BigDecimal bd2 = new BigDecimal(num2);
+
+        // 进行除法运算，保留1位小数
+        BigDecimal result = bd1.divide(bd2, 1, RoundingMode.HALF_UP);
+
+        // 输出结果
+        System.out.println("结果：" + result);
+        System.out.println("结果2：" + new BigDecimal(5));
+        if (result.scale() <= 0) {
+            // 整数部分
+            System.out.println("结果3：" + result.intValue());
+        }
+        System.out.println("结果3：" + result.intValue());
     }
 }

@@ -461,6 +461,20 @@ public class ListTest {
         System.out.println(stringList);
     }
 
+    @Test
+    public void testListGroup() {
+        List<String> list = Arrays.asList("apple", "banana", "apple", "orange", "banana", "apple");
+        // 使用 Java 8 Stream API 来统计每个元素出现的次数
+        Map<String, Long> elementCount = list.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+        // 输出结果
+        System.out.println(elementCount);
+
+        // 将 Long 转换为 Integer
+        Map<String, Integer> elementCountAsInt = elementCount.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().intValue()));
+        // 输出结果
+        System.out.println(elementCountAsInt);
+    }
+
     private void addMapData(Map<String, Set<String>> map, String key, String value) {
         if (map.containsKey(key)) {
             map.get(key).add(value);
