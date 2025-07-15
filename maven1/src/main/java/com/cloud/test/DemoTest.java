@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,5 +74,29 @@ public class DemoTest {
         System.out.println(Integer.parseInt("277") / 100);
     }
 
+    @Test
+    public void strTest() {
+//        System.out.println("0000" + null +"1111");
+//        System.out.println("0000" + false +"1111");
 
+//        String linkTitle = "1234567890";
+        String linkTitle = "https://www.huodongxing.com:4433/Web/dataxcloud#/sendTask/taskList";
+        boolean matches = linkTitle.matches("((https?|ftp|file)://|www\\\\.)[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]");
+        System.out.println(matches);
+
+        String s = "".split(",")[0];
+        System.out.println(s);
+    }
+
+    @Test
+    public void listTest() {
+        String accounts= "3345590820978";
+        List<String> accountList2 = Arrays.asList(accounts.split(","));
+        List<String> accountList = new ArrayList<>(Arrays.asList(accounts.split(",")));
+        if (accountList.size() > 0 && accountList.contains("33455908209781")) {
+            // 活动行官方账号 9871501487828
+            accountList.add("9871501487828");
+        }
+        System.out.println(accountList);
+    }
 }

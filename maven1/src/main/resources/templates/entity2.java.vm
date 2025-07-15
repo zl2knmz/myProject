@@ -41,7 +41,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 @TableName("`${table.name}`")
 #end
 #if(${swagger2})
-@ApiModel(value="${entity}对象", description="$!{table.comment} ")
+@ApiModel(value="${entity}对象", description="$!{table.comment}")
 #end
 public class ${entity} implements Serializable {
 #if(${entitySerialVersionUID})

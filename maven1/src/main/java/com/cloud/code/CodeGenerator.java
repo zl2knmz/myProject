@@ -22,7 +22,7 @@ public class CodeGenerator {
         String userName = "root";                       //用户名
         String password = "root";                     //密码
         // 修改表名
-        String[] tableList = {"s_circle_subscribe"};
+        String[] tableList = {"pass_activity_coupon"};
 
         String baseProjectPackage = "com";     //包路径
         String model = "";                          //模块名称

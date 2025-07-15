@@ -1,10 +1,13 @@
 package com.cloud.test;
 
+import org.junit.Test;
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * @author zl
@@ -56,4 +59,22 @@ public class Java8DateTest {
         System.out.println("c " + now2);
 
     }
+
+    @Test
+    public void strTest() {
+        //当前时间到今天24点的秒数
+        long secondsUntilMidnight = getSecondsUntilMidnight();
+        System.out.println(secondsUntilMidnight);
+    }
+
+    /**
+     * 计算当前时间到当天24点的秒数
+     */
+    public static long getSecondsUntilMidnight() {
+        LocalDateTime now = LocalDateTime.now();
+        return now.until(now.toLocalDate().atTime(LocalTime.MIDNIGHT).plusDays(1), ChronoUnit.SECONDS);
+    }
+
+
+
 }
